@@ -30,6 +30,20 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
 
   bool isMax=false;
 
+  void maxWindow(){
+    windowManager.maximize();
+    setState(() {
+      isMax=true;
+    });
+  }
+
+  void unMaxWindow(){
+    windowManager.unmaximize();
+    setState(() {
+      isMax=false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -40,23 +54,23 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
           child: Row(
             children: [
               Expanded(child: DragToMoveArea(child: Container())),
-              Platform.isMacOS ? Obx(
+              Platform.isWindows ? Obx(
                 ()=>Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     WindowCaptionButton.minimize(
-                      onPressed: () => windowManager.minimize(),
+                      onPressed: windowManager.minimize,
                       brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
                     ),
                     isMax ? WindowCaptionButton.unmaximize(
-                      onPressed: ()=>windowManager.unmaximize(),
+                      onPressed: unMaxWindow,
                       brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
                     ) : WindowCaptionButton.maximize(
-                      onPressed: ()=>windowManager.maximize(),
+                      onPressed: maxWindow,
                       brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
                     ) ,
                     WindowCaptionButton.close(
-                      onPressed: ()=>windowManager.close(),
+                      onPressed: windowManager.close,
                       brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
                     )
                   ],
