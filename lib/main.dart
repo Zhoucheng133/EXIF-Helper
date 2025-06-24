@@ -1,3 +1,4 @@
+import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/main_window.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,9 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   Get.put(ThemeController());
+  Get.put(ImageController());
   WindowOptions windowOptions = WindowOptions(
-    size: Size(800, 600),
+    size: Size(800, 700),
     center: true,
     backgroundColor: Colors.transparent,
     skipTaskbar: false,

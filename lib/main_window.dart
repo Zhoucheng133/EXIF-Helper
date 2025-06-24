@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:exif_helper/views/add_image.dart';
+import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
+import 'package:exif_helper/views/image_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:window_manager/window_manager.dart';
@@ -27,6 +30,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
   }
 
   final ThemeController themeController=Get.find();
+  final ImageController imageController=Get.find();
 
   bool isMax=false;
 
@@ -78,6 +82,9 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
               ) : Container()
             ],
           ),
+        ),
+        Obx(()=>
+          imageController.item.value==null ? AddImage() : ImageConfig()
         )
       ],
     );
