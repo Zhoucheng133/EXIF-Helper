@@ -7,6 +7,7 @@ import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -38,6 +39,8 @@ class _AddImageState extends State<AddImage> {
 
       imageController.item.value=ImageItem(
         fileBytes,
+        p.basename(filePath),
+        // filePath,
         (Map.fromEntries(data.entries))['Image Make']?.printable ?? "",
         (Map.fromEntries(data.entries))['Image Model']?.printable ?? "", 
         (Map.fromEntries(data.entries))['EXIF DateTimeOriginal']?.printable ?? "", 

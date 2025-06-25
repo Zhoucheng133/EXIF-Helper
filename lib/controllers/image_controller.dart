@@ -10,6 +10,8 @@ class ImageItem{
 
   // 图片数据
   late Uint8List raw;
+  // 文件名
+  late String fileName;
 
   // 相机制造商
   late String make;
@@ -32,5 +34,5 @@ class ImageItem{
   // 镜头型号
   late String lenModel;
 
-  ImageItem(this.raw, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel);
+  ImageItem(this.raw, this.fileName, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel);
 }
