@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:expressions/expressions.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:path/path.dart' as p;
 
 class ImageConfig extends StatefulWidget {
   const ImageConfig({super.key});
@@ -89,7 +93,20 @@ class _ImageConfigState extends State<ImageConfig> {
                       ConfigItem(keyWord: "光圈", value: calFnum(imageController.item.value!.fNum), enable: true),
                       ConfigItem(keyWord: "曝光时间", value: "${imageController.item.value!.exposureTime}s", enable: true),
                       ConfigItem(keyWord: "ISO", value: imageController.item.value!.iso, enable: true),
-                      ConfigItem(keyWord: "拍摄时间", value: calDatatime(imageController.item.value!.dateTime), enable: true)
+                      ConfigItem(keyWord: "拍摄时间", value: calDatatime(imageController.item.value!.dateTime), enable: true),
+                      const SizedBox(height: 20,),
+                      TextButton(
+                        onPressed: () async {
+                          String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+                          if(selectedDirectory!=null){
+                            final String newName=p.withoutExtension(imageController.item.value!.fileName);
+                            final String ext=p.extension(imageController.item.value!.fileName);
+                            final file = File(p.join(selectedDirectory, "${newName}_output$ext"));
+                            await file.writeAsBytes(imageController.item.value!.raw);
+                          }
+                        }, 
+                        child: const Text("下载图片")
+                      )
                     ],
                   ),
                 ),

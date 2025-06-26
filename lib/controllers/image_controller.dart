@@ -1,9 +1,12 @@
 import 'dart:typed_data';
 
+// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ImageController extends GetxController {
   Rx<ImageItem?> item=Rx<ImageItem?>(null);
+
+  RxBool loading=false.obs;
 }
 
 class ImageItem{
@@ -33,6 +36,9 @@ class ImageItem{
   late String lenMake;
   // 镜头型号
   late String lenModel;
+
+  // 处理中
+  late bool loading;
 
   ImageItem(this.raw, this.fileName, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel);
 }

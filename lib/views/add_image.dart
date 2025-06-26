@@ -5,9 +5,11 @@ import 'package:exif/exif.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
+import 'package:image/image.dart' as img;
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -20,9 +22,23 @@ class _AddImageState extends State<AddImage> {
 
   final ImageController imageController=Get.find();
 
+  static Uint8List imgOp(Uint8List fileBytes){
+    img.Image? image = img.decodeImage(fileBytes);
+    if(image!=null){
+      final infoBarHeight=(image.height*0.15).round();
+      final newHeight=image.height + infoBarHeight;
+      final newImage=img.Image(width: image.width, height: newHeight);
+      img.fill(newImage, color: img.ColorFloat32.rgb(255, 255, 255));
+      img.compositeImage(newImage, image, dstX: 0, dstY: 0);
+      fileBytes=img.encodeJpg(newImage);
+    }
+    return fileBytes;
+  }
+
+
   Future<void> fileChecker(BuildContext context,String filePath) async {
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
-      final fileBytes = File(filePath).readAsBytesSync();
+      Uint8List fileBytes = File(filePath).readAsBytesSync();
       final data = await readExifFromBytes(fileBytes);
       if (data.isEmpty) {
         if(context.mounted){
@@ -36,6 +52,11 @@ class _AddImageState extends State<AddImage> {
       if (data.containsKey('TIFFThumbnail')) {
         data.remove('TIFFThumbnail');
       }
+
+      // fileBytes=imgOp(fileBytes);
+      imageController.loading.value=true;
+      fileBytes=await compute(imgOp, fileBytes);
+      imageController.loading.value=false;
 
       imageController.item.value=ImageItem(
         fileBytes,
@@ -52,7 +73,6 @@ class _AddImageState extends State<AddImage> {
         (Map.fromEntries(data.entries))['EXIF LensMake']?.printable ?? "", 
         (Map.fromEntries(data.entries))['EXIF LensModel']?.printable ?? "", 
       );
-
     }else{
       warnDialog(context, "导入图片错误", "不支持的格式");
       return;

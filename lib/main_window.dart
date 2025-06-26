@@ -6,6 +6,7 @@ import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/views/image_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MainWindow extends StatefulWidget {
@@ -84,7 +85,11 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
           ),
         ),
         Obx(()=>
-          imageController.item.value==null ? AddImage() : ImageConfig()
+          imageController.loading.value ? Expanded(
+            child: Center(
+              child: LoadingAnimationWidget.beat(color: Colors.purple, size: 25),
+            ),
+          ) : imageController.item.value==null ? AddImage() : ImageConfig()
         )
       ],
     );
