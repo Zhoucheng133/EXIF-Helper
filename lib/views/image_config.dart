@@ -1,5 +1,6 @@
 import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
+import 'package:expressions/expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,19 @@ class ImageConfig extends StatefulWidget {
 class _ImageConfigState extends State<ImageConfig> {
 
   final ImageController imageController=Get.find();
+
+  String calFnum(String input){
+    final expression = Expression.parse(input);
+    final evaluator = const ExpressionEvaluator();
+
+    return "F${evaluator.eval(expression, {})}";
+  }
+
+  String calDatatime(String input){
+    input=input.replaceFirst(":", "-");
+    input=input.replaceFirst(":", "-");
+    return input;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +85,11 @@ class _ImageConfigState extends State<ImageConfig> {
                       ConfigItem(keyWord: "相机制造商", value: imageController.item.value!.make, enable: true),
                       ConfigItem(keyWord: "相机型号", value: imageController.item.value!.model, enable: true),
                       ConfigItem(keyWord: "镜头型号", value: imageController.item.value!.lenModel, enable: true),
-                      ConfigItem(keyWord: "焦距", value: imageController.item.value!.forcal, enable: true),
-                      ConfigItem(keyWord: "光圈", value: imageController.item.value!.fNum, enable: true),
-                      ConfigItem(keyWord: "曝光时间", value: imageController.item.value!.exposureTime, enable: true),
+                      ConfigItem(keyWord: "焦距", value: "${imageController.item.value!.forcal}mm", enable: true),
+                      ConfigItem(keyWord: "光圈", value: calFnum(imageController.item.value!.fNum), enable: true),
+                      ConfigItem(keyWord: "曝光时间", value: "${imageController.item.value!.exposureTime}s", enable: true),
                       ConfigItem(keyWord: "ISO", value: imageController.item.value!.iso, enable: true),
-                      ConfigItem(keyWord: "拍摄时间", value: imageController.item.value!.dateTime, enable: true)
+                      ConfigItem(keyWord: "拍摄时间", value: calDatatime(imageController.item.value!.dateTime), enable: true)
                     ],
                   ),
                 ),
