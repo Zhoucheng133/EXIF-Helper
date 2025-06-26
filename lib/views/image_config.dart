@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:exif_helper/components/config_item.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
+import 'package:ffi/ffi.dart';
 
 class ImageConfig extends StatefulWidget {
   const ImageConfig({super.key});
@@ -104,8 +104,9 @@ class _ImageConfigState extends State<ImageConfig> {
                           if(selectedDirectory!=null){
                             final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
                             final String ext=p.extension(imageController.item.value!.filePath);
-                            final file = File(p.join(selectedDirectory, "${newName}_output$ext"));
-                            await file.writeAsBytes(imageController.item.value!.raw);
+                            final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
+                            // await file.writeAsBytes(imageController.item.value!.raw);
+                            imageController.item.value!.savePhoto(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8());
                           }
                         }, 
                         child: const Text("下载图片")

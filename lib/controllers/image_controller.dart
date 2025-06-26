@@ -1,7 +1,9 @@
+import 'dart:ffi';
 import 'dart:typed_data';
-
-// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ffi/ffi.dart';
+
+typedef SavePhoto = Pointer<Utf8> Function(Pointer<Utf8>, Pointer<Utf8>);
 
 class ImageController extends GetxController {
   Rx<ImageItem?> item=Rx<ImageItem?>(null);
@@ -40,5 +42,12 @@ class ImageItem{
   // 处理中
   late bool loading;
 
-  ImageItem(this.raw, this.filePath, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel);
+  late SavePhoto savePhoto;
+
+  ImageItem(this.raw, this.filePath, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel){
+    final dylib = DynamicLibrary.open("image.dylib");
+    savePhoto=dylib
+    .lookup<NativeFunction<SavePhoto>>("SavePhoto")
+    .asFunction();
+  }
 }
