@@ -8,8 +8,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart' as p;
-import 'package:image/image.dart' as img;
+// import 'package:path/path.dart' as p;
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -21,19 +20,6 @@ class AddImage extends StatefulWidget {
 class _AddImageState extends State<AddImage> {
 
   final ImageController imageController=Get.find();
-
-  static Uint8List imgOp(Uint8List fileBytes){
-    img.Image? image = img.decodeImage(fileBytes);
-    if(image!=null){
-      final infoBarHeight=(image.height*0.15).round();
-      final newHeight=image.height + infoBarHeight;
-      final newImage=img.Image(width: image.width, height: newHeight);
-      img.fill(newImage, color: img.ColorFloat32.rgb(255, 255, 255));
-      img.compositeImage(newImage, image, dstX: 0, dstY: 0);
-      fileBytes=img.encodeJpg(newImage);
-    }
-    return fileBytes;
-  }
 
 
   Future<void> fileChecker(BuildContext context,String filePath) async {
@@ -55,13 +41,11 @@ class _AddImageState extends State<AddImage> {
 
       // fileBytes=imgOp(fileBytes);
       imageController.loading.value=true;
-      fileBytes=await compute(imgOp, fileBytes);
-      imageController.loading.value=false;
+      // fileBytes=await compute(imgOp, fileBytes);
 
       imageController.item.value=ImageItem(
         fileBytes,
-        p.basename(filePath),
-        // filePath,
+        filePath,
         (Map.fromEntries(data.entries))['Image Make']?.printable ?? "",
         (Map.fromEntries(data.entries))['Image Model']?.printable ?? "", 
         (Map.fromEntries(data.entries))['EXIF DateTimeOriginal']?.printable ?? "", 
@@ -73,6 +57,8 @@ class _AddImageState extends State<AddImage> {
         (Map.fromEntries(data.entries))['EXIF LensMake']?.printable ?? "", 
         (Map.fromEntries(data.entries))['EXIF LensModel']?.printable ?? "", 
       );
+      fileBytes=Uint8List(0);
+      imageController.loading.value=false;
     }else{
       warnDialog(context, "导入图片错误", "不支持的格式");
       return;

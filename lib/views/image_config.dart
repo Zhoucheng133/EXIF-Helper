@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
@@ -47,7 +48,8 @@ class _ImageConfigState extends State<ImageConfig> {
                     child: Obx(()=>
                       Image.memory(
                         imageController.item.value!.raw,
-                        fit: BoxFit.contain
+                        fit: BoxFit.contain,
+                        gaplessPlayback: false,
                       )
                     ),
                   ),
@@ -56,6 +58,7 @@ class _ImageConfigState extends State<ImageConfig> {
                     right: 10,
                     child: IconButton(
                       onPressed: (){
+                        imageController.item.value?.raw = Uint8List(0);
                         imageController.item.value=null;
                       }, 
                       icon: const Icon(Icons.close_rounded)
@@ -78,7 +81,7 @@ class _ImageConfigState extends State<ImageConfig> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        imageController.item.value!.fileName,
+                        imageController.item.value!.filePath,
                         style: GoogleFonts.notoSansSc(
                           fontSize: 18,
                         ),
@@ -99,8 +102,8 @@ class _ImageConfigState extends State<ImageConfig> {
                         onPressed: () async {
                           String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
                           if(selectedDirectory!=null){
-                            final String newName=p.withoutExtension(imageController.item.value!.fileName);
-                            final String ext=p.extension(imageController.item.value!.fileName);
+                            final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
+                            final String ext=p.extension(imageController.item.value!.filePath);
                             final file = File(p.join(selectedDirectory, "${newName}_output$ext"));
                             await file.writeAsBytes(imageController.item.value!.raw);
                           }

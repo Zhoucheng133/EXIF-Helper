@@ -13,8 +13,8 @@ class ImageItem{
 
   // 图片数据
   late Uint8List raw;
-  // 文件名
-  late String fileName;
+  // 文件路径
+  late String filePath;
 
   // 相机制造商
   late String make;
@@ -40,5 +40,5 @@ class ImageItem{
   // 处理中
   late bool loading;
 
-  ImageItem(this.raw, this.fileName, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel);
+  ImageItem(this.raw, this.filePath, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel);
 }
