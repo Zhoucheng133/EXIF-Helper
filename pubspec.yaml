@@ -10,6 +10,7 @@ dependencies:
   desktop_drop: ^0.6.0
   dropdown_button2: ^2.3.9
   exif: ^3.3.0
+  expressions: ^0.2.5+2
   file_picker: ^10.2.0
   flutter:
     sdk: flutter
