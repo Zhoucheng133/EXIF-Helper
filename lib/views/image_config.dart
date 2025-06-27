@@ -106,7 +106,7 @@ class _ImageConfigState extends State<ImageConfig> {
                             final String ext=p.extension(imageController.item.value!.filePath);
                             final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
                             // await file.writeAsBytes(imageController.item.value!.raw);
-                            imageController.item.value!.savePhoto(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8());
+                            imageController.imageSave(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8());
                           }
                         }, 
                         child: const Text("下载图片")

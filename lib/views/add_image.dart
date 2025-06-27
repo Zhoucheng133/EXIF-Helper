@@ -1,14 +1,13 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:desktop_drop/desktop_drop.dart';
-import 'package:exif/exif.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
+import 'package:ffi/ffi.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:path/path.dart' as p;
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -24,41 +23,24 @@ class _AddImageState extends State<AddImage> {
 
   Future<void> fileChecker(BuildContext context,String filePath) async {
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
-      Uint8List fileBytes = File(filePath).readAsBytesSync();
-      final data = await readExifFromBytes(fileBytes);
-      if (data.isEmpty) {
-        if(context.mounted){
-          warnDialog(context, "导入图片错误", "没有EXIF信息");
-        }
-        return;
-      }
-      if (data.containsKey('JPEGThumbnail')) {
-        data.remove('JPEGThumbnail');
-      }
-      if (data.containsKey('TIFFThumbnail')) {
-        data.remove('TIFFThumbnail');
-      }
-
-      // fileBytes=imgOp(fileBytes);
-      imageController.loading.value=true;
-      // fileBytes=await compute(imgOp, fileBytes);
+      
+      final exifString=imageController.getEXIF(filePath.toNativeUtf8()).toDartString();
+      final exifJson=jsonDecode(exifString);
 
       imageController.item.value=ImageItem(
-        fileBytes,
-        filePath,
-        (Map.fromEntries(data.entries))['Image Make']?.printable ?? "",
-        (Map.fromEntries(data.entries))['Image Model']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF DateTimeOriginal']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF ExposureTime']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF FNumber']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF ISOSpeedRatings']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF FocalLength']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF FocalLengthIn35mmFilm']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF LensMake']?.printable ?? "", 
-        (Map.fromEntries(data.entries))['EXIF LensModel']?.printable ?? "", 
+        imageController.convertImage(filePath) ?? Uint8List(0), 
+        filePath, 
+        exifJson["camMake"].replaceAll("\"", ""), 
+        exifJson["camModel"].replaceAll("\"", ""), 
+        exifJson["captureTime"].replaceAll("\"", ""), 
+        exifJson["exposureTime"].replaceAll("\"", ""), 
+        exifJson["fNum"].replaceAll("\"", ""), 
+        exifJson["iso"].replaceAll("\"", ""), 
+        exifJson["focal"].replaceAll("\"", ""), 
+        exifJson["focal35"].replaceAll("\"", ""), 
+        exifJson["lenMake"].replaceAll("\"", ""), 
+        exifJson["lenModel"].replaceAll("\"", ""), 
       );
-      fileBytes=Uint8List(0);
-      imageController.loading.value=false;
     }else{
       warnDialog(context, "导入图片错误", "不支持的格式");
       return;
