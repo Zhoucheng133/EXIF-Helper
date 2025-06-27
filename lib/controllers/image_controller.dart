@@ -1,14 +1,53 @@
 import 'dart:ffi';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:ffi/ffi.dart';
 
-typedef SavePhoto = Pointer<Utf8> Function(Pointer<Utf8>, Pointer<Utf8>);
+typedef ImageSave = Pointer<Utf8> Function(Pointer<Utf8>, Pointer<Utf8>);
+typedef GetEXIF = Pointer<Utf8> Function(Pointer<Utf8>);
+typedef ImagePreview = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength);
+typedef FreeMemory = Void Function(Pointer<Void> ptr);
+typedef FreeMemoryDart = void Function(Pointer<Void> ptr);
 
 class ImageController extends GetxController {
   Rx<ImageItem?> item=Rx<ImageItem?>(null);
+  late ImageSave imageSave;
+  late ImagePreview imagePreview;
+  late FreeMemoryDart freeMemory;
+  late GetEXIF getEXIF;
 
-  RxBool loading=false.obs;
+  ImageController(){
+    final dylib = DynamicLibrary.open(Platform.isWindows ? "image.dll" :"image.dylib");
+    imageSave=dylib
+    .lookup<NativeFunction<ImageSave>>("ImageSave")
+    .asFunction();
+    imagePreview=dylib
+    .lookup<NativeFunction<ImagePreview>>("ImagePreview")
+    .asFunction();
+    freeMemory=dylib
+    .lookup<NativeFunction<FreeMemory>>("FreeMemory")
+    .asFunction();
+    getEXIF=dylib
+    .lookup<NativeFunction<GetEXIF>>("GetEXIF")
+    .asFunction();
+  }
+
+  Uint8List? convertImage(String path){
+    final pathPtr = path.toNativeUtf8();
+    final outLenPtr = malloc<Int32>();
+    final dataPtr = imagePreview(pathPtr, outLenPtr);
+    final length = outLenPtr.value;
+
+    malloc.free(pathPtr);
+    malloc.free(outLenPtr);
+
+    if (dataPtr == nullptr || length == 0) return null;
+
+    final dataList = dataPtr.asTypedList(length);
+    freeMemory(dataPtr.cast());
+    return Uint8List.fromList(dataList);
+  }
 }
 
 class ImageItem{
@@ -39,15 +78,5 @@ class ImageItem{
   // 镜头型号
   late String lenModel;
 
-  // 处理中
-  late bool loading;
-
-  late SavePhoto savePhoto;
-
-  ImageItem(this.raw, this.filePath, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel){
-    final dylib = DynamicLibrary.open("image.dylib");
-    savePhoto=dylib
-    .lookup<NativeFunction<SavePhoto>>("SavePhoto")
-    .asFunction();
-  }
+  ImageItem(this.raw, this.filePath, this.make, this.model, this.dateTime, this.exposureTime, this.fNum, this.iso, this.forcal, this.forcal35, this.lenMake, this.lenModel);
 }
