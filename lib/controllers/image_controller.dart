@@ -44,9 +44,14 @@ class ImageController extends GetxController {
 
     if (dataPtr == nullptr || length == 0) return null;
 
-    final dataList = dataPtr.asTypedList(length);
+    final dataCopy = Uint8List.fromList(dataPtr.asTypedList(length));
     freeMemory(dataPtr.cast());
-    return Uint8List.fromList(dataList);
+    return dataCopy;
+
+    // final dataList = dataPtr.asTypedList(length);
+    // freeMemory(dataPtr.cast());
+    // return Uint8List.fromList(dataList);
+
   }
 }
 
