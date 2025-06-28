@@ -55,7 +55,7 @@ class _AddImageState extends State<AddImage> {
     return Expanded(
       child: DropTarget(
         onDragDone: (detail) async {
-          final filePath=detail.files[0].path;
+          final filePath=detail.files[0].path.replaceAll("\\", "/");
           fileChecker(context, filePath);
         },
         child: Container(
