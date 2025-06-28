@@ -2,12 +2,14 @@ import 'dart:convert';
 
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
+import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:ffi/ffi.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -19,6 +21,7 @@ class AddImage extends StatefulWidget {
 class _AddImageState extends State<AddImage> {
 
   final ImageController imageController=Get.find();
+  final ThemeController themeController=Get.find();
 
 
   Future<void> fileChecker(BuildContext context,String filePath) async {
@@ -75,7 +78,12 @@ class _AddImageState extends State<AddImage> {
                   )
                 ),
                 const SizedBox(height: 10,),
-                Text("添加一个照片，你也可以拖拽照片文件到这里")
+                Text(
+                  "添加一个照片，你也可以拖拽照片文件到这里",
+                  style: GoogleFonts.notoSansSc(
+                    color: Theme.of(context).colorScheme.onSurface
+                  )
+                )
               ],
             ),
           ),

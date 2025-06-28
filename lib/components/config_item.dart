@@ -1,4 +1,6 @@
+import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfigItem extends StatefulWidget {
@@ -13,6 +15,9 @@ class ConfigItem extends StatefulWidget {
 }
 
 class _ConfigItemState extends State<ConfigItem> {
+
+  final ThemeController themeController=Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,10 +26,13 @@ class _ConfigItemState extends State<ConfigItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            widget.keyWord,
-            style: GoogleFonts.notoSansSc(
-              fontWeight: FontWeight.bold
+          Obx(()=>
+            Text(
+              widget.keyWord,
+              style: GoogleFonts.notoSansSc(
+                fontWeight: FontWeight.bold,
+                color: themeController.darkMode.value ? Colors.white : Colors.black
+              ),
             ),
           ),
           Text(
