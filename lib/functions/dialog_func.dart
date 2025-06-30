@@ -23,34 +23,33 @@ void showAbout(BuildContext context, String version){
   showDialog(
     context: context, 
     builder: (context)=>AlertDialog(
-      title: Text('关于EXIF Helper', style: GoogleFonts.notoSansSc(),),
+      title: Text('关于EXIF Helper'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Align(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: 100,
-              height: 100,
-              child: Image.asset('assets/icon.png')
-            ),
-          ),
-          Text(
-            'EXIF Helper', 
-            style: GoogleFonts.notoSansSc(
-              fontWeight: FontWeight.bold,
-              fontSize: 20
-            ),
+          Image.asset(
+            'assets/icon.png',
+            width: 100,
+            height: 100,
           ),
           const SizedBox(height: 10,),
           Text(
-            "v$version",
+            'netPlayer',
             style: GoogleFonts.notoSansSc(
-              color: Colors.grey[500],
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
           ),
-          const SizedBox(height: 15,),
+          const SizedBox(height: 3,),
+          Text(
+            "v$version",
+            style: GoogleFonts.notoSansSc(
+              fontSize: 13,
+              color: Colors.grey[400]
+            ),
+          ),
+          const SizedBox(height: 20,),
           GestureDetector(
             onTap: () async {
               final Uri url = Uri.parse('https://github.com/Zhoucheng133/EXIF-Helper');
@@ -59,23 +58,28 @@ void showAbout(BuildContext context, String version){
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: Row(
-                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const FaIcon(
                     FontAwesomeIcons.github,
                     size: 15,
                   ),
                   const SizedBox(width: 5,),
-                  Text(
-                    '本项目地址',
-                    style:  GoogleFonts.notoSansSc(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 2),
+                    child: Text(
+                      '本地项目地址',
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13,
+                      ),
+                    ),
                   )
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 10,),
+          const SizedBox(height: 5),
           GestureDetector(
             onTap: () => showLicensePage(
               applicationName: 'EXIF Helper',
@@ -85,32 +89,37 @@ void showAbout(BuildContext context, String version){
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: Row(
-                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const FaIcon(
                     FontAwesomeIcons.certificate,
                     size: 15,
                   ),
                   const SizedBox(width: 5,),
-                  Text(
-                    '许可证',
-                    style:  GoogleFonts.notoSansSc(),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 2),
+                    child: Text(
+                      '许可证',
+                      style: GoogleFonts.notoSansSc(
+                        fontSize: 13,
+                      ),
+                    ),
                   )
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
       actions: [
         ElevatedButton(
-          child: Text('好的', style: GoogleFonts.notoSansSc(),), 
           onPressed: (){
             Navigator.pop(context);
-          }
+          }, 
+          child: Text('好的')
         )
       ],
-    )
+    ),
   );
 }
