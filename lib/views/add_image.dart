@@ -53,41 +53,53 @@ class _AddImageState extends State<AddImage> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: DropTarget(
-        onDragDone: (detail) async {
-          final filePath=detail.files[0].path.replaceAll("\\", "/");
-          fileChecker(context, filePath);
-        },
-        child: Container(
-          color: Colors.transparent,
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: () async {
-                    FilePickerResult? result = await FilePicker.platform.pickFiles();
-                    if (result != null && context.mounted) {
-                      fileChecker(context, result.files.single.path!);
-                    }
-                  }, 
-                  icon: const Icon(
-                    Icons.add_rounded,
-                    size: 30,
-                  )
+      child: Stack(
+        children: [
+          DropTarget(
+            onDragDone: (detail) async {
+              final filePath=detail.files[0].path.replaceAll("\\", "/");
+              fileChecker(context, filePath);
+            },
+            child: Container(
+              color: Colors.transparent,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () async {
+                        FilePickerResult? result = await FilePicker.platform.pickFiles();
+                        if (result != null && context.mounted) {
+                          fileChecker(context, result.files.single.path!);
+                        }
+                      }, 
+                      icon: const Icon(
+                        Icons.add_rounded,
+                        size: 30,
+                      )
+                    ),
+                    const SizedBox(height: 10,),
+                    Text(
+                      "添加一个照片，你也可以拖拽照片文件到这里",
+                      style: GoogleFonts.notoSansSc(
+                        color: Theme.of(context).colorScheme.onSurface
+                      )
+                    )
+                  ],
                 ),
-                const SizedBox(height: 10,),
-                Text(
-                  "添加一个照片，你也可以拖拽照片文件到这里",
-                  style: GoogleFonts.notoSansSc(
-                    color: Theme.of(context).colorScheme.onSurface
-                  )
-                )
-              ],
+              ),
             ),
           ),
-        ),
+          Positioned(
+            right: 10,
+            bottom: 10,
+            child: IconButton(
+              onPressed: () => showAbout(context), 
+              icon: Icon(Icons.info_rounded)
+            )
+          )
+        ],
       ),
     );
   }

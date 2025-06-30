@@ -8,7 +8,6 @@ import 'package:exif_helper/views/image_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MainWindow extends StatefulWidget {
@@ -19,18 +18,10 @@ class MainWindow extends StatefulWidget {
 }
 
 class _MainWindowState extends State<MainWindow> with WindowListener {
-
-  late PackageInfo packageInfo;
-
-  Future<void> init() async {
-    packageInfo = await PackageInfo.fromPlatform();
-  }
-
   @override
   void initState() {
     super.initState();
     windowManager.addListener(this);
-    init();
   }
 
  @override
@@ -106,7 +97,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                       PlatformMenuItem(
                         label: "关于 EXIF Helper",
                         onSelected: (){
-                          showAbout(context, packageInfo.version);
+                          showAbout(context);
                         }
                       )
                     ]
