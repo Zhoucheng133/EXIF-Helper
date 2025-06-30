@@ -16,10 +16,12 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  font_awesome_flutter: ^10.8.0
   get: ^4.7.2
   google_fonts: ^6.2.1
   package_info_plus: ^8.3.0
   path: ^1.9.1
+  url_launcher: ^6.3.1
   window_manager: ^0.3.8
 
 dev_dependencies:
@@ -29,3 +31,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
