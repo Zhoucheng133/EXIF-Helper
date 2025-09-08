@@ -16,6 +16,7 @@ dependencies:
     sdk: flutter
   get: ^4.7.2
   google_fonts: ^6.2.1
+  msix: ^3.16.12
   package_info_plus: ^8.3.0
   path: ^1.9.1
   window_manager: ^0.3.8
@@ -27,3 +28,15 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+msix_config:
+  display_name: EXIF Helper
+  publisher_display_name: ZhouCheng
+  identity_name: ZhouCheng.EXIFHelper
+  trim_logo: false
+  msix_version: 0.1.0.0
+  logo_path: assets/icon.png
+  capabilities: internetClient
+  languages: zh-cn
+  publisher: # Publisher HERE
+  store: true
