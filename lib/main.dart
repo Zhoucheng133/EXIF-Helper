@@ -18,6 +18,7 @@ Future<void> main() async {
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
     titleBarStyle: TitleBarStyle.hidden,
+    title: "EXIF Helper"
   );
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
