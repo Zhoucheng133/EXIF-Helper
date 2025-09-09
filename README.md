@@ -6,6 +6,8 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
+<a href="https://apps.microsoft.com/store/detail/9P6389WJJJ8K?cid=DevShareMCLPCS"><img src="demo/ms_badge.svg" width="150px"></a>
+
 支持的Windows系统: Windows10~ & macOS
 
 动态库组件仓库[在这里](https://github.com/Zhoucheng133/EXIF-Helper-Core)
