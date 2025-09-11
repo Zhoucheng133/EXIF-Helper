@@ -6,7 +6,9 @@
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
-<a href="https://apps.microsoft.com/store/detail/9P6389WJJJ8K?cid=DevShareMCLPCS"><img src="demo/ms_badge.svg" width="150px"></a>
+<a href="https://apps.microsoft.com/detail/9p6389wjjj8k?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+</a>
 
 支持的Windows系统: Windows10~ & macOS
 
