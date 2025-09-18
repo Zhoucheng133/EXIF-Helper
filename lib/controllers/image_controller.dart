@@ -51,11 +51,6 @@ class ImageController extends GetxController {
     final dataCopy = Uint8List.fromList(dataPtr.asTypedList(length));
     freeMemory(dataPtr.cast());
     return dataCopy;
-
-    // final dataList = dataPtr.asTypedList(length);
-    // freeMemory(dataPtr.cast());
-    // return Uint8List.fromList(dataList);
-
   }
 
   void reloadImage(){
