@@ -4,18 +4,22 @@ import 'dart:typed_data';
 import 'package:get/get.dart';
 import 'package:ffi/ffi.dart';
 
-typedef ImageSave = Pointer<Utf8> Function(Pointer<Utf8>, Pointer<Utf8>);
+typedef ImageSave = Void Function(Pointer<Utf8>, Pointer<Utf8>, Int);
+typedef ImageSaveDart = void Function(Pointer<Utf8>, Pointer<Utf8>, int);
 typedef GetEXIF = Pointer<Utf8> Function(Pointer<Utf8>);
-typedef ImagePreview = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength);
+typedef ImagePreview = Pointer<Uint8> Function(Pointer<Utf8>, Pointer<Int32>, Int);
+typedef ImagePreviewDart = Pointer<Uint8> Function(Pointer<Utf8>, Pointer<Int32>, int);
 typedef FreeMemory = Void Function(Pointer<Void> ptr);
 typedef FreeMemoryDart = void Function(Pointer<Void> ptr);
 
 class ImageController extends GetxController {
   Rx<ImageItem?> item=Rx<ImageItem?>(null);
-  late ImageSave imageSave;
-  late ImagePreview imagePreview;
+  late ImageSaveDart imageSave;
+  late ImagePreviewDart imagePreview;
   late FreeMemoryDart freeMemory;
   late GetEXIF getEXIF;
+
+  RxBool load=false.obs;
 
   ImageController(){
     final dylib = DynamicLibrary.open(Platform.isWindows ? "image.dll" :"image.dylib");
@@ -36,7 +40,7 @@ class ImageController extends GetxController {
   Uint8List? convertImage(String path){
     final pathPtr = path.toNativeUtf8();
     final outLenPtr = malloc<Int32>();
-    final dataPtr = imagePreview(pathPtr, outLenPtr);
+    final dataPtr = imagePreview(pathPtr, outLenPtr, showLogo.value?1:0);
     final length = outLenPtr.value;
 
     malloc.free(pathPtr);
@@ -53,6 +57,15 @@ class ImageController extends GetxController {
     // return Uint8List.fromList(dataList);
 
   }
+
+  void reloadImage(){
+    load.value=true;
+    item.value?.raw=convertImage(item.value!.filePath) ?? Uint8List(0);
+    item.refresh();
+    load.value=false;
+  }
+
+  RxBool showLogo=true.obs;
 }
 
 class ImageItem{

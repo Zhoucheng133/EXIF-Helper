@@ -92,7 +92,27 @@ class _ImageConfigState extends State<ImageConfig> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(height: 5,),
+                        Transform.translate(
+                          offset: Offset(-10, 0),
+                          child: Row(
+                            children: [
+                              Transform.scale(
+                                scale: 0.7,
+                                child: Switch(
+                                  splashRadius: 0,
+                                  value: imageController.showLogo.value, 
+                                  onChanged: (val){
+                                    imageController.showLogo.value=val;
+                                    imageController.reloadImage();
+                                  }
+                                ),
+                              ),
+                              Text('显示品牌logo')
+                            ],
+                          ),
+                        ),
+                        // const SizedBox(height: 10,),
                         ConfigItem(keyWord: "相机制造商", value: imageController.item.value!.make, enable: true),
                         ConfigItem(keyWord: "相机型号", value: imageController.item.value!.model, enable: true),
                         ConfigItem(keyWord: "镜头型号", value: imageController.item.value!.lenModel, enable: true),
@@ -110,7 +130,7 @@ class _ImageConfigState extends State<ImageConfig> {
                               final String ext=p.extension(imageController.item.value!.filePath);
                               final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
                               // await file.writeAsBytes(imageController.item.value!.raw);
-                              imageController.imageSave(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8());
+                              imageController.imageSave(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8(), imageController.showLogo.value?1:0);
                             }
                           }, 
                           child: const Text("下载图片")
