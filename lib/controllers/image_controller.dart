@@ -1,6 +1,6 @@
 import 'dart:ffi';
 import 'dart:io';
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:ffi/ffi.dart';
 
@@ -15,8 +15,6 @@ typedef FreeMemoryDart = void Function(Pointer<Void> ptr);
 class ImageController extends GetxController {
   Rx<ImageItem?> item=Rx<ImageItem?>(null);
   late ImageSaveDart imageSave;
-  late ImagePreviewDart imagePreview;
-  late FreeMemoryDart freeMemory;
   late GetEXIF getEXIF;
 
   RxBool load=false.obs;
@@ -26,36 +24,45 @@ class ImageController extends GetxController {
     imageSave=dylib
     .lookup<NativeFunction<ImageSave>>("ImageSave")
     .asFunction();
-    imagePreview=dylib
-    .lookup<NativeFunction<ImagePreview>>("ImagePreview")
-    .asFunction();
-    freeMemory=dylib
-    .lookup<NativeFunction<FreeMemory>>("FreeMemory")
-    .asFunction();
     getEXIF=dylib
     .lookup<NativeFunction<GetEXIF>>("GetEXIF")
     .asFunction();
   }
 
-  Uint8List? convertImage(String path){
-    final pathPtr = path.toNativeUtf8();
+  // params: [path, showLogo(0,1)]
+  static Uint8List? previewImageHandler(List params){
     final outLenPtr = malloc<Int32>();
-    final dataPtr = imagePreview(pathPtr, outLenPtr, showLogo.value?1:0);
+    final dylib = DynamicLibrary.open(Platform.isWindows ? "image.dll" :"image.dylib");
+    ImagePreviewDart imagePreview=dylib
+    .lookup<NativeFunction<ImagePreview>>("ImagePreview")
+    .asFunction();
+    FreeMemoryDart freeMemory=dylib
+    .lookup<NativeFunction<FreeMemory>>("FreeMemory")
+    .asFunction();
+
+    final dataPtr = imagePreview(params[0], outLenPtr, params[1]);
     final length = outLenPtr.value;
 
-    malloc.free(pathPtr);
+    malloc.free(params[0]);
     malloc.free(outLenPtr);
 
     if (dataPtr == nullptr || length == 0) return null;
-
-    final dataCopy = Uint8List.fromList(dataPtr.asTypedList(length));
     freeMemory(dataPtr.cast());
+    final dataCopy = Uint8List.fromList(dataPtr.asTypedList(length));
     return dataCopy;
   }
 
-  void reloadImage(){
+  Future<Uint8List?> convertImage(String path) async {
     load.value=true;
-    item.value?.raw=convertImage(item.value!.filePath) ?? Uint8List(0);
+    final pathPtr = path.toNativeUtf8();
+    Uint8List? data= await compute(previewImageHandler, [pathPtr, showLogo.value?1:0]);
+    load.value=false;
+    return data;
+  }
+
+  Future<void> reloadImage() async {
+    load.value=true;
+    item.value?.raw=await convertImage(item.value!.filePath) ?? Uint8List(0);
     item.refresh();
     load.value=false;
   }

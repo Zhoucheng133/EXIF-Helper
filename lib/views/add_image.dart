@@ -31,7 +31,7 @@ class _AddImageState extends State<AddImage> {
       final exifJson=jsonDecode(exifString);
 
       imageController.item.value=ImageItem(
-        imageController.convertImage(filePath) ?? Uint8List(0), 
+        await imageController.convertImage(filePath) ?? Uint8List(0), 
         filePath, 
         exifJson["camMake"].replaceAll("\"", ""), 
         exifJson["camModel"].replaceAll("\"", ""), 
