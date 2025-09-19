@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:exif_helper/components/loading.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:exif_helper/views/add_image.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
@@ -85,7 +86,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
           ),
         ),
         Obx(()=>
-          imageController.item.value==null ? AddImage() : ImageConfig()
+          imageController.item.value==null ? imageController.load.value ? Loading() : AddImage() : ImageConfig()
         ),
         Platform.isMacOS ? PlatformMenuBar(
             menus: [

@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:exif_helper/components/config_item.dart';
+import 'package:exif_helper/components/loading.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:expressions/expressions.dart';
@@ -43,31 +44,33 @@ class _ImageConfigState extends State<ImageConfig> {
         padding: const EdgeInsets.all(10.0),
         child: Row(
           children: [
-            Expanded(
-              child: Stack(
-                children: [
-                  Center(
-                    child: Obx(()=>
-                      Image.memory(
-                        imageController.item.value!.raw,
-                        fit: BoxFit.contain,
-                        gaplessPlayback: false,
-                      )
+            Obx(
+              ()=> imageController.load.value ? Loading() :  Expanded(
+                child: Stack(
+                  children: [
+                    Center(
+                      child: Obx(()=>
+                        Image.memory(
+                          imageController.item.value!.raw,
+                          fit: BoxFit.contain,
+                          gaplessPlayback: false,
+                        )
+                      ),
                     ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: IconButton(
-                      onPressed: (){
-                        imageController.item.value?.raw = Uint8List(0);
-                        imageController.item.value=null;
-                      }, 
-                      icon: const Icon(Icons.close_rounded)
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: IconButton(
+                        onPressed: (){
+                          imageController.item.value?.raw = Uint8List(0);
+                          imageController.item.value=null;
+                        }, 
+                        icon: const Icon(Icons.close_rounded)
+                      )
                     )
-                  )
-                ],
-              )
+                  ],
+                )
+              ),
             ),
             SizedBox(width: 10,),
             Obx(()=>
