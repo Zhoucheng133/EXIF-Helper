@@ -47,8 +47,8 @@ class ImageController extends GetxController {
     malloc.free(outLenPtr);
 
     if (dataPtr == nullptr || length == 0) return null;
-    freeMemory(dataPtr.cast());
     final dataCopy = Uint8List.fromList(dataPtr.asTypedList(length));
+    freeMemory(dataPtr.cast());
     return dataCopy;
   }
 
