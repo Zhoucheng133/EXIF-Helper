@@ -73,7 +73,7 @@ Future<void> showAbout(BuildContext context) async {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
-                        '本地项目地址',
+                        '本项目地址',
                         style: GoogleFonts.notoSansSc(
                           fontSize: 13,
                         ),
