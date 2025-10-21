@@ -39,7 +39,7 @@ Future<void> showAbout(BuildContext context) async {
             ),
             const SizedBox(height: 10,),
             Text(
-              'netPlayer',
+              'EXIF Helper',
               style: GoogleFonts.notoSansSc(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
