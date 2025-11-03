@@ -98,29 +98,14 @@ class _ImageConfigState extends State<ImageConfig> {
             children: [
               Obx(
                 ()=> imageController.load.value ? Loading() :  Expanded(
-                  child: Stack(
-                    children: [
-                      Center(
-                        child: Obx(()=>
-                          Image.memory(
-                            imageController.item.value!.raw,
-                            fit: BoxFit.contain,
-                            gaplessPlayback: false,
-                          )
-                        ),
-                      ),
-                      Positioned(
-                        top: 10,
-                        right: 10,
-                        child: IconButton(
-                          onPressed: (){
-                            imageController.item.value?.raw = Uint8List(0);
-                            imageController.item.value=null;
-                          }, 
-                          icon: const Icon(Icons.close_rounded)
-                        )
+                  child: Center(
+                    child: Obx(()=>
+                      Image.memory(
+                        imageController.item.value!.raw,
+                        fit: BoxFit.contain,
+                        gaplessPlayback: false,
                       )
-                    ],
+                    ),
                   )
                 ),
               ),
@@ -177,18 +162,30 @@ class _ImageConfigState extends State<ImageConfig> {
                           ConfigItem(keyWord: "ISO", value: imageController.item.value!.iso, enable: true),
                           ConfigItem(keyWord: "拍摄时间", value: calDatatime(imageController.item.value!.dateTime), enable: true),
                           const SizedBox(height: 20,),
-                          TextButton(
-                            onPressed: () async {
-                              String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
-                              if(selectedDirectory!=null){
-                                final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
-                                final String ext=p.extension(imageController.item.value!.filePath);
-                                final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
-                                // await file.writeAsBytes(imageController.item.value!.raw);
-                                imageController.imageSave(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8(), imageController.showLogo.value?1:0);
-                              }
-                            }, 
-                            child: const Text("下载图片")
+                          Row(
+                            children: [
+                              FilledButton(
+                                onPressed: () async {
+                                  String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+                                  if(selectedDirectory!=null){
+                                    final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
+                                    final String ext=p.extension(imageController.item.value!.filePath);
+                                    final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
+                                    // await file.writeAsBytes(imageController.item.value!.raw);
+                                    imageController.imageSave(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8(), imageController.showLogo.value?1:0);
+                                  }
+                                }, 
+                                child: const Text("下载图片")
+                              ),
+                              Expanded(child: Container()),
+                              TextButton(
+                                onPressed: (){
+                                  imageController.item.value?.raw = Uint8List(0);
+                                  imageController.item.value=null;
+                                }, 
+                                child: Text("关闭此照片"),
+                              )
+                            ],
                           )
                         ],
                       ),
