@@ -9,7 +9,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -82,7 +81,7 @@ class _AddImageState extends State<AddImage> {
                     const SizedBox(height: 10,),
                     Text(
                       "添加一个照片，你也可以拖拽照片文件到这里",
-                      style: GoogleFonts.notoSansSc(
+                      style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface
                       )
                     )

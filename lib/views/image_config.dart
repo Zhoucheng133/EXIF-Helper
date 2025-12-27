@@ -11,7 +11,6 @@ import 'package:expressions/expressions.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:path/path.dart' as p;
 import 'package:ffi/ffi.dart';
 
@@ -125,7 +124,7 @@ class _ImageConfigState extends State<ImageConfig> {
                         children: [
                           Text(
                             imageController.item.value!.filePath,
-                            style: GoogleFonts.notoSansSc(
+                            style: TextStyle(
                               fontSize: 18,
                               color: themeController.darkMode.value ? Colors.white : Colors.black
                             ),

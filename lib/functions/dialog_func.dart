@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -40,7 +39,7 @@ Future<void> showAbout(BuildContext context) async {
             const SizedBox(height: 10,),
             Text(
               'EXIF Helper',
-              style: GoogleFonts.notoSansSc(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
@@ -48,7 +47,7 @@ Future<void> showAbout(BuildContext context) async {
             const SizedBox(height: 3,),
             Text(
               "v$version",
-              style: GoogleFonts.notoSansSc(
+              style: TextStyle(
                 fontSize: 13,
                 color: Colors.grey[400]
               ),
@@ -74,7 +73,7 @@ Future<void> showAbout(BuildContext context) async {
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
                         '本项目地址',
-                        style: GoogleFonts.notoSansSc(
+                        style: TextStyle(
                           fontSize: 13,
                         ),
                       ),
@@ -105,7 +104,7 @@ Future<void> showAbout(BuildContext context) async {
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
                         '许可证',
-                        style: GoogleFonts.notoSansSc(
+                        style: TextStyle(
                           fontSize: 13,
                         ),
                       ),

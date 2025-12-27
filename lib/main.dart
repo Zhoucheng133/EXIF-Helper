@@ -4,7 +4,6 @@ import 'package:exif_helper/main_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
@@ -55,12 +54,19 @@ class _MainAppState extends State<MainApp> {
         ],
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          brightness: brightness,
+          fontFamily: 'Noto', 
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.purple,
-            brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light
+            brightness: brightness,
           ),
-          useMaterial3: true,
-          textTheme: GoogleFonts.notoSansScTextTheme(),
+          textTheme: brightness==Brightness.dark ? ThemeData.dark().textTheme.apply(
+            fontFamily: 'Noto',
+            bodyColor: Colors.white,
+            displayColor: Colors.white,
+          ) : ThemeData.light().textTheme.apply(
+            fontFamily: 'Noto',
+          ),
         ),
         home: Scaffold(
           body: MainWindow()

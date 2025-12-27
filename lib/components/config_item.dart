@@ -1,7 +1,6 @@
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ConfigItem extends StatefulWidget {
   final String keyWord;
@@ -29,7 +28,7 @@ class _ConfigItemState extends State<ConfigItem> {
           Obx(()=>
             Text(
               widget.keyWord,
-              style: GoogleFonts.notoSansSc(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: themeController.darkMode.value ? Colors.white : Colors.black
               ),
@@ -37,7 +36,7 @@ class _ConfigItemState extends State<ConfigItem> {
           ),
           Text(
             widget.value,
-            style: GoogleFonts.notoSansSc(
+            style: TextStyle(
               color: Colors.grey,
             ),
             overflow: TextOverflow.ellipsis,

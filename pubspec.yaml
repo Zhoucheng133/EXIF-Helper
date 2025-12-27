@@ -34,6 +34,13 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+  fonts:
+    - family: "Noto"
+      fonts:
+        - asset: fonts/NotoSansSC-Regular.ttf
+          weight: 400
+        - asset: fonts/NotoSansSC-Bold.ttf
+          weight: 700
 
 msix_config:
   display_name: EXIF Helper
