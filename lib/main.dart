@@ -60,7 +60,7 @@ class _MainAppState extends State<MainApp> {
             seedColor: Colors.purple,
             brightness: brightness,
           ),
-          textTheme: brightness==Brightness.dark ? ThemeData.dark().textTheme.apply(
+          textTheme: themeController.darkMode.value ? ThemeData.dark().textTheme.apply(
             fontFamily: 'Noto',
             bodyColor: Colors.white,
             displayColor: Colors.white,
