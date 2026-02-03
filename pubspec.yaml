@@ -1,7 +1,7 @@
 name: exif_helper
 description: "EXIF Helper"
 publish_to: 'none'
-version: 0.2.4
+version: 0.3.0
 
 environment:
   sdk: ^3.8.1
@@ -35,11 +35,11 @@ flutter:
   assets:
     - assets/
   fonts:
-    - family: "Noto"
+    - family: "PuHui"
       fonts:
-        - asset: fonts/NotoSansSC-Regular.ttf
+        - asset: fonts/PuHuiTi-3-55-Regular.ttf
           weight: 400
-        - asset: fonts/NotoSansSC-Bold.ttf
+        - asset: fonts/PuHuiTi-3-85-Bold.ttf
           weight: 700
 
 msix_config:

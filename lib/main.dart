@@ -55,17 +55,17 @@ class _MainAppState extends State<MainApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: brightness,
-          fontFamily: 'Noto', 
+          fontFamily: 'PuHui', 
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.purple,
             brightness: brightness,
           ),
           textTheme: themeController.darkMode.value ? ThemeData.dark().textTheme.apply(
-            fontFamily: 'Noto',
+            fontFamily: 'PuHui',
             bodyColor: Colors.white,
             displayColor: Colors.white,
           ) : ThemeData.light().textTheme.apply(
-            fontFamily: 'Noto',
+            fontFamily: 'PuHui',
           ),
         ),
         home: Scaffold(
