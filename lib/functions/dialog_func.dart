@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -7,12 +8,12 @@ void warnDialog(BuildContext context, String title, String content){
   showDialog(
     context: context, 
     builder: (context)=>AlertDialog(
-      title: const Text("导入图片错误"),
-      content: const Text("不支持的格式"),
+      title: Text(title),
+      content: Text(content),
       actions: [
         ElevatedButton(
           onPressed: ()=>Navigator.pop(context), 
-          child: const Text("好的")
+          child: Text("ok".tr)
         )
       ],
     )
@@ -26,7 +27,7 @@ Future<void> showAbout(BuildContext context) async {
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
-        title: Text('关于EXIF Helper'),
+        title: Text('about'.tr),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +73,7 @@ Future<void> showAbout(BuildContext context) async {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
-                        '本项目地址',
+                        'prjLink'.tr,
                         style: TextStyle(
                           fontSize: 13,
                         ),
@@ -103,7 +104,7 @@ Future<void> showAbout(BuildContext context) async {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
-                        '许可证',
+                        'license'.tr,
                         style: TextStyle(
                           fontSize: 13,
                         ),
@@ -120,7 +121,7 @@ Future<void> showAbout(BuildContext context) async {
             onPressed: (){
               Navigator.pop(context);
             }, 
-            child: Text('好的')
+            child: Text('ok'.tr)
           )
         ],
       ),

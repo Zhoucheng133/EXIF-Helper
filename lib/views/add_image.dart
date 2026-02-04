@@ -44,7 +44,7 @@ class _AddImageState extends State<AddImage> {
         exifJson["lenModel"].replaceAll("\"", ""), 
       );
     }else{
-      warnDialog(context, "导入图片错误", "不支持的格式");
+      warnDialog(context, "importErr".tr, "unsupportFormat".tr);
       return;
     }
   }
@@ -80,7 +80,7 @@ class _AddImageState extends State<AddImage> {
                     ),
                     const SizedBox(height: 10,),
                     Text(
-                      "添加一个照片，你也可以拖拽照片文件到这里",
+                      "addView".tr,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onSurface
                       )

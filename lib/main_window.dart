@@ -94,7 +94,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                   PlatformMenuItemGroup(
                     members: [
                       PlatformMenuItem(
-                        label: "关于 EXIF Helper",
+                        label: "aboutEXIFHelper".tr,
                         onSelected: (){
                           showAbout(context);
                         }
@@ -116,10 +116,10 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                 ]
               ),
               PlatformMenu(
-                label: "编辑",
+                label: "edit".tr,
                 menus: [
                   PlatformMenuItem(
-                    label: "拷贝",
+                    label: "copy".tr,
                     shortcut: const SingleActivator(
                       LogicalKeyboardKey.keyC,
                       meta: true
@@ -127,7 +127,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                     onSelected: (){}
                   ),
                   PlatformMenuItem(
-                    label: "粘贴",
+                    label: "paste".tr,
                     shortcut: const SingleActivator(
                       LogicalKeyboardKey.keyV,
                       meta: true
@@ -135,7 +135,7 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                     onSelected: (){}
                   ),
                   PlatformMenuItem(
-                    label: "全选",
+                    label: "selectAll".tr,
                     shortcut: const SingleActivator(
                       LogicalKeyboardKey.keyA,
                       meta: true
@@ -144,8 +144,8 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                   )
                 ]
               ),
-              const PlatformMenu(
-                label: "窗口", 
+              PlatformMenu(
+                label: "window".tr, 
                 menus: [
                   PlatformMenuItemGroup(
                     members: [

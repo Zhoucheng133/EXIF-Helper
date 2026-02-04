@@ -12,7 +12,8 @@ import 'package:window_manager/window_manager.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
-  Get.put(ThemeController());
+  final controller=Get.put(ThemeController());
+  await controller.initLang();
   Get.put(ImageController());
   WindowOptions windowOptions = WindowOptions(
     size: Size(900, 670),
@@ -46,7 +47,6 @@ class MainTranslations extends Translations {
   };
 }
 
-
 class _MainAppState extends State<MainApp> {
 
   final ThemeController themeController=Get.find();
@@ -61,7 +61,9 @@ class _MainAppState extends State<MainApp> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        locale: themeController.lang.value.locale, 
+        translations: MainTranslations(),
+        locale: themeController.lang.value.locale,
+        fallbackLocale: Locale('en', 'US'),
         supportedLocales: supportedLocales.map((item)=>item.locale).toList(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

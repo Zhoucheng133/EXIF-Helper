@@ -44,12 +44,12 @@ class _ImageConfigState extends State<ImageConfig> {
     showDialog(
       context: context, 
       builder: (context)=>AlertDialog(
-        title: const Text("更换图片"),
-        content: const Text("确定要更换图片吗? 此操作会关闭当前图片"),
+        title: Text("changeImage".tr),
+        content: Text("changeImageTip".tr),
         actions: [
           TextButton(
             onPressed: ()=>Navigator.pop(context), 
-            child: const Text("取消")
+            child: Text("cancel".tr)
           ),
           ElevatedButton(
             onPressed: () async {
@@ -73,11 +73,11 @@ class _ImageConfigState extends State<ImageConfig> {
                   exifJson["lenModel"].replaceAll("\"", ""), 
                 );
               }else{
-                warnDialog(context, "导入图片错误", "不支持的格式");
+                warnDialog(context, "importErr".tr, "unsupportFormat".tr);
                 return;
               }
             }, 
-            child: const Text("继续")
+            child: Text("continue".tr)
           )
         ]
       )
@@ -122,7 +122,8 @@ class _ImageConfigState extends State<ImageConfig> {
                     Column(
                       children: [
                         Expanded(
-                          child: ListView(
+                          child: Column(
+                            crossAxisAlignment: .start,
                             children: [
                               Text(
                                 imageController.item.value!.filePath,
@@ -149,7 +150,7 @@ class _ImageConfigState extends State<ImageConfig> {
                                         }
                                       ),
                                     ),
-                                    Text('显示品牌logo')
+                                    Text('showBrandLogo'.tr)
                                   ],
                                 ),
                               ),
@@ -163,7 +164,7 @@ class _ImageConfigState extends State<ImageConfig> {
                                         imageController.showExposureTime.value=val;
                                         imageController.reloadImage();
                                       }, 
-                                      label: "曝光时间"
+                                      label: "exposureTime".tr
                                     ),
                                     CheckboxItem(
                                       val: imageController.showF.value, 
@@ -171,7 +172,7 @@ class _ImageConfigState extends State<ImageConfig> {
                                         imageController.showF.value=val;
                                         imageController.reloadImage();
                                       }, 
-                                      label: "光圈"
+                                      label: "fNumber".tr
                                     ),
                                     CheckboxItem(
                                       val: imageController.showISO.value, 
@@ -184,51 +185,48 @@ class _ImageConfigState extends State<ImageConfig> {
                                   ],
                                 ),
                               ),
-                              ConfigItem(keyWord: "相机制造商", value: imageController.item.value!.make, enable: true),
-                              ConfigItem(keyWord: "相机型号", value: imageController.item.value!.model, enable: true),
-                              ConfigItem(keyWord: "镜头型号", value: imageController.item.value!.lenModel, enable: true),
-                              ConfigItem(keyWord: "焦距", value: "${imageController.item.value!.forcal}mm", enable: true),
-                              ConfigItem(keyWord: "光圈", value: calFnum(imageController.item.value!.fNum), enable: true),
-                              ConfigItem(keyWord: "曝光时间", value: "${imageController.item.value!.exposureTime}s", enable: true),
+                              ConfigItem(keyWord: "camMake".tr, value: imageController.item.value!.make, enable: true),
+                              ConfigItem(keyWord: "camModel".tr, value: imageController.item.value!.model, enable: true),
+                              ConfigItem(keyWord: "lenModel".tr, value: imageController.item.value!.lenModel, enable: true),
+                              ConfigItem(keyWord: "forcal".tr, value: "${imageController.item.value!.forcal}mm", enable: true),
+                              ConfigItem(keyWord: "fNumber".tr, value: calFnum(imageController.item.value!.fNum), enable: true),
+                              ConfigItem(keyWord: "exposureTime".tr, value: "${imageController.item.value!.exposureTime}s", enable: true),
                               ConfigItem(keyWord: "ISO", value: imageController.item.value!.iso, enable: true),
-                              ConfigItem(keyWord: "拍摄时间", value: calDatatime(imageController.item.value!.dateTime), enable: true),
+                              ConfigItem(keyWord: "captureTime".tr, value: calDatatime(imageController.item.value!.dateTime), enable: true),
                               const SizedBox(height: 20,),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: .only(top: 10),
-                          child: Row(
-                            children: [
-                              FilledButton(
-                                onPressed: () async {
-                                  String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
-                                  if(selectedDirectory!=null){
-                                    final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
-                                    final String ext=p.extension(imageController.item.value!.filePath);
-                                    final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
-                                    imageController.imageSave(
-                                      imageController.item.value!.filePath.toNativeUtf8(), 
-                                      outputPath.toNativeUtf8(), 
-                                      imageController.showLogo.value?1:0,
-                                      imageController.showF.value?1:0,
-                                      imageController.showExposureTime.value?1:0,
-                                      imageController.showISO.value?1:0
-                                    );
-                                  }
-                                }, 
-                                child: const Text("下载图片")
-                              ),
-                              Expanded(child: Container()),
-                              TextButton(
-                                onPressed: (){
-                                  imageController.item.value?.raw = Uint8List(0);
-                                  imageController.item.value=null;
-                                }, 
-                                child: Text("关闭此照片"),
-                              )
-                            ],
-                          ),
+                        Row(
+                          children: [
+                            FilledButton(
+                              onPressed: () async {
+                                String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+                                if(selectedDirectory!=null){
+                                  final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
+                                  final String ext=p.extension(imageController.item.value!.filePath);
+                                  final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
+                                  imageController.imageSave(
+                                    imageController.item.value!.filePath.toNativeUtf8(), 
+                                    outputPath.toNativeUtf8(), 
+                                    imageController.showLogo.value?1:0,
+                                    imageController.showF.value?1:0,
+                                    imageController.showExposureTime.value?1:0,
+                                    imageController.showISO.value?1:0
+                                  );
+                                }
+                              }, 
+                              child: Text("downloadImage".tr)
+                            ),
+                            Expanded(child: Container()),
+                            TextButton(
+                              onPressed: (){
+                                imageController.item.value?.raw = Uint8List(0);
+                                imageController.item.value=null;
+                              }, 
+                              child: Text("closeImage".tr),
+                            )
+                          ],
                         )
                       ],
                     ),
