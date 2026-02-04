@@ -98,14 +98,32 @@ class _ImageConfigState extends State<ImageConfig> {
             children: [
               Obx(
                 ()=> imageController.load.value ? Loading() :  Expanded(
-                  child: Center(
-                    child: Obx(()=>
-                      Image.memory(
-                        imageController.item.value!.raw,
-                        fit: BoxFit.contain,
-                        gaplessPlayback: false,
+                  child: Stack(
+                    children: [
+                      Center(
+                        child: Obx(()=>
+                          Image.memory(
+                            imageController.item.value!.raw,
+                            fit: BoxFit.contain,
+                            gaplessPlayback: false,
+                          )
+                        ),
+                      ),
+                      Positioned(
+                        top: 30,
+                        right: 10,
+                        child: IconButton(
+                          style: IconButton.styleFrom(
+                            backgroundColor: Colors.white.withAlpha(100)
+                          ),
+                          onPressed: (){
+                            imageController.item.value?.raw = Uint8List(0);
+                            imageController.item.value=null;
+                          }, 
+                          icon: Icon(Icons.close_rounded)
+                        )
                       )
-                    ),
+                    ],
                   )
                 ),
               ),
@@ -122,8 +140,7 @@ class _ImageConfigState extends State<ImageConfig> {
                     Column(
                       children: [
                         Expanded(
-                          child: Column(
-                            crossAxisAlignment: .start,
+                          child: ListView(
                             children: [
                               Text(
                                 imageController.item.value!.filePath,
@@ -156,7 +173,7 @@ class _ImageConfigState extends State<ImageConfig> {
                               ),
                               Transform.translate(
                                 offset: Offset(-10, 0),
-                                child: Row(
+                                child: Column(
                                   children: [
                                     CheckboxItem(
                                       val: imageController.showExposureTime.value, 
@@ -197,36 +214,27 @@ class _ImageConfigState extends State<ImageConfig> {
                             ],
                           ),
                         ),
-                        Row(
-                          children: [
-                            FilledButton(
-                              onPressed: () async {
-                                String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
-                                if(selectedDirectory!=null){
-                                  final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
-                                  final String ext=p.extension(imageController.item.value!.filePath);
-                                  final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
-                                  imageController.imageSave(
-                                    imageController.item.value!.filePath.toNativeUtf8(), 
-                                    outputPath.toNativeUtf8(), 
-                                    imageController.showLogo.value?1:0,
-                                    imageController.showF.value?1:0,
-                                    imageController.showExposureTime.value?1:0,
-                                    imageController.showISO.value?1:0
-                                  );
-                                }
-                              }, 
-                              child: Text("downloadImage".tr)
-                            ),
-                            Expanded(child: Container()),
-                            TextButton(
-                              onPressed: (){
-                                imageController.item.value?.raw = Uint8List(0);
-                                imageController.item.value=null;
-                              }, 
-                              child: Text("closeImage".tr),
-                            )
-                          ],
+                        Padding(
+                          padding: .only(top: 10),
+                          child: FilledButton(
+                            onPressed: () async {
+                              String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+                              if(selectedDirectory!=null){
+                                final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
+                                final String ext=p.extension(imageController.item.value!.filePath);
+                                final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
+                                imageController.imageSave(
+                                  imageController.item.value!.filePath.toNativeUtf8(), 
+                                  outputPath.toNativeUtf8(), 
+                                  imageController.showLogo.value?1:0,
+                                  imageController.showF.value?1:0,
+                                  imageController.showExposureTime.value?1:0,
+                                  imageController.showISO.value?1:0
+                                );
+                              }
+                            }, 
+                            child: Text("downloadImage".tr)
+                          ),
                         )
                       ],
                     ),
