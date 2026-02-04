@@ -25,13 +25,11 @@ class _ConfigItemState extends State<ConfigItem> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Obx(()=>
-            Text(
-              widget.keyWord,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: themeController.darkMode.value ? Colors.white : Colors.black
-              ),
+          Text(
+            widget.keyWord,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).brightness==Brightness.dark ? Colors.white : Colors.black
             ),
           ),
           Text(

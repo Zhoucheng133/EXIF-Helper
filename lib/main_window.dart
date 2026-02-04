@@ -60,27 +60,25 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
           child: Row(
             children: [
               Expanded(child: DragToMoveArea(child: Container())),
-              Platform.isWindows ? Obx(
-                ()=>Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    WindowCaptionButton.minimize(
-                      onPressed: windowManager.minimize,
-                      brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
-                    ),
-                    isMax ? WindowCaptionButton.unmaximize(
-                      onPressed: unMaxWindow,
-                      brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
-                    ) : WindowCaptionButton.maximize(
-                      onPressed: maxWindow,
-                      brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
-                    ) ,
-                    WindowCaptionButton.close(
-                      onPressed: windowManager.close,
-                      brightness: themeController.darkMode.value ? Brightness.dark : Brightness.light,
-                    )
-                  ],
-                ),
+              Platform.isWindows ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  WindowCaptionButton.minimize(
+                    onPressed: windowManager.minimize,
+                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                  ),
+                  isMax ? WindowCaptionButton.unmaximize(
+                    onPressed: unMaxWindow,
+                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                  ) : WindowCaptionButton.maximize(
+                    onPressed: maxWindow,
+                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                  ) ,
+                  WindowCaptionButton.close(
+                    onPressed: windowManager.close,
+                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                  )
+                ],
               ) : Container()
             ],
           ),
