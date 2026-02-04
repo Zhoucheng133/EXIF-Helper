@@ -21,7 +21,7 @@ const Map<String, String> enUS = {
   'lenModel': 'Lens Model',
   'forcal': 'Focal Length',
   'captureTime': 'Capture Time',
-  'downloadImage': 'Download',
+  'downloadImage': 'Download Image',
   'closeImage': 'Close',
   'ok': 'OK',
   'about': 'About',
