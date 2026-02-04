@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:desktop_drop/desktop_drop.dart';
+import 'package:exif_helper/components/checkbox_item.dart';
 import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/components/loading.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
@@ -92,7 +93,7 @@ class _ImageConfigState extends State<ImageConfig> {
           changeFile(context, filePath);
         },
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: .all(10.0),
           child: Row(
             children: [
               Obx(
@@ -117,74 +118,118 @@ class _ImageConfigState extends State<ImageConfig> {
                     color: themeController.darkMode.value ? Colors.grey[800] : Colors.white
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: .all(15.0),
                     child: Obx(()=>
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            imageController.item.value!.filePath,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: themeController.darkMode.value ? Colors.white : Colors.black
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 5,),
-                          Transform.translate(
-                            offset: Offset(-10, 0),
-                            child: Row(
+                          Expanded(
+                            child: ListView(
                               children: [
-                                Transform.scale(
-                                  scale: 0.7,
-                                  child: Switch(
-                                    splashRadius: 0,
-                                    value: imageController.showLogo.value, 
-                                    onChanged: (val){
-                                      imageController.showLogo.value=val;
-                                      imageController.reloadImage();
-                                    }
+                                Text(
+                                  imageController.item.value!.filePath,
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: themeController.darkMode.value ? Colors.white : Colors.black
+                                  ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 5,),
+                                Transform.translate(
+                                  offset: Offset(-10, 0),
+                                  child: Row(
+                                    children: [
+                                      Transform.scale(
+                                        scale: 0.7,
+                                        child: Switch(
+                                          splashRadius: 0,
+                                          value: imageController.showLogo.value, 
+                                          onChanged: (val){
+                                            imageController.showLogo.value=val;
+                                            imageController.reloadImage();
+                                          }
+                                        ),
+                                      ),
+                                      Text('显示品牌logo')
+                                    ],
                                   ),
                                 ),
-                                Text('显示品牌logo')
+                                Transform.translate(
+                                  offset: Offset(-10, 0),
+                                  child: Row(
+                                    children: [
+                                      CheckboxItem(
+                                        val: imageController.showExposureTime.value, 
+                                        onChanged: !imageController.showF.value && !imageController.showISO.value ? null : (val){
+                                          imageController.showExposureTime.value=val;
+                                          imageController.reloadImage();
+                                        }, 
+                                        label: "曝光时间"
+                                      ),
+                                      CheckboxItem(
+                                        val: imageController.showF.value, 
+                                        onChanged: !imageController.showExposureTime.value && !imageController.showISO.value ? null : (val){
+                                          imageController.showF.value=val;
+                                          imageController.reloadImage();
+                                        }, 
+                                        label: "光圈"
+                                      ),
+                                      CheckboxItem(
+                                        val: imageController.showISO.value, 
+                                        onChanged: !imageController.showExposureTime.value && !imageController.showF.value ? null : (val){
+                                          imageController.showISO.value=val;
+                                          imageController.reloadImage();
+                                        }, 
+                                        label: "ISO"
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                ConfigItem(keyWord: "相机制造商", value: imageController.item.value!.make, enable: true),
+                                ConfigItem(keyWord: "相机型号", value: imageController.item.value!.model, enable: true),
+                                ConfigItem(keyWord: "镜头型号", value: imageController.item.value!.lenModel, enable: true),
+                                ConfigItem(keyWord: "焦距", value: "${imageController.item.value!.forcal}mm", enable: true),
+                                ConfigItem(keyWord: "光圈", value: calFnum(imageController.item.value!.fNum), enable: true),
+                                ConfigItem(keyWord: "曝光时间", value: "${imageController.item.value!.exposureTime}s", enable: true),
+                                ConfigItem(keyWord: "ISO", value: imageController.item.value!.iso, enable: true),
+                                ConfigItem(keyWord: "拍摄时间", value: calDatatime(imageController.item.value!.dateTime), enable: true),
+                                const SizedBox(height: 20,),
                               ],
                             ),
                           ),
-                          // const SizedBox(height: 10,),
-                          ConfigItem(keyWord: "相机制造商", value: imageController.item.value!.make, enable: true),
-                          ConfigItem(keyWord: "相机型号", value: imageController.item.value!.model, enable: true),
-                          ConfigItem(keyWord: "镜头型号", value: imageController.item.value!.lenModel, enable: true),
-                          ConfigItem(keyWord: "焦距", value: "${imageController.item.value!.forcal}mm", enable: true),
-                          ConfigItem(keyWord: "光圈", value: calFnum(imageController.item.value!.fNum), enable: true),
-                          ConfigItem(keyWord: "曝光时间", value: "${imageController.item.value!.exposureTime}s", enable: true),
-                          ConfigItem(keyWord: "ISO", value: imageController.item.value!.iso, enable: true),
-                          ConfigItem(keyWord: "拍摄时间", value: calDatatime(imageController.item.value!.dateTime), enable: true),
-                          const SizedBox(height: 20,),
-                          Row(
-                            children: [
-                              FilledButton(
-                                onPressed: () async {
-                                  String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
-                                  if(selectedDirectory!=null){
-                                    final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
-                                    final String ext=p.extension(imageController.item.value!.filePath);
-                                    final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
-                                    // await file.writeAsBytes(imageController.item.value!.raw);
-                                    imageController.imageSave(imageController.item.value!.filePath.toNativeUtf8(), outputPath.toNativeUtf8(), imageController.showLogo.value?1:0);
-                                  }
-                                }, 
-                                child: const Text("下载图片")
-                              ),
-                              Expanded(child: Container()),
-                              TextButton(
-                                onPressed: (){
-                                  imageController.item.value?.raw = Uint8List(0);
-                                  imageController.item.value=null;
-                                }, 
-                                child: Text("关闭此照片"),
-                              )
-                            ],
+                          Padding(
+                            padding: .only(top: 10),
+                            child: Row(
+                              children: [
+                                FilledButton(
+                                  onPressed: () async {
+                                    String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
+                                    if(selectedDirectory!=null){
+                                      final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
+                                      final String ext=p.extension(imageController.item.value!.filePath);
+                                      final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
+                                      imageController.imageSave(
+                                        imageController.item.value!.filePath.toNativeUtf8(), 
+                                        outputPath.toNativeUtf8(), 
+                                        imageController.showLogo.value?1:0,
+                                        imageController.showF.value?1:0,
+                                        imageController.showExposureTime.value?1:0,
+                                        imageController.showISO.value?1:0
+                                      );
+                                    }
+                                  }, 
+                                  child: const Text("下载图片")
+                                ),
+                                Expanded(child: Container()),
+                                TextButton(
+                                  onPressed: (){
+                                    imageController.item.value?.raw = Uint8List(0);
+                                    imageController.item.value=null;
+                                  }, 
+                                  child: Text("关闭此照片"),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),

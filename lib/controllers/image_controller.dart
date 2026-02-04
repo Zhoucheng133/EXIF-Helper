@@ -4,11 +4,15 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:ffi/ffi.dart';
 
-typedef ImageSave = Void Function(Pointer<Utf8>, Pointer<Utf8>, Int);
-typedef ImageSaveDart = void Function(Pointer<Utf8>, Pointer<Utf8>, int);
+// func ImageSave(path *C.char, output *C.char, showLogo C.int, showF C.int, showExposureTime C.int, showISO C.int)
+typedef ImageSave = Void Function(Pointer<Utf8> path, Pointer<Utf8> output, Int showLogo, Int showF, Int showExposureTime, Int showISO);
+typedef ImageSaveDart = void Function(Pointer<Utf8> path, Pointer<Utf8> output, int showLogo, int showF, int showExposureTime, int showISO);
+
 typedef GetEXIF = Pointer<Utf8> Function(Pointer<Utf8>);
-typedef ImagePreview = Pointer<Uint8> Function(Pointer<Utf8>, Pointer<Int32>, Int);
-typedef ImagePreviewDart = Pointer<Uint8> Function(Pointer<Utf8>, Pointer<Int32>, int);
+// func ImagePreview(path *C.char, outLength *C.int, showLogo C.int, showF C.int, showExposureTime C.int, showISO C.int)
+typedef ImagePreview = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength, Int showLogo, Int showF, Int showExposureTime, Int showISO);
+typedef ImagePreviewDart = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength, int showLogo, int showF, int showExposureTime, int showISO);
+
 typedef FreeMemory = Void Function(Pointer<Void> ptr);
 typedef FreeMemoryDart = void Function(Pointer<Void> ptr);
 
@@ -40,7 +44,7 @@ class ImageController extends GetxController {
     .lookup<NativeFunction<FreeMemory>>("FreeMemory")
     .asFunction();
 
-    final dataPtr = imagePreview(params[0], outLenPtr, params[1]);
+    final dataPtr = imagePreview(params[0], outLenPtr, params[1], params[2], params[3], params[4]);
     final length = outLenPtr.value;
 
     malloc.free(params[0]);
@@ -55,7 +59,7 @@ class ImageController extends GetxController {
   Future<Uint8List?> convertImage(String path) async {
     load.value=true;
     final pathPtr = path.toNativeUtf8();
-    Uint8List? data= await compute(previewImageHandler, [pathPtr, showLogo.value?1:0]);
+    Uint8List? data= await compute(previewImageHandler, [pathPtr, showLogo.value?1:0, showF.value?1:0, showExposureTime.value?1:0, showISO.value?1:0]);
     load.value=false;
     return data;
   }
@@ -68,6 +72,9 @@ class ImageController extends GetxController {
   }
 
   RxBool showLogo=true.obs;
+  RxBool showF=true.obs;
+  RxBool showExposureTime=true.obs;
+  RxBool showISO=true.obs;
 }
 
 class ImageItem{
