@@ -1,5 +1,8 @@
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
+import 'package:exif_helper/i18n/en_us.dart';
+import 'package:exif_helper/i18n/zh_cn.dart';
+import 'package:exif_helper/i18n/zh_tw.dart';
 import 'package:exif_helper/main_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -34,6 +37,16 @@ class MainApp extends StatefulWidget {
   State<MainApp> createState() => _MainAppState();
 }
 
+class MainTranslations extends Translations {
+  @override
+  Map<String, Map<String, String>> get keys => {
+    'en_US': enUS,
+    'zh_CN': zhCN,
+    'zh_TW': zhTW,
+  };
+}
+
+
 class _MainAppState extends State<MainApp> {
 
   final ThemeController themeController=Get.find();
@@ -41,7 +54,6 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     final Brightness brightness = MediaQuery.of(context).platformBrightness;
-    themeController.darkMode.value=brightness == Brightness.dark;
     return Obx(
       ()=>GetMaterialApp(
         localizationsDelegates: [
@@ -49,9 +61,8 @@ class _MainAppState extends State<MainApp> {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate
         ],
-        supportedLocales: [
-          Locale('zh', 'CN'),
-        ],
+        locale: themeController.lang.value.locale, 
+        supportedLocales: supportedLocales.map((item)=>item.locale).toList(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: brightness,
@@ -60,7 +71,7 @@ class _MainAppState extends State<MainApp> {
             seedColor: Colors.purple,
             brightness: brightness,
           ),
-          textTheme: themeController.darkMode.value ? ThemeData.dark().textTheme.apply(
+          textTheme: brightness == Brightness.dark ? ThemeData.dark().textTheme.apply(
             fontFamily: 'PuHui',
             bodyColor: Colors.white,
             displayColor: Colors.white,
