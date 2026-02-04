@@ -15,8 +15,8 @@ Future<void> main() async {
   Get.put(ThemeController());
   Get.put(ImageController());
   WindowOptions windowOptions = WindowOptions(
-    size: Size(900, 630),
-    minimumSize: Size(900, 630),
+    size: Size(900, 670),
+    minimumSize: Size(900, 670),
     center: true,
     backgroundColor: Colors.transparent,
     skipTaskbar: false,
