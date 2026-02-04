@@ -1,3 +1,5 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -127,4 +129,32 @@ Future<void> showAbout(BuildContext context) async {
       ),
     );
   }
+}
+
+Future<void> showLanguageDialog(BuildContext context) async {
+  final controller = Get.find<ThemeController>();
+  await showDialog(
+    context: context, 
+    builder: (context)=>AlertDialog(
+      title: Text('language'.tr),
+      content: Obx(()=>DropdownButtonHideUnderline(
+        child: DropdownButton2(
+          items: supportedLocales.map((item)=>DropdownMenuItem(
+            value: item.locale,
+            child: Text(item.name)
+          )).toList(),
+          value: controller.lang.value.locale,
+          onChanged: (value) => controller.changeLanguage(
+            supportedLocales.indexWhere((item)=>item.locale == value)
+          ),
+        )
+      )),
+      actions: [
+        ElevatedButton(
+          onPressed: ()=>Navigator.of(context).pop(), 
+          child: Text("ok".tr)
+        )
+      ],
+    ),
+  );
 }

@@ -27,4 +27,6 @@ const Map<String, String> zhCN = {
   'about': '关于',
   'prjLink': '本项目地址',
   'license': '许可证',
+
+  'language': '语言',
 };

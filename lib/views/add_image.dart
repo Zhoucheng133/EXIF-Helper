@@ -91,11 +91,54 @@ class _AddImageState extends State<AddImage> {
             ),
           ),
           Positioned(
-            right: 10,
-            bottom: 10,
-            child: IconButton(
-              onPressed: () => showAbout(context), 
-              icon: Icon(Icons.info_rounded)
+            right: 30,
+            bottom: 30,
+            child: Row(
+              mainAxisSize: .min,
+              mainAxisAlignment: .center,
+              crossAxisAlignment: .center,
+              children: [
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        bottomLeft: Radius.circular(10)
+                      )
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  ),
+                  onPressed: ()=>showLanguageDialog(context), 
+                  child: Row(
+                    mainAxisSize: .min,
+                    children: [
+                      Icon(Icons.translate_rounded),
+                      SizedBox(width: 5,),
+                      Text("language".tr),
+                    ],
+                  )
+                ),
+                FilledButton(
+                  style: FilledButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        bottomRight: Radius.circular(10)
+                      )
+                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                  ),
+                  onPressed: ()=>showAbout(context), 
+                  child: Row(
+                    mainAxisSize: .min,
+                    children: [
+                      Icon(Icons.info_rounded),
+                      SizedBox(width: 5,),
+                      Text("about".tr),
+                    ],
+                  )
+                ),
+              ],
             )
           )
         ],
