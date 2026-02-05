@@ -51,6 +51,6 @@ msix_config:
   msix_version: 0.3.0.0
   logo_path: assets/icon.png
   capabilities: internetClient
-  languages: zh-cn
+  languages: zh-cn, en-us, zh-tw
   publisher: # Publisher HERE
   store: true
