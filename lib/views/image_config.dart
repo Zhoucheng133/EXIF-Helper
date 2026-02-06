@@ -204,7 +204,7 @@ class _ImageConfigState extends State<ImageConfig> {
                               ),
                               ConfigItem(keyWord: "camMake".tr, value: imageController.item.value!.make, enable: true),
                               ConfigItem(keyWord: "camModel".tr, value: imageController.item.value!.model, enable: true),
-                              ConfigItem(keyWord: "lenModel".tr, value: imageController.item.value!.lenModel, enable: true),
+                              if(imageController.item.value!.lenModel.isNotEmpty) ConfigItem(keyWord: "lenModel".tr, value: imageController.item.value!.lenModel, enable: true),
                               ConfigItem(keyWord: "forcal".tr, value: "${imageController.item.value!.forcal}mm", enable: true),
                               ConfigItem(keyWord: "fNumber".tr, value: calFnum(imageController.item.value!.fNum), enable: true),
                               ConfigItem(keyWord: "exposureTime".tr, value: "${imageController.item.value!.exposureTime}s", enable: true),

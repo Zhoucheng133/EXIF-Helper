@@ -22,6 +22,18 @@ class _AddImageState extends State<AddImage> {
   final ImageController imageController=Get.find();
   final ThemeController themeController=Get.find();
 
+  bool jsonChecker(Map json) {
+    return json.entries.every((entry) {
+      if (entry.key == "lenMake" || entry.key == "lenModel" || entry.key =="orientation") return true;
+
+      final val = entry.value;
+      if (val == null) return false;
+      if (val is String) return val.trim().isNotEmpty;
+      if (val is Iterable || val is Map) return val.isNotEmpty;
+      
+      return true;
+    });
+  }
 
   Future<void> fileChecker(BuildContext context,String filePath) async {
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
@@ -32,6 +44,11 @@ class _AddImageState extends State<AddImage> {
         return;
       }
       final exifJson=jsonDecode(exifString);
+
+      if(!jsonChecker(exifJson)){
+        warnDialog(context, "importErr".tr, "noExif".tr);
+        return;
+      }
 
       imageController.item.value=ImageItem(
         await imageController.convertImage(filePath) ?? Uint8List(0), 
