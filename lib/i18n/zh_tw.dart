@@ -29,4 +29,5 @@ const Map<String, String> zhTW = {
   'license': '許可證',
 
   'language': '語言',
+  'noExif': '沒有 EXIF 資訊',
 };

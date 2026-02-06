@@ -29,4 +29,5 @@ const Map<String, String> enUS = {
   'license': 'License',
 
   'language': 'Language',
+  'noExif': 'No EXIF data',
 };

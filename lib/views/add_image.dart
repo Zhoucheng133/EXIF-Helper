@@ -27,6 +27,10 @@ class _AddImageState extends State<AddImage> {
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
       
       final exifString=imageController.getEXIF(filePath.toNativeUtf8()).toDartString();
+      if(exifString.isEmpty){
+        warnDialog(context, "importErr".tr, "noExif".tr);
+        return;
+      }
       final exifJson=jsonDecode(exifString);
 
       imageController.item.value=ImageItem(

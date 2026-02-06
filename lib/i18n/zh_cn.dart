@@ -29,4 +29,5 @@ const Map<String, String> zhCN = {
   'license': '许可证',
 
   'language': '语言',
+  'noExif': '无EXIF信息',
 };
