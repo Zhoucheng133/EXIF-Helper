@@ -23,12 +23,9 @@ class _CheckboxItemState extends State<CheckboxItem> {
           value: widget.val,
           onChanged: widget.onChanged,
         ),
-        MouseRegion(
-          cursor: SystemMouseCursors.click,
-          child: GestureDetector(
-            onTap: widget.onChanged==null ? null : () => widget.onChanged!(!widget.val),
-            child: Text(widget.label)
-          ),
+        GestureDetector(
+          onTap: widget.onChanged==null ? null : () => widget.onChanged!(!widget.val),
+          child: Text(widget.label)
         ),
       ],
     );
