@@ -154,21 +154,13 @@ class _ImageConfigState extends State<ImageConfig> {
                               const SizedBox(height: 5,),
                               Transform.translate(
                                 offset: Offset(-10, 0),
-                                child: Row(
-                                  children: [
-                                    Transform.scale(
-                                      scale: 0.7,
-                                      child: Switch(
-                                        splashRadius: 0,
-                                        value: imageController.showLogo.value, 
-                                        onChanged: (val){
-                                          imageController.showLogo.value=val;
-                                          imageController.reloadImage();
-                                        }
-                                      ),
-                                    ),
-                                    Text('showBrandLogo'.tr)
-                                  ],
+                                child: CheckboxItem(
+                                  val: imageController.showLogo.value, 
+                                  onChanged: (val){
+                                    imageController.showLogo.value=val;
+                                    imageController.reloadImage();
+                                  }, 
+                                  label: 'showBrandLogo'.tr
                                 ),
                               ),
                               Transform.translate(
