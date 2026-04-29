@@ -1,5 +1,7 @@
 # EXIF Helper
 
+Also available in English. Click [HERE](/documents/en.md) to view the English version of the README
+
 ## 简介
 
 <img src="assets/icon.png" width="100px">
@@ -49,3 +51,7 @@
 3. 将生成的动态库复制到App目录中<sup>*</sup>
 
 <sup>*</sup> 如果是Windows系统。直接复制到App根目录下，如果是macOS系统，拷贝到`EXIF Helper/Contents/Frameworks`中（本项目会自动拷贝到，你也可以保留项目中的动态库文件）。注意**不要修改动态库名称**
+
+## 赞助
+
+如果有帮助到了你，欢迎[给我投喂](https://blog.z-server.top/sponsor/)谢谢 🙏
