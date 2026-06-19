@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -137,18 +136,26 @@ Future<void> showLanguageDialog(BuildContext context) async {
     context: context, 
     builder: (context)=>AlertDialog(
       title: Text('language'.tr),
-      content: Obx(()=>DropdownButtonHideUnderline(
-        child: DropdownButton2(
-          items: supportedLocales.map((item)=>DropdownMenuItem(
-            value: item.locale,
-            child: Text(item.name)
-          )).toList(),
-          value: controller.lang.value.locale,
-          onChanged: (value) => controller.changeLanguage(
-            supportedLocales.indexWhere((item)=>item.locale == value)
+      content: Obx(
+        ()=>DropdownButtonHideUnderline(
+          child: DropdownButton(
+            focusColor: Colors.transparent,
+            borderRadius: BorderRadius.circular(10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            value: controller.lang.value.name,
+            items: supportedLocales.map((item)=>DropdownMenuItem<String>(
+              value: item.name,
+              child: Text(
+                item.name
+              ),
+            )).toList(),
+            onChanged: (val){
+              final index=supportedLocales.indexWhere((element) => element.name==val);
+              controller.changeLanguage(index);
+            },
           ),
         )
-      )),
+      ),
       actions: [
         ElevatedButton(
           onPressed: ()=>Navigator.of(context).pop(), 

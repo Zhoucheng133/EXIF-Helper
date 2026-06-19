@@ -8,7 +8,6 @@ environment:
 
 dependencies:
   desktop_drop: ^0.6.0
-  dropdown_button2: ^2.3.9
   expressions: ^0.2.5+2
   ffi: ^2.1.4
   file_picker: ^10.2.0
