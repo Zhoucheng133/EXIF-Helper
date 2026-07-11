@@ -24,7 +24,7 @@ class _AddImageState extends State<AddImage> {
 
   bool jsonChecker(Map json) {
     return json.entries.every((entry) {
-      if (entry.key == "lenMake" || entry.key == "lenModel" || entry.key =="orientation") return true;
+      if (entry.key == "lenMake" || entry.key == "lenModel" || entry.key =="orientation" || entry.key=="focal35") return true;
 
       final val = entry.value;
       if (val == null) return false;
