@@ -106,6 +106,7 @@ class _ImageConfigState extends State<ImageConfig> {
                             imageController.item.value!.raw,
                             fit: BoxFit.contain,
                             gaplessPlayback: false,
+                            cacheHeight: 800,
                           )
                         ),
                       ),
