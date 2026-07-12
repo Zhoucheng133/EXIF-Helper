@@ -21,7 +21,7 @@ const Map<String, String> zhCN = {
   'lenModel': '镜头型号',
   'forcal': '焦距',
   'captureTime': '拍摄时间',
-  'downloadImage': '下载图片',
+  'saveImage': '保存图片',
   'closeImage': '关闭图片',
   'ok': '好的',
   'about': '关于',

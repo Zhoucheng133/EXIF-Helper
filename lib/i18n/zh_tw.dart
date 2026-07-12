@@ -21,7 +21,7 @@ const Map<String, String> zhTW = {
   'lenModel': '鏡頭型號',
   'forcal': '焦距',
   'captureTime': '拍攝時間',
-  'downloadImage': '下載圖片',
+  'saveImage': '儲存圖片',
   'closeImage': '關閉圖片',
   'ok': '好的',
   'about': '關於',
