@@ -16,7 +16,7 @@ The repository for the dynamic library component is located [HERE](https://githu
 
 ## Screenshots
 
-![alt text](../demo/demo.png)
+![alt text](../demo/en.png)
 
 ## Configuring EXIF Helper on Your Device
 

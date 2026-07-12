@@ -18,7 +18,7 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 
 ## 截图
 
-![alt text](demo/demo.png)
+![alt text](demo/cn.png)
 
 ## 在你的设备上配置EXIF Helper
 
