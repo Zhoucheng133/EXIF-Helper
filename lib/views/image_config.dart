@@ -226,7 +226,7 @@ class _ImageConfigState extends State<ImageConfig> {
                                 );
                               }
                             }, 
-                            child: Text("downloadImage".tr)
+                            child: Text("saveImage".tr)
                           ),
                         )
                       ],
