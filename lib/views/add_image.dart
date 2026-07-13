@@ -4,7 +4,6 @@ import 'package:desktop_drop/desktop_drop.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
-import 'package:ffi/ffi.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +37,7 @@ class _AddImageState extends State<AddImage> {
   Future<void> fileChecker(BuildContext context,String filePath) async {
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
       
-      final exifString=imageController.getEXIF(filePath.toNativeUtf8()).toDartString();
+      final exifString=imageController.getEXIFString(filePath);
       if(exifString.isEmpty){
         warnDialog(context, "importErr".tr, "noExif".tr);
         return;

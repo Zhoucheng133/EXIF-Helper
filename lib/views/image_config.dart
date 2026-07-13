@@ -55,7 +55,7 @@ class _ImageConfigState extends State<ImageConfig> {
             onPressed: () async {
               Navigator.pop(context);
               if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
-                final exifString=imageController.getEXIF(filePath.toNativeUtf8()).toDartString();
+                final exifString=imageController.getEXIFString(filePath);
                 final exifJson=jsonDecode(exifString);
 
                 imageController.item.value=ImageItem(
@@ -216,14 +216,18 @@ class _ImageConfigState extends State<ImageConfig> {
                                 final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
                                 final String ext=p.extension(imageController.item.value!.filePath);
                                 final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
+                                final filePathPtr=imageController.item.value!.filePath.toNativeUtf8();
+                                final outputPathPtr=outputPath.toNativeUtf8();
                                 imageController.imageSave(
-                                  imageController.item.value!.filePath.toNativeUtf8(), 
-                                  outputPath.toNativeUtf8(), 
+                                  filePathPtr, 
+                                  outputPathPtr, 
                                   imageController.showLogo.value?1:0,
                                   imageController.showF.value?1:0,
                                   imageController.showExposureTime.value?1:0,
                                   imageController.showISO.value?1:0
                                 );
+                                malloc.free(filePathPtr);
+                                malloc.free(outputPathPtr);
                               }
                             }, 
                             child: Text("saveImage".tr)

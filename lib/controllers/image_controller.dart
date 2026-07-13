@@ -19,7 +19,8 @@ typedef FreeMemoryDart = void Function(Pointer<Void> ptr);
 class ImageController extends GetxController {
   Rx<ImageItem?> item=Rx<ImageItem?>(null);
   late ImageSaveDart imageSave;
-  late GetEXIF getEXIF;
+  late GetEXIF _getEXIF;
+  late FreeMemoryDart _freeMemory;
 
   RxBool load=false.obs;
 
@@ -28,9 +29,21 @@ class ImageController extends GetxController {
     imageSave=dylib
     .lookup<NativeFunction<ImageSave>>("ImageSave")
     .asFunction();
-    getEXIF=dylib
+    _getEXIF=dylib
     .lookup<NativeFunction<GetEXIF>>("GetEXIF")
     .asFunction();
+    _freeMemory=dylib
+    .lookup<NativeFunction<FreeMemory>>("FreeMemory")
+    .asFunction();
+  }
+
+  String getEXIFString(String path) {
+    final pathPtr = path.toNativeUtf8();
+    final resultPtr = _getEXIF(pathPtr);
+    malloc.free(pathPtr);
+    final result = resultPtr.toDartString();
+    _freeMemory(resultPtr.cast());
+    return result;
   }
 
   // params: [path, showLogo(0,1)]
