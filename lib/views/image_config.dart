@@ -25,6 +25,8 @@ class _ImageConfigState extends State<ImageConfig> {
   final ImageController imageController=Get.find();
   final ThemeController themeController=Get.find();
 
+  bool saveLoad=false;
+
   void changeFile(BuildContext context, String filePath){
     showDialog(
       context: context, 
@@ -195,13 +197,28 @@ class _ImageConfigState extends State<ImageConfig> {
                         Padding(
                           padding: .only(top: 10),
                           child: FilledButton(
-                            onPressed: () async {
+                            onPressed: saveLoad ? null : () async {
                               String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
                               if(selectedDirectory!=null){
-                                imageController.save(selectedDirectory);
+                                setState(() {
+                                  saveLoad=true;
+                                });
+                                await imageController.save(selectedDirectory);
+                                if(context.mounted){
+                                  warnDialog(context, "saveSuccess".tr, "");
+                                }
+                                setState(() {
+                                  saveLoad=false;
+                                });
                               }
                             }, 
-                            child: Text("saveImage".tr)
+                            child: saveLoad ? SizedBox(
+                              width: 10,
+                              height: 10,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                              )
+                            ) : Text('saveImage'.tr)
                           ),
                         )
                       ],
