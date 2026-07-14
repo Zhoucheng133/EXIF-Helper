@@ -1,9 +1,11 @@
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
+import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:exif_helper/i18n/en_us.dart';
 import 'package:exif_helper/i18n/zh_cn.dart';
 import 'package:exif_helper/i18n/zh_tw.dart';
 import 'package:exif_helper/main_window.dart';
+import 'package:exif_helper/mobile/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -11,23 +13,25 @@ import 'package:window_manager/window_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
   final controller=Get.put(ThemeController());
   await controller.initLang();
   Get.put(ImageController());
-  WindowOptions windowOptions = WindowOptions(
-    size: Size(900, 650),
-    minimumSize: Size(900, 650),
-    center: true,
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
-    titleBarStyle: TitleBarStyle.hidden,
-    title: "EXIF Helper"
-  );
-  windowManager.waitUntilReadyToShow(windowOptions, () async {
-    await windowManager.show();
-    await windowManager.focus();
-  });
+  if(isDesktop()){
+    await windowManager.ensureInitialized();
+    WindowOptions windowOptions = WindowOptions(
+      size: Size(900, 650),
+      minimumSize: Size(900, 650),
+      center: true,
+      backgroundColor: Colors.transparent,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.hidden,
+      title: "EXIF Helper"
+    );
+    windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+    });
+  }
   runApp(const MainApp());
 }
 
@@ -81,9 +85,9 @@ class _MainAppState extends State<MainApp> {
             fontFamily: 'PuHui',
           ),
         ),
-        home: Scaffold(
+        home: isDesktop() ? Scaffold(
           body: MainWindow()
-        ),
+        ) : MainView(),
       ),
     );
   }

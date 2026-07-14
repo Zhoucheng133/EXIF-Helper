@@ -9,6 +9,7 @@ const Map<String, String> zhTW = {
   'importErr': '匯入圖片錯誤',
   'unsupportFormat': '不支援的格式',
   'addView': '新增一張照片，你也可以拖曳照片檔案到這裡',
+  'openPhoto': '打開一張照片',
   'changeImage': '更換圖片',
   'changeImageTip': '確定要更換圖片嗎？此操作會關閉目前圖片',
   'cancel': '取消',

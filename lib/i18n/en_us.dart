@@ -9,6 +9,7 @@ const Map<String, String> enUS = {
   'importErr': 'Error importing image',
   'unsupportFormat': 'Unsupported format',
   'addView': 'Add a photo, or drag and drop a photo file here',
+  'openPhoto': 'Open A Photo',
   'changeImage': 'Change Image',
   'changeImageTip': 'Are you sure you want to change the image? This will close the current one.',
   'cancel': 'Cancel',

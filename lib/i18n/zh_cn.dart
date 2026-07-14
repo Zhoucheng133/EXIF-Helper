@@ -9,6 +9,7 @@ const Map<String, String> zhCN = {
   'importErr': '导入图片错误',
   'unsupportFormat': '不支持的格式',
   'addView': '添加一个照片，你也可以拖拽照片文件到这里',
+  'openPhoto': '打开一个照片',
   'changeImage': '更换图片',
   'changeImageTip': '确定要更换图片吗? 此操作会关闭当前图片',
   'cancel': '取消',

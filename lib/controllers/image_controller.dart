@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ffi/ffi.dart';
 
@@ -24,8 +27,57 @@ class ImageController extends GetxController {
 
   RxBool load=false.obs;
 
+  bool jsonChecker(Map json) {
+    return json.entries.every((entry) {
+      if (entry.key == "lenMake" || entry.key == "lenModel" || entry.key =="orientation" || entry.key=="focal35") return true;
+
+      final val = entry.value;
+      if (val == null) return false;
+      if (val is String) return val.trim().isNotEmpty;
+      if (val is Iterable || val is Map) return val.isNotEmpty;
+      
+      return true;
+    });
+  }
+
+  Future<bool> fileChecker(BuildContext context,String filePath) async {
+    if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
+      
+      final exifString=getEXIFString(filePath);
+      if(exifString.isEmpty){
+        warnDialog(context, "importErr".tr, "noExif".tr);
+        return false;
+      }
+      final exifJson=jsonDecode(exifString);
+
+      if(!jsonChecker(exifJson)){
+        warnDialog(context, "importErr".tr, "noExif".tr);
+        return false;
+      }
+
+      item.value=ImageItem(
+        await convertImage(filePath) ?? Uint8List(0), 
+        filePath, 
+        exifJson["camMake"].replaceAll("\"", ""), 
+        exifJson["camModel"].replaceAll("\"", ""), 
+        exifJson["captureTime"].replaceAll("\"", ""), 
+        exifJson["exposureTime"].replaceAll("\"", ""), 
+        exifJson["fNum"].replaceAll("\"", ""), 
+        exifJson["iso"].replaceAll("\"", ""), 
+        exifJson["focal"].replaceAll("\"", ""), 
+        exifJson["focal35"].replaceAll("\"", ""), 
+        exifJson["lenMake"].replaceAll("\"", ""), 
+        exifJson["lenModel"].replaceAll("\"", ""), 
+      );
+    }else{
+      warnDialog(context, "importErr".tr, "unsupportFormat".tr);
+      return false;
+    }
+    return true;
+  }
+
   ImageController(){
-    final dylib = DynamicLibrary.open(Platform.isWindows ? "image.dll" :"image.dylib");
+    final dylib = Platform.isIOS ? DynamicLibrary.process() : DynamicLibrary.open(Platform.isWindows ? "image.dll" : Platform.isMacOS ? "image.dylib" : "libcore.so");
     imageSave=dylib
     .lookup<NativeFunction<ImageSave>>("ImageSave")
     .asFunction();
@@ -49,7 +101,7 @@ class ImageController extends GetxController {
   // params: [path, showLogo(0,1)]
   static Uint8List? previewImageHandler(List params){
     final outLenPtr = malloc<Int32>();
-    final dylib = DynamicLibrary.open(Platform.isWindows ? "image.dll" :"image.dylib");
+    final dylib = Platform.isIOS ? DynamicLibrary.process() : DynamicLibrary.open(Platform.isWindows ? "image.dll" : Platform.isMacOS ? "image.dylib" : "libcore.so");
     ImagePreviewDart imagePreview=dylib
     .lookup<NativeFunction<ImagePreview>>("ImagePreview")
     .asFunction();

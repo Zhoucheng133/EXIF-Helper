@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,57 +14,8 @@ class AddImage extends StatefulWidget {
 }
 
 class _AddImageState extends State<AddImage> {
-
-  final ImageController imageController=Get.find();
   final ThemeController themeController=Get.find();
-
-  bool jsonChecker(Map json) {
-    return json.entries.every((entry) {
-      if (entry.key == "lenMake" || entry.key == "lenModel" || entry.key =="orientation" || entry.key=="focal35") return true;
-
-      final val = entry.value;
-      if (val == null) return false;
-      if (val is String) return val.trim().isNotEmpty;
-      if (val is Iterable || val is Map) return val.isNotEmpty;
-      
-      return true;
-    });
-  }
-
-  Future<void> fileChecker(BuildContext context,String filePath) async {
-    if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
-      
-      final exifString=imageController.getEXIFString(filePath);
-      if(exifString.isEmpty){
-        warnDialog(context, "importErr".tr, "noExif".tr);
-        return;
-      }
-      final exifJson=jsonDecode(exifString);
-
-      if(!jsonChecker(exifJson)){
-        warnDialog(context, "importErr".tr, "noExif".tr);
-        return;
-      }
-
-      imageController.item.value=ImageItem(
-        await imageController.convertImage(filePath) ?? Uint8List(0), 
-        filePath, 
-        exifJson["camMake"].replaceAll("\"", ""), 
-        exifJson["camModel"].replaceAll("\"", ""), 
-        exifJson["captureTime"].replaceAll("\"", ""), 
-        exifJson["exposureTime"].replaceAll("\"", ""), 
-        exifJson["fNum"].replaceAll("\"", ""), 
-        exifJson["iso"].replaceAll("\"", ""), 
-        exifJson["focal"].replaceAll("\"", ""), 
-        exifJson["focal35"].replaceAll("\"", ""), 
-        exifJson["lenMake"].replaceAll("\"", ""), 
-        exifJson["lenModel"].replaceAll("\"", ""), 
-      );
-    }else{
-      warnDialog(context, "importErr".tr, "unsupportFormat".tr);
-      return;
-    }
-  }
+  final ImageController imageController=Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +25,7 @@ class _AddImageState extends State<AddImage> {
           DropTarget(
             onDragDone: (detail) async {
               final filePath=detail.files[0].path.replaceAll("\\", "/");
-              fileChecker(context, filePath);
+              imageController.fileChecker(context, filePath);
             },
             child: Container(
               color: Colors.transparent,
@@ -90,7 +38,7 @@ class _AddImageState extends State<AddImage> {
                       onPressed: () async {
                         FilePickerResult? result = await FilePicker.platform.pickFiles();
                         if (result != null && context.mounted) {
-                          fileChecker(context, result.files.single.path!);
+                          imageController.fileChecker(context, result.files.single.path!);
                         }
                       }, 
                       icon: const Icon(

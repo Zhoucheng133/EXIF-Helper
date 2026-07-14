@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -164,4 +166,8 @@ Future<void> showLanguageDialog(BuildContext context) async {
       ],
     ),
   );
+}
+
+bool isDesktop(){
+  return Platform.isWindows || Platform.isMacOS || Platform.isLinux;
 }
