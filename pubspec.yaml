@@ -16,12 +16,14 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   font_awesome_flutter: ^10.8.0
+  gal: ^2.3.2
   get: ^4.7.2
   google_fonts: ^6.2.1
   image_picker: ^1.2.3
   msix: ^3.16.12
   package_info_plus: ^8.3.0
   path: ^1.9.1
+  path_provider: ^2.1.6
   shared_preferences: ^2.5.4
   url_launcher: ^6.3.1
   window_manager: ^0.5.1
