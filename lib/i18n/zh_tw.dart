@@ -34,4 +34,6 @@ const Map<String, String> zhTW = {
 
   'home': '首頁',
   'settings': '設定',
+  'config': '配置',
+  'photoInfo': '圖片資訊',
 };

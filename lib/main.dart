@@ -1,6 +1,6 @@
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
-import 'package:exif_helper/functions/dialog_func.dart';
+import 'package:exif_helper/functions/cals.dart';
 import 'package:exif_helper/i18n/en_us.dart';
 import 'package:exif_helper/i18n/zh_cn.dart';
 import 'package:exif_helper/i18n/zh_tw.dart';

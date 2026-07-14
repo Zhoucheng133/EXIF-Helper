@@ -34,4 +34,6 @@ const Map<String, String> enUS = {
 
   'home': 'Home',
   'settings': 'Settings',
+  'config': 'Config',
+  'photoInfo': 'Photo Info',
 };

@@ -34,4 +34,6 @@ const Map<String, String> zhCN = {
 
   'home': '主页',
   'settings': '设置',
+  'config': '配置',
+  'photoInfo': '图片信息'
 };

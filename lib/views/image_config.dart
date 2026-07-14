@@ -7,8 +7,8 @@ import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/components/loading.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
+import 'package:exif_helper/functions/cals.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
-import 'package:expressions/expressions.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,19 +26,6 @@ class _ImageConfigState extends State<ImageConfig> {
 
   final ImageController imageController=Get.find();
   final ThemeController themeController=Get.find();
-
-  String calFnum(String input){
-    final expression = Expression.parse(input);
-    final evaluator = const ExpressionEvaluator();
-
-    return "F${evaluator.eval(expression, {})}";
-  }
-
-  String calDatatime(String input){
-    input=input.replaceFirst(":", "-");
-    input=input.replaceFirst(":", "-");
-    return input;
-  }
 
   void changeFile(BuildContext context, String filePath){
     showDialog(

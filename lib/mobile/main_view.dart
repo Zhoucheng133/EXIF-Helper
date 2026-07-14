@@ -19,6 +19,7 @@ class _MainViewState extends State<MainView> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(pageIndex==0?"home".tr:"settings".tr),
       ),
