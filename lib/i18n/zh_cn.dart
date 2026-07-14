@@ -35,5 +35,9 @@ const Map<String, String> zhCN = {
   'home': '主页',
   'settings': '设置',
   'config': '配置',
-  'photoInfo': '图片信息'
+  'photoInfo': '图片信息',
+  'saveSuccess': '保存成功',
+  'saveFail': '保存失败',
+  'saveSuccessTip': '图片已保存到相册',
+  'saveFailTip': '图片保存失败，请检查相册权限',
 };

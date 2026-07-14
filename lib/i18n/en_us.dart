@@ -36,4 +36,8 @@ const Map<String, String> enUS = {
   'settings': 'Settings',
   'config': 'Config',
   'photoInfo': 'Photo Info',
+  'saveSuccess': 'Saved successfully',
+  'saveFail': 'Save failed',
+  'saveSuccessTip': 'The image has been saved to the album',
+  'saveFailTip': 'Image failed to save. Please check your album permissions',
 };

@@ -36,4 +36,8 @@ const Map<String, String> zhTW = {
   'settings': '設定',
   'config': '配置',
   'photoInfo': '圖片資訊',
+  'saveSuccess': '保存成功',
+  'saveFail': '保存失敗',
+  'saveSuccessTip': '圖片已儲存至相冊',
+  'saveFailTip': '圖片儲存失敗，請檢查相簿權限',
 };

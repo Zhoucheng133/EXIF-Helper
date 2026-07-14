@@ -12,8 +12,6 @@ import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart' as p;
-import 'package:ffi/ffi.dart';
 
 class ImageConfig extends StatefulWidget {
   const ImageConfig({super.key});
@@ -200,21 +198,7 @@ class _ImageConfigState extends State<ImageConfig> {
                             onPressed: () async {
                               String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
                               if(selectedDirectory!=null){
-                                final String newName=p.basenameWithoutExtension(imageController.item.value!.filePath);
-                                final String ext=p.extension(imageController.item.value!.filePath);
-                                final String outputPath=p.join(selectedDirectory, "${newName}_output$ext");
-                                final filePathPtr=imageController.item.value!.filePath.toNativeUtf8();
-                                final outputPathPtr=outputPath.toNativeUtf8();
-                                imageController.imageSave(
-                                  filePathPtr, 
-                                  outputPathPtr, 
-                                  imageController.showLogo.value?1:0,
-                                  imageController.showF.value?1:0,
-                                  imageController.showExposureTime.value?1:0,
-                                  imageController.showISO.value?1:0
-                                );
-                                malloc.free(filePathPtr);
-                                malloc.free(outputPathPtr);
+                                imageController.save(selectedDirectory);
                               }
                             }, 
                             child: Text("saveImage".tr)

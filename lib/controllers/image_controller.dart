@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ffi/ffi.dart';
+import 'package:path/path.dart' as p;
 
 // func ImageSave(path *C.char, output *C.char, showLogo C.int, showF C.int, showExposureTime C.int, showISO C.int)
 typedef ImageSave = Void Function(Pointer<Utf8> path, Pointer<Utf8> output, Int showLogo, Int showF, Int showExposureTime, Int showISO);
@@ -21,9 +22,9 @@ typedef FreeMemoryDart = void Function(Pointer<Void> ptr);
 
 class ImageController extends GetxController {
   Rx<ImageItem?> item=Rx<ImageItem?>(null);
-  late ImageSaveDart imageSave;
-  late GetEXIF _getEXIF;
-  late FreeMemoryDart _freeMemory;
+  // late ImageSaveDart imageSave;
+  late GetEXIF getEXIF;
+  late FreeMemoryDart freeMemory;
 
   RxBool load=false.obs;
 
@@ -78,23 +79,20 @@ class ImageController extends GetxController {
 
   ImageController(){
     final dylib = Platform.isIOS ? DynamicLibrary.process() : DynamicLibrary.open(Platform.isWindows ? "image.dll" : Platform.isMacOS ? "image.dylib" : "libcore.so");
-    imageSave=dylib
-    .lookup<NativeFunction<ImageSave>>("ImageSave")
-    .asFunction();
-    _getEXIF=dylib
+    getEXIF=dylib
     .lookup<NativeFunction<GetEXIF>>("GetEXIF")
     .asFunction();
-    _freeMemory=dylib
+    freeMemory=dylib
     .lookup<NativeFunction<FreeMemory>>("FreeMemory")
     .asFunction();
   }
 
   String getEXIFString(String path) {
     final pathPtr = path.toNativeUtf8();
-    final resultPtr = _getEXIF(pathPtr);
+    final resultPtr = getEXIF(pathPtr);
     malloc.free(pathPtr);
     final result = resultPtr.toDartString();
-    _freeMemory(resultPtr.cast());
+    freeMemory(resultPtr.cast());
     return result;
   }
 
@@ -121,6 +119,17 @@ class ImageController extends GetxController {
     return dataCopy;
   }
 
+  // params: [filePath, outputPath, showLogo(0,1), showF(0,1), showExposureTime(0,1), showISO(0,1)]
+  static saveImageHanlder(List params){
+    final dylib = Platform.isIOS ? DynamicLibrary.process() : DynamicLibrary.open(Platform.isWindows ? "image.dll" : Platform.isMacOS ? "image.dylib" : "libcore.so");
+    ImageSaveDart imageSave=dylib
+    .lookup<NativeFunction<ImageSave>>("ImageSave")
+    .asFunction();
+    imageSave(params[0], params[1], params[2], params[3], params[4], params[5]);
+    malloc.free(params[0]);
+    malloc.free(params[1]);
+  }
+
   Future<Uint8List?> convertImage(String path) async {
     load.value=true;
     final pathPtr = path.toNativeUtf8();
@@ -140,6 +149,18 @@ class ImageController extends GetxController {
   RxBool showF=true.obs;
   RxBool showExposureTime=true.obs;
   RxBool showISO=true.obs;
+
+  Future<void> save(String output, {String? name}) async {
+    final String newName=name ?? "${p.basenameWithoutExtension(item.value!.filePath)}_output";
+    final String ext=p.extension(item.value!.filePath);
+    final String outputPath=p.join(output, "$newName.$ext");
+    final filePathPtr=item.value!.filePath.toNativeUtf8();
+    final outputPathPtr=outputPath.toNativeUtf8();
+    await compute(
+      saveImageHanlder, 
+      [filePathPtr, outputPathPtr, showLogo.value?1:0, showF.value?1:0, showExposureTime.value?1:0, showISO.value?1:0]
+    );
+  }
 }
 
 class ImageItem{
