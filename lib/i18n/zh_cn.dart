@@ -31,4 +31,7 @@ const Map<String, String> zhCN = {
 
   'language': '语言',
   'noExif': '无EXIF信息',
+
+  'home': '主页',
+  'settings': '设置',
 };

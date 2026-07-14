@@ -31,4 +31,7 @@ const Map<String, String> zhTW = {
 
   'language': '語言',
   'noExif': '沒有 EXIF 資訊',
+
+  'home': '首頁',
+  'settings': '設定',
 };

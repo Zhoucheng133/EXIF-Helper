@@ -31,4 +31,7 @@ const Map<String, String> enUS = {
 
   'language': 'Language',
   'noExif': 'No EXIF data',
+
+  'home': 'Home',
+  'settings': 'Settings',
 };
