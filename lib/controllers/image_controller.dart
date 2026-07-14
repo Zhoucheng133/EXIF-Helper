@@ -125,7 +125,6 @@ class ImageController extends GetxController {
     load.value=true;
     final pathPtr = path.toNativeUtf8();
     Uint8List? data= await compute(previewImageHandler, [pathPtr, showLogo.value?1:0, showF.value?1:0, showExposureTime.value?1:0, showISO.value?1:0]);
-    malloc.free(pathPtr);
     load.value=false;
     return data;
   }
