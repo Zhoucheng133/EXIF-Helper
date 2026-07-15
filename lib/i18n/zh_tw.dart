@@ -40,4 +40,5 @@ const Map<String, String> zhTW = {
   'saveFail': '保存失敗',
   'saveSuccessTip': '圖片已儲存至相冊',
   'saveFailTip': '圖片儲存失敗，請檢查相簿權限',
+  'clearCache': '清除快取',
 };

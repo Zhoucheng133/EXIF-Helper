@@ -40,4 +40,5 @@ const Map<String, String> enUS = {
   'saveFail': 'Save failed',
   'saveSuccessTip': 'The image has been saved to the album',
   'saveFailTip': 'Image failed to save. Please check your album permissions',
+  'clearCache': 'Clear Cache',
 };

@@ -40,4 +40,5 @@ const Map<String, String> zhCN = {
   'saveFail': '保存失败',
   'saveSuccessTip': '图片已保存到相册',
   'saveFailTip': '图片保存失败，请检查相册权限',
+  'clearCache': '清理缓存',
 };
