@@ -70,13 +70,13 @@ class _ConfigViewState extends State<ConfigView> {
                       ),
                       ListTile(
                         title: Text("exposureTime".tr),
-                        onTap: (){
+                        onTap: !imageController.showF.value && !imageController.showISO.value ? null :(){
                           imageController.showExposureTime.value=!imageController.showExposureTime.value;
                           imageController.reloadImage();
                         },
                         trailing: Switch(
                           value: imageController.showExposureTime.value,
-                          onChanged: (value) {
+                          onChanged: !imageController.showF.value && !imageController.showISO.value ? null : (value) {
                             imageController.showExposureTime.value=!imageController.showExposureTime.value;
                             imageController.reloadImage();
                           },
@@ -84,13 +84,13 @@ class _ConfigViewState extends State<ConfigView> {
                       ),
                       ListTile(
                         title: Text("fNumber".tr),
-                        onTap: (){
+                        onTap: !imageController.showExposureTime.value && !imageController.showISO.value ? null : (){
                           imageController.showF.value=!imageController.showF.value;
                           imageController.reloadImage();
                         },
                         trailing: Switch(
                           value: imageController.showF.value,
-                          onChanged: (value) {
+                          onChanged: !imageController.showExposureTime.value && !imageController.showISO.value ? null : (value) {
                             imageController.showF.value=!imageController.showF.value;
                             imageController.reloadImage();
                           },
@@ -98,13 +98,13 @@ class _ConfigViewState extends State<ConfigView> {
                       ),
                       ListTile(
                         title: Text("ISO"),
-                        onTap: (){
+                        onTap: !imageController.showExposureTime.value && !imageController.showF.value ? null : (){
                           imageController.showISO.value=!imageController.showISO.value;
                           imageController.reloadImage();
                         },
                         trailing: Switch(
                           value: imageController.showISO.value,
-                          onChanged: (value) {
+                          onChanged: !imageController.showExposureTime.value && !imageController.showF.value ? null : (value) {
                             imageController.showISO.value=!imageController.showISO.value;
                             imageController.reloadImage();
                           },
