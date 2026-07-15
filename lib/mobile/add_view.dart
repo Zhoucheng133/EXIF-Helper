@@ -14,6 +14,8 @@ class AddView extends StatefulWidget {
 class _AddViewState extends State<AddView> {
 
   final ImageController imageController=Get.find();
+
+  bool load=false;
   
   @override
   Widget build(BuildContext context) {
@@ -22,16 +24,21 @@ class _AddViewState extends State<AddView> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          IconButton(
+          load ? CircularProgressIndicator() : IconButton(
             onPressed: () async {
               final picker = ImagePicker();
               final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+              setState(() {
+                load=true;
+              });
               if (image != null && context.mounted) {
-                Get.to(()=>ConfigView());
-                imageController.load.value=true;
-                await imageController.fileChecker(context, image.path);
-                imageController.load.value=false;
+                if(await imageController.fileChecker(context, image.path)){
+                  Get.to(()=>ConfigView());
+                }
               }
+              setState(() {
+                load=false;
+              });
             }, 
             icon: const Icon(
               Icons.add_rounded,
