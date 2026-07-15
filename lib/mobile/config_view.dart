@@ -128,11 +128,11 @@ class _ConfigViewState extends State<ConfigView> {
                                 int timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
                                 final supportDir=await getApplicationDocumentsDirectory();
                                 await imageController.save(
-                                  supportDir.path,
+                                  p.join(supportDir.path, "temp_image"),
                                   name: timestamp.toString(),
                                 );
                                 final String ext=p.extension(imageController.item.value!.filePath);
-                                final filePath=p.join(supportDir.path, "${timestamp.toString()}.$ext");
+                                final filePath=p.join(supportDir.path, "temp_image", "${timestamp.toString()}$ext");
                                 try {
                                   await Gal.putImage(filePath);
                                   if(context.mounted){

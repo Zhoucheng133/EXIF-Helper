@@ -153,7 +153,7 @@ class ImageController extends GetxController {
   Future<void> save(String output, {String? name}) async {
     final String newName=name ?? "${p.basenameWithoutExtension(item.value!.filePath)}_output";
     final String ext=p.extension(item.value!.filePath);
-    final String outputPath=p.join(output, "$newName.$ext");
+    final String outputPath=p.join(output, "$newName$ext");
     final filePathPtr=item.value!.filePath.toNativeUtf8();
     final outputPathPtr=outputPath.toNativeUtf8();
     await compute(
