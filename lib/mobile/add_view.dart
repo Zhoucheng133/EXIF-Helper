@@ -27,9 +27,10 @@ class _AddViewState extends State<AddView> {
               final picker = ImagePicker();
               final XFile? image = await picker.pickImage(source: ImageSource.gallery);
               if (image != null && context.mounted) {
-                if(await imageController.fileChecker(context, image.path)){
-                  Get.to(()=>ConfigView());
-                }
+                Get.to(()=>ConfigView());
+                imageController.load.value=true;
+                await imageController.fileChecker(context, image.path);
+                imageController.load.value=false;
               }
             }, 
             icon: const Icon(
