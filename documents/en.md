@@ -10,49 +10,47 @@
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
 
-Supported OS: Windows 10+ & macOS
+Support Windows, macOS, Android and iOS
 
 The repository for the dynamic library component is located [HERE](https://github.com/Zhoucheng133/EXIF-Helper-Core).
 
 ## Screenshots
 
-![alt text](../demo/en.png)
+![alt text](../demo/en1.png)
+
+<img src="../demo/en2.png" width="200px" />
 
 ## Configuring EXIF Helper on Your Device
 
 You need to have Flutter and Go installed on your device.
 
-1. Go to the [Dynamic Library Component Repository](https://github.com/Zhoucheng133/EXIF-Helper-Core) to build the `dll` (Windows) or `dylib` (macOS):
+### Build Dynamic/Static Libraries
 
-    ```bash
-    # Inside the EXIF-Helper-Core repository
-    go mod tidy
-    
-    # For Windows
-    go build -o build/image.dll -buildmode=c-shared .
-    
-    # For macOS
-    go build -o build/image.dylib -buildmode=c-shared .
+The core component is located in the `/core` directory and is developed using Go. For build instructions, refer to [Flutter FFI Template](https://github.com/Zhoucheng133/Flutter-FFI-Template).
 
-    # If you are using a newer version of Golang, use the following commands to generate the dynamic library:
-    # macOS
-    go build -buildmode=c-shared -ldflags="-s -w" -o build/core.dylib
-    # Windows
-    go build -buildmode=c-shared -ldflags="-s -w" -o build/core.dll
-    ```
+For Windows, macOS, Android, and iOS platforms, this project includes pre-built binary dynamic/static libraries.
 
-2. Build the App itself:
-    ```bash
-    # For Windows
-    flutter build windows
-    
-    # For macOS
-    flutter build macos
-    ```
+- Windows: `/windows/image.dll`
+- macOS: `/macos/image.dylib`
+- Android: `/android/app/src/main/jniLibs/arm64-v8a/libcore.so`
+- iOS: `/ios/libcore.xcframework`
 
-3. Copy the generated dynamic library into the App directory<sup>*</sup>
+### Build the App
 
-<sup>*</sup> For Windows: Copy it directly to the App root directory. For macOS: Copy it to `EXIF Helper/Contents/Frameworks` (the project will attempt to copy this automatically, or you can manually keep the library files in the project). Note: **Do not rename the dynamic library file.**
+This project uses Flutter version `3.41.6`. Do not use Flutter versions lower than `3.38` for building.
+
+When building for any platform, the binary dynamic/static libraries will be copied into the built App automatically.
+
+```bash
+# Windows
+flutter build windows
+
+# macOS
+flutter build macos
+
+# Android
+flutter build apk --split-per-abi
+```
 
 ## Sponsor
 

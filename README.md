@@ -12,45 +12,45 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
 
-支持的Windows系统: Windows10~ & macOS
+支持Windows，macOS，Android和iOS
 
 动态库组件仓库[在这里](https://github.com/Zhoucheng133/EXIF-Helper-Core)
 
 ## 截图
 
-![alt text](demo/cn.png)
+![alt text](demo/cn1.png)
+
+<img src="demo/cn2.png" width="200px" />
 
 ## 在你的设备上配置EXIF Helper
 
 你需要在你的设备上安装Flutter和Go
 
-1. 前往[动态库组件仓库](https://github.com/Zhoucheng133/EXIF-Helper-Core)中构建dll (Windows)或者dylib (macOS)：
+### 构建动态/静态库
 
-    ```bash
-    # 在EXIF-Helper-Core仓库中
-    go mod tidy
-    # Windows系统
-    go build -o build/image.dll -buildmode=c-shared .
-    # macOS系统
-    go build -o build/image.dylib -buildmode=c-shared .
+核心组件在`/core`目录下，使用Go开发，构建方式见[Flutter FFI Template](https://github.com/Zhoucheng133/Flutter-FFI-Template)
 
+对于Windows, macOS, Android和iOS平台，本项目包含已经构建好的二进制动态/静态库
 
-   # 如果你使用比较新版本的golang，使用下面的命令生成动态库
-    #  macOS
-    go build -buildmode=c-shared -ldflags="-s -w" -o build/core.dylib
-    # Windows
-    go build -buildmode=c-shared -ldflags="-s -w" -o build/core.dll
-    ```
-2. 构建App本体：
-    ```bash
-    # Windows系统
-    flutter build windows
-    # macOS系统
-    flutter build macos
-    ```
-3. 将生成的动态库复制到App目录中<sup>*</sup>
+- Windows: `/windows/image.dll`
+- macOS: `/macos/image.dylib`
+- Android: `/android/app/src/main/jniLibs/arm64-v8a/libcore.so`
+- iOS: `/ios/libcore.xcframework`
 
-<sup>*</sup> 如果是Windows系统。直接复制到App根目录下，如果是macOS系统，拷贝到`EXIF Helper/Contents/Frameworks`中（本项目会自动拷贝到，你也可以保留项目中的动态库文件）。注意**不要修改动态库名称**
+### 构建App本体
+
+本项目使用的Flutter版本为`3.41.6`，不要使用低于`3.38`的Flutter构建
+
+所有平台的构建时，二进制动态/静态库都会拷贝到构建的App中
+
+```bash
+# Windows
+flutter build windows
+# macOS
+flutter build macos
+# Android
+flutter build apk --split-per-abi
+```
 
 ## 赞助
 
