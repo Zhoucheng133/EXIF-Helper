@@ -64,6 +64,7 @@ EXIFData getEXIFData(List params) {
   final resultPtr = getEXIF(pathPtr);
   final result = resultPtr.toDartString();
   malloc.free(pathPtr);
+  freeMemory(resultPtr.cast());
   return EXIFData.fromJson(jsonDecode(result));
 }
 
