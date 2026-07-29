@@ -28,10 +28,13 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
           onTap: (){},
           child: Stack(
             children: [
-              Center(
-                child: Icon(
-                  widget.icon,
-                  color: Colors.purple,
+              Padding(
+                padding: .only(bottom: 20),
+                child: Center(
+                  child: Icon(
+                    widget.icon,
+                    color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
+                  ),
                 ),
               ),
               Positioned(
@@ -39,13 +42,13 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
                 left: 0,
                 right: 0,
                 child: Container(
-                  height: 30,
+                  height: 40,
                   color: Theme.of(context).brightness==Brightness.dark ? Colors.black.withAlpha(80) : Colors.white.withAlpha(80),
                   child: Center(
                     child: Text(
                       widget.title,
                       style: TextStyle(
-                        color: Theme.of(context).brightness==Brightness.dark ? Colors.white : Colors.black,
+                        color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
                       ),
                     ),
                   ),

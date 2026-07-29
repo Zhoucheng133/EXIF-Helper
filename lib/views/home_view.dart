@@ -26,13 +26,13 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 20,
                 children: [
                   HomeButtons(),
-                  const SizedBox(height: 10,),
                   Text(
                     "addView".tr,
                     style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface
+                      color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
                     )
                   )
                 ],

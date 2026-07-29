@@ -1,5 +1,6 @@
 import 'package:exif_helper/components/homebuttons/home_button_item.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeButtons extends StatefulWidget {
   const HomeButtons({super.key});
@@ -20,19 +21,19 @@ class _HomeButtonsState extends State<HomeButtons> {
           mainAxisSize: .min,
           children: [
             HomeButtonItem(
-              title: "1", 
+              title: "editExif".tr, 
               icon: Icons.edit_rounded,
-              width: 120, 
-              height: 120, 
+              width: 140, 
+              height: 150, 
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
               )
             ),
             HomeButtonItem(
-              title: "1", 
-              icon: Icons.abc, 
-              width: 120, 
-              height: 120, 
+              title: "removeExif".tr, 
+              icon: Icons.delete_rounded, 
+              width: 140, 
+              height: 150, 
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(10),
               )
@@ -40,10 +41,10 @@ class _HomeButtonsState extends State<HomeButtons> {
           ],
         ),
         HomeButtonItem(
-          title: "1", 
-          icon: Icons.abc, 
-          width: 250, 
-          height: 120, 
+          title: "addMark".tr, 
+          icon: Icons.picture_in_picture_alt_rounded, 
+          width: 290, 
+          height: 150, 
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(10),
             bottomRight: Radius.circular(10),
