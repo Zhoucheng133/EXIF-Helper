@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:exif_helper/components/loading.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
-import 'package:exif_helper/views/add_image.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
-import 'package:exif_helper/views/image_config.dart';
+import 'package:exif_helper/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -65,26 +63,36 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                 children: [
                   WindowCaptionButton.minimize(
                     onPressed: windowManager.minimize,
-                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                    brightness: Theme.of(context).brightness,
                   ),
                   isMax ? WindowCaptionButton.unmaximize(
                     onPressed: unMaxWindow,
-                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                    brightness: Theme.of(context).brightness,
                   ) : WindowCaptionButton.maximize(
                     onPressed: maxWindow,
-                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                    brightness: Theme.of(context).brightness,
                   ) ,
                   WindowCaptionButton.close(
                     onPressed: windowManager.close,
-                    brightness: Theme.of(context).brightness==Brightness.dark ? Brightness.dark : Brightness.light,
+                    brightness: Theme.of(context).brightness,
                   )
                 ],
               ) : Container()
             ],
           ),
         ),
-        Obx(()=>
-          imageController.item.value==null ? imageController.load.value ? Loading() : AddImage() : ImageConfig()
+        Expanded(
+          child: Navigator(
+            key: Get.nestedKey(1),
+            initialRoute: '/home',
+            onGenerateRoute: (settings) {
+              switch (settings.name) {
+                case "/home":
+                  return GetPageRoute(page: () => const HomeView());
+              }
+              return null;
+            },
+          ),
         ),
         Platform.isMacOS ? PlatformMenuBar(
             menus: [

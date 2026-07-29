@@ -5,7 +5,6 @@ import 'package:exif_helper/i18n/en_us.dart';
 import 'package:exif_helper/i18n/zh_cn.dart';
 import 'package:exif_helper/i18n/zh_tw.dart';
 import 'package:exif_helper/main_window.dart';
-import 'package:exif_helper/mobile/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -87,7 +86,8 @@ class _MainAppState extends State<MainApp> {
         ),
         home: isDesktop() ? Scaffold(
           body: MainWindow()
-        ) : MainView(),
+          // TODO 临时，注意移动页面
+        ) : Placeholder()
       ),
     );
   }
