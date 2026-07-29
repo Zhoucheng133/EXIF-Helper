@@ -15,4 +15,8 @@ const Map<String, String> zhTW = {
   'prjLink': '本專案地址',
   'license': '許可證',
   'language': '語言',
+
+  'editExif': '編輯 EXIF',
+  'removeExif': '移除 EXIF',
+  'addMark': '添加浮水印',
 };

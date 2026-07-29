@@ -15,4 +15,8 @@ const Map<String, String> zhCN = {
   'prjLink': '本项目地址',
   'license': '许可证',
   'language': '语言',
+
+  'editExif': '编辑 EXIF',
+  'removeExif': '移除 EXIF',
+  'addMark': '添加水印',
 };

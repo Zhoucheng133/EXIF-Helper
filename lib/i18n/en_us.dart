@@ -15,4 +15,8 @@ const Map<String, String> enUS = {
   'prjLink': 'Project URL',
   'license': 'License',
   'language': 'Language',
+
+  'editExif': 'Edit EXIF',
+  'removeExif': 'Remove EXIF',
+  'addMark': 'Add Watermark',
 };
