@@ -52,5 +52,33 @@ class EXIFData{
   String focal;
   String focal35;
   String orientation;
-  EXIFData(this.camMake, this.camModel, this.lenMake, this.lenModel, this.captureTime, this.exposureTime, this.fNum, this.iso, this.focal, this.focal35, this.orientation);
+  EXIFData({
+    required this.camMake, 
+    required this.camModel, 
+    required this.lenMake, 
+    required this.lenModel, 
+    required this.captureTime, 
+    required this.exposureTime, 
+    required this.fNum, 
+    required this.iso, 
+    required this.focal, 
+    required this.focal35, 
+    required this.orientation
+  });
+
+  factory EXIFData.fromJson(Map<String, dynamic> json) {
+    return EXIFData(
+      camMake: json["camMake"].replaceAll("\"", ""), 
+      camModel: json["camModel"].replaceAll("\"", ""), 
+      captureTime: json["captureTime"].replaceAll("\"", ""), 
+      exposureTime: json["exposureTime"].replaceAll("\"", ""), 
+      fNum: json["fNum"].replaceAll("\"", ""), 
+      iso: json["iso"].replaceAll("\"", ""), 
+      focal: json["focal"].replaceAll("\"", ""), 
+      focal35: json["focal35"].replaceAll("\"", ""), 
+      lenMake: json["lenMake"].replaceAll("\"", ""), 
+      lenModel: json["lenModel"].replaceAll("\"", ""), 
+      orientation: json["orientation"]
+    );
+  }
 }
