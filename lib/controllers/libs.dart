@@ -27,7 +27,7 @@ Uint8List? previewImageHandler(List params) {
   .lookup<NativeFunction<ImagePreview>>("ImagePreview")
   .asFunction();
 
-  final pathPtr = params[0].toNativeUtf8();
+  final pathPtr = (params[0] as String).toNativeUtf8();
   final dataPtr = imagePreview(pathPtr, outLenPtr, params[1], params[2], params[3], params[4]);
   final length = outLenPtr.value;
 
@@ -46,8 +46,8 @@ void saveImageHanlder(List params) {
   .lookup<NativeFunction<ImageSave>>("ImageSave")
   .asFunction();
 
-  final inputPathPtr = params[0].toNativeUtf8();
-  final outputPathPtr = params[1].toNativeUtf8();
+  final inputPathPtr = (params[0] as String).toNativeUtf8();
+  final outputPathPtr = (params[1] as String).toNativeUtf8();
 
   imageSave(inputPathPtr, outputPathPtr, params[2], params[3], params[4], params[5]);
 
@@ -55,17 +55,21 @@ void saveImageHanlder(List params) {
   malloc.free(outputPathPtr);
 }
 // params: [path]
-EXIFData getEXIFData(List params) {
+EXIFData? getEXIFData(List params) {
   final dylib = getDylib();
   GetEXIFDart getEXIF=dylib
   .lookup<NativeFunction<GetEXIF>>("GetEXIF")
   .asFunction();
-  final pathPtr = params[0].toNativeUtf8();
+  final pathPtr = (params[0] as String).toNativeUtf8();
   final resultPtr = getEXIF(pathPtr);
   final result = resultPtr.toDartString();
   malloc.free(pathPtr);
   freeMemory(resultPtr.cast());
-  return EXIFData.fromJson(jsonDecode(result));
+  try {
+    return EXIFData.fromJson(jsonDecode(result));
+  } catch (_) {
+    return null;
+  }
 }
 
 // params: [inputPath, outputPath]
@@ -74,8 +78,8 @@ void removeExif(List params) {
   RemoveExifDart removeExif=dylib
   .lookup<NativeFunction<RemoveExif>>("RemoveExif")
   .asFunction();
-  final inputPathPtr = params[0].toNativeUtf8();
-  final outputPathPtr = params[1].toNativeUtf8();
+  final inputPathPtr = (params[0] as String).toNativeUtf8();
+  final outputPathPtr = (params[1] as String).toNativeUtf8();
   removeExif(inputPathPtr, outputPathPtr);
   malloc.free(inputPathPtr);
   malloc.free(outputPathPtr);
@@ -87,9 +91,9 @@ void removeExif(List params) {
   EditEXIFDart editExif=dylib
   .lookup<NativeFunction<EditEXIF>>("EditEXIF")
   .asFunction();
-  final inputPathPtr = params[0].toNativeUtf8();
-  final outputPathPtr = params[1].toNativeUtf8();
-  final exifPtr = params[2].toNativeUtf8();
+  final inputPathPtr = (params[0] as String).toNativeUtf8();
+  final outputPathPtr = (params[1] as String).toNativeUtf8();
+  final exifPtr = (params[2] as String).toNativeUtf8();
   editExif(inputPathPtr, outputPathPtr, exifPtr);
   malloc.free(inputPathPtr);
   malloc.free(outputPathPtr);
