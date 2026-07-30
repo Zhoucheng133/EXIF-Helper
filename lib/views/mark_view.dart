@@ -155,12 +155,16 @@ class _MarkViewState extends State<MarkView> {
                           onPressed: saveLoad ? null : () async {
                             String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
                             if(selectedDirectory!=null){
+                              if(p.normalize(selectedDirectory)==p.normalize(p.dirname(imageController.filePath.value)) && context.mounted){
+                                warnDialog(context, "saveFail".tr, "samePath".tr);
+                                return;
+                              }
                               setState(() {
                                 saveLoad=true;
                               });
                               await compute(
                                 saveImageHanlder, 
-                                [imageController.filePath.value, p.join(selectedDirectory, "output.jpg") , imageController.showLogo.value ? 1:0, imageController.showF.value ? 1:0, imageController.showExposureTime.value ? 1:0, imageController.showISO.value ? 1:0]
+                                [imageController.filePath.value, p.join(selectedDirectory, "${p.basenameWithoutExtension(imageController.filePath.value)}.jpg") , imageController.showLogo.value ? 1:0, imageController.showF.value ? 1:0, imageController.showExposureTime.value ? 1:0, imageController.showISO.value ? 1:0]
                               );
                               if(context.mounted){
                                 warnDialog(context, "saveSuccess".tr, "");

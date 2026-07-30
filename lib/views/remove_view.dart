@@ -111,10 +111,14 @@ class _RemoveViewState extends State<RemoveView> {
                           onPressed: saveLoad ? null : () async {
                             String? selectedDirectory = await FilePicker.platform.getDirectoryPath();
                             if(selectedDirectory!=null){
+                              if(p.normalize(selectedDirectory)==p.normalize(p.dirname(imageController.filePath.value)) && context.mounted){
+                                warnDialog(context, "saveFail".tr, "samePath".tr);
+                                return;
+                              }
                               setState(() {
                                 saveLoad=true;
                               });
-                              await compute(removeExif, [imageController.filePath.value, p.join(selectedDirectory, "output.jpg")]);
+                              await compute(removeExif, [imageController.filePath.value, p.join(selectedDirectory, "${p.basenameWithoutExtension(imageController.filePath.value)}.jpg")]);
                               if(context.mounted){
                                 warnDialog(context, "saveSuccess".tr, "");
                               }

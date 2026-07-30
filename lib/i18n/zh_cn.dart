@@ -32,4 +32,6 @@ const Map<String, String> zhCN = {
   'saveImage': '保存图片',
   'closeImage': '关闭图片',
   'saveSuccess': '保存成功',
+  'saveFail': '保存失败',
+  'samePath': '保存路径和原图路径相同',
 };

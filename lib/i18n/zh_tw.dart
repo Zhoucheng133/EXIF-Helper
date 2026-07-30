@@ -32,4 +32,6 @@ const Map<String, String> zhTW = {
   'saveImage': '儲存圖片',
   'closeImage': '關閉圖片',
   'saveSuccess': '保存成功',
+  'saveFailed': '保存失敗',
+  'samePath': '儲存路徑和原圖路徑相同',
 };
