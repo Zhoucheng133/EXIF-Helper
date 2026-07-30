@@ -31,4 +31,5 @@ const Map<String, String> zhTW = {
   'captureTime': '拍攝時間',
   'saveImage': '儲存圖片',
   'closeImage': '關閉圖片',
+  'saveSuccess': '保存成功',
 };

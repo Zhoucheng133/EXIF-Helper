@@ -31,4 +31,5 @@ const Map<String, String> zhCN = {
   'captureTime': '拍摄时间',
   'saveImage': '保存图片',
   'closeImage': '关闭图片',
+  'saveSuccess': '保存成功',
 };

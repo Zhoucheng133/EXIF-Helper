@@ -31,4 +31,5 @@ const Map<String, String> enUS = {
   'captureTime': 'Capture Time',
   'saveImage': 'Save Image',
   'closeImage': 'Close',
+  'saveSuccess': 'Saved successfully',
 };
