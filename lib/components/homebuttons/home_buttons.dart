@@ -27,7 +27,8 @@ class _HomeButtonsState extends State<HomeButtons> {
               height: 150, 
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
-              )
+              ), 
+              onDone: ()=>Get.toNamed("/edit", id: 1),
             ),
             HomeButtonItem(
               title: "removeExif".tr, 
@@ -36,7 +37,8 @@ class _HomeButtonsState extends State<HomeButtons> {
               height: 150, 
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(10),
-              )
+              ),
+              onDone: ()=>Get.toNamed("/remove", id: 1),
             ),
           ],
         ),
@@ -48,7 +50,8 @@ class _HomeButtonsState extends State<HomeButtons> {
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(10),
             bottomRight: Radius.circular(10),
-          )
+          ),
+          onDone: (){},
         ),
       ],
     );

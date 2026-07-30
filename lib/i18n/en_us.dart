@@ -8,6 +8,7 @@ const Map<String, String> enUS = {
   
   'importErr': 'Error importing image',
   'unsupportFormat': 'Unsupported format',
+  'noExif': 'No EXIF data',
   'addView': 'Or drag and drop a photo file here',
   
   'ok': 'OK',
@@ -19,4 +20,14 @@ const Map<String, String> enUS = {
   'editExif': 'Edit EXIF',
   'removeExif': 'Remove EXIF',
   'addMark': 'Add Watermark',
+
+  'exposureTime': 'Exposure Time',
+  'fNumber': 'F-Number',
+  'camMake': 'Camera Manufacturer',
+  'camModel': 'Camera Model',
+  'lenModel': 'Lens Model',
+  'forcal': 'Focal Length',
+  'captureTime': 'Capture Time',
+  'saveImage': 'Save Image',
+  'closeImage': 'Close',
 };

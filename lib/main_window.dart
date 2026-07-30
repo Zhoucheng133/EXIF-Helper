@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
+import 'package:exif_helper/views/edit_view.dart';
 import 'package:exif_helper/views/home_view.dart';
+import 'package:exif_helper/views/remove_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -89,6 +91,10 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
               switch (settings.name) {
                 case "/home":
                   return GetPageRoute(page: () => const HomeView());
+                case "/edit":
+                  return GetPageRoute(page: () => const EditView());
+                case "/remove":
+                  return GetPageRoute(page: () => const RemoveView());
               }
               return null;
             },

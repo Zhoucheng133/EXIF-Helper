@@ -67,6 +67,17 @@ class EXIFData{
   });
 
   factory EXIFData.fromJson(Map<String, dynamic> json) {
+    if(json.isEmpty || 
+      (json['camMake'] as String).isEmpty || 
+      (json['camModel'] as String).isEmpty ||
+      (json['focal'] as String).isEmpty ||
+      (json['fNum'] as String).isEmpty ||
+      (json['exposureTime'] as String).isEmpty ||
+      (json['iso'] as String).isEmpty ||
+      (json['captureTime'] as String).isEmpty
+    ){
+      throw ArgumentError('No EXIF data found');
+    }
     return EXIFData(
       camMake: json["camMake"].replaceAll("\"", ""), 
       camModel: json["camModel"].replaceAll("\"", ""), 

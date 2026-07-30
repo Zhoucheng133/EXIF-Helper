@@ -8,6 +8,7 @@ const Map<String, String> zhCN = {
   
   'importErr': '导入图片错误',
   'unsupportFormat': '不支持的格式',
+  'noExif': '无 EXIF 信息',
   'addView': '你也可以拖拽照片文件到这里',
   
   'ok': '好的',
@@ -19,4 +20,14 @@ const Map<String, String> zhCN = {
   'editExif': '编辑 EXIF',
   'removeExif': '移除 EXIF',
   'addMark': '添加水印',
+
+  'exposureTime': '曝光时间',
+  'fNumber': '光圈',
+  'camMake': '相机制造商',
+  'camModel': '相机型号',
+  'lenModel': '镜头型号',
+  'forcal': '焦距',
+  'captureTime': '拍摄时间',
+  'saveImage': '保存图片',
+  'closeImage': '关闭图片',
 };

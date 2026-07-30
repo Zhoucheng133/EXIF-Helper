@@ -8,6 +8,7 @@ const Map<String, String> zhTW = {
   
   'importErr': '匯入圖片錯誤',
   'unsupportFormat': '不支援的格式',
+  'noExif': '沒有 EXIF 資訊',
   'addView': '你也可以拖曳照片檔案到這裡',
   
   'ok': '好的',
@@ -19,4 +20,14 @@ const Map<String, String> zhTW = {
   'editExif': '編輯 EXIF',
   'removeExif': '移除 EXIF',
   'addMark': '添加浮水印',
+
+  'exposureTime': '曝光時間',
+  'fNumber': '光圈',
+  'camMake': '相機製造商',
+  'camModel': '相機型號',
+  'lenModel': '鏡頭型號',
+  'forcal': '焦距',
+  'captureTime': '拍攝時間',
+  'saveImage': '儲存圖片',
+  'closeImage': '關閉圖片',
 };

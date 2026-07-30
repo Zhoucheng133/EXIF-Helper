@@ -1,5 +1,6 @@
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:exif_helper/components/homebuttons/home_buttons.dart';
+import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,30 +13,36 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+
+  final ImageController imageController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        DropTarget(
-          onDragDone: (detail) async {
-            // TODO Drag
-          },
-          child: Container(
-            color: Colors.transparent,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 20,
-                children: [
-                  HomeButtons(),
-                  Text(
-                    "addView".tr,
-                    style: TextStyle(
-                      color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: DropTarget(
+            onDragDone: (detail) async {
+              // TODO Drag
+            },
+            child: Container(
+              color: Colors.transparent,
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: 20,
+                  children: [
+                    HomeButtons(),
+                    Text(
+                      "addView".tr,
+                      style: TextStyle(
+                        color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
+                      )
                     )
-                  )
-                ],
+                  ],
+                ),
               ),
             ),
           ),
