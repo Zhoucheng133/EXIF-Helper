@@ -21,6 +21,7 @@ const Map<String, String> zhTW = {
   'removeExif': '移除 EXIF',
   'addMark': '添加浮水印',
 
+  'showBrandLogo': '顯示品牌 Logo',
   'exposureTime': '曝光時間',
   'fNumber': '光圈',
   'camMake': '相機製造商',

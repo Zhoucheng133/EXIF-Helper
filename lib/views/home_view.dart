@@ -20,29 +20,26 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        AnimatedSwitcher(
-          duration: Duration(milliseconds: 300),
-          child: DropTarget(
-            onDragDone: (detail) async {
-              // TODO Drag
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  spacing: 20,
-                  children: [
-                    HomeButtons(),
-                    Text(
-                      "addView".tr,
-                      style: TextStyle(
-                        color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
-                      )
+        DropTarget(
+          onDragDone: (detail) async {
+            // TODO Drag
+          },
+          child: Container(
+            color: Colors.transparent,
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 20,
+                children: [
+                  HomeButtons(),
+                  Text(
+                    "addView".tr,
+                    style: TextStyle(
+                      color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
                     )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
           ),

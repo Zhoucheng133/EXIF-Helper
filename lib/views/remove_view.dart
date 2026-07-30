@@ -4,6 +4,7 @@ import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/libs.dart';
 import 'package:exif_helper/functions/cals.dart';
+import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -113,6 +114,9 @@ class _RemoveViewState extends State<RemoveView> {
                               saveLoad=true;
                             });
                             await compute(removeExif, [imageController.filePath.value, p.join(selectedDirectory, "output.jpg")]);
+                            if(context.mounted){
+                              warnDialog(context, "saveSuccess".tr, "");
+                            }
                             setState(() {
                               saveLoad=false;
                             });

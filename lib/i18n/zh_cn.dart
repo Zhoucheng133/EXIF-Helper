@@ -21,6 +21,7 @@ const Map<String, String> zhCN = {
   'removeExif': '移除 EXIF',
   'addMark': '添加水印',
 
+  'showBrandLogo': '显示品牌Logo',
   'exposureTime': '曝光时间',
   'fNumber': '光圈',
   'camMake': '相机制造商',

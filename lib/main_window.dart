@@ -5,6 +5,7 @@ import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/views/edit_view.dart';
 import 'package:exif_helper/views/home_view.dart';
+import 'package:exif_helper/views/mark_view.dart';
 import 'package:exif_helper/views/remove_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -95,6 +96,8 @@ class _MainWindowState extends State<MainWindow> with WindowListener {
                   return GetPageRoute(page: () => const EditView());
                 case "/remove":
                   return GetPageRoute(page: () => const RemoveView());
+                case "/mark":
+                  return GetPageRoute(page: () => const MarkView());
               }
               return null;
             },

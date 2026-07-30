@@ -21,6 +21,7 @@ const Map<String, String> enUS = {
   'removeExif': 'Remove EXIF',
   'addMark': 'Add Watermark',
 
+  'showBrandLogo': 'Show Brand Logo',
   'exposureTime': 'Exposure Time',
   'fNumber': 'F-Number',
   'camMake': 'Camera Manufacturer',

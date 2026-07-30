@@ -7,10 +7,18 @@ import 'package:get/get.dart';
 
 class ImageController extends GetxController {
 
-  late Uint8List previewImage;
+  Rx<Uint8List?> previewImage = (null as Uint8List?).obs;
   Rx<EXIFData?> exifData = (null as EXIFData?).obs;
+
   RxBool loading = false.obs;
+  RxBool previewLoad = false.obs;
+
   RxString filePath = "".obs;
+
+  RxBool showLogo = true.obs;
+  RxBool showF = true.obs;
+  RxBool showExposureTime = true.obs;
+  RxBool showISO = true.obs;
 
   Future<bool> fileChecker(BuildContext context,String filePath) async {
     loading.value = true;
@@ -26,8 +34,16 @@ class ImageController extends GetxController {
       return false;
     }
     this.filePath.value=filePath;
-    loading.value = false;
     return true;
+  }
+
+  Future<void> loadPreviewImage() async {
+    previewLoad.value = true;
+    previewImage.value = await compute(
+      previewImageHandler, 
+      [filePath.value, showLogo.value ? 1:0, showF.value ? 1:0, showExposureTime.value ? 1:0, showISO.value ? 1:0]
+    );
+    previewLoad.value = false;
   }
 
 }
