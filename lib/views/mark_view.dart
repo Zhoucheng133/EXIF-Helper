@@ -1,12 +1,15 @@
 import 'package:exif_helper/components/checkbox_item.dart';
 import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
+import 'package:exif_helper/controllers/libs.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/functions/cals.dart';
 import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 
 class MarkView extends StatefulWidget {
   const MarkView({super.key});
@@ -31,7 +34,7 @@ class _MarkViewState extends State<MarkView> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Material(
       child: Padding(
         padding: .all(10.0),
         child: Row(
@@ -155,7 +158,10 @@ class _MarkViewState extends State<MarkView> {
                               setState(() {
                                 saveLoad=true;
                               });
-                              // TODO 保存
+                              await compute(
+                                saveImageHanlder, 
+                                [imageController.filePath.value, p.join(selectedDirectory, "output.jpg") , imageController.showLogo.value ? 1:0, imageController.showF.value ? 1:0, imageController.showExposureTime.value ? 1:0, imageController.showISO.value ? 1:0]
+                              );
                               if(context.mounted){
                                 warnDialog(context, "saveSuccess".tr, "");
                               }
