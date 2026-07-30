@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
+import 'package:exif_helper/controllers/libs.dart';
 import 'package:exif_helper/functions/cals.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 
 class RemoveView extends StatefulWidget {
   const RemoveView({super.key});
@@ -109,6 +112,7 @@ class _RemoveViewState extends State<RemoveView> {
                             setState(() {
                               saveLoad=true;
                             });
+                            await compute(removeExif, [imageController.filePath.value, p.join(selectedDirectory, "output.jpg")]);
                             setState(() {
                               saveLoad=false;
                             });
