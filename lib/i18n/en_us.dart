@@ -33,5 +33,6 @@ const Map<String, String> enUS = {
   'closeImage': 'Close',
   'saveSuccess': 'Saved successfully',
   'saveFail': 'Save failed',
-  'samePath': 'The save path is the same as the original image path'
+  'samePath': 'The save path is the same as the original image path',
+  'saveTo': 'The image has been saved to',
 };

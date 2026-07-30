@@ -167,7 +167,11 @@ class _MarkViewState extends State<MarkView> {
                                 [imageController.filePath.value, p.join(selectedDirectory, "${p.basenameWithoutExtension(imageController.filePath.value)}.jpg") , imageController.showLogo.value ? 1:0, imageController.showF.value ? 1:0, imageController.showExposureTime.value ? 1:0, imageController.showISO.value ? 1:0]
                               );
                               if(context.mounted){
-                                warnDialog(context, "saveSuccess".tr, "");
+                                warnDialog(
+                                  context, 
+                                  "saveSuccess".tr, 
+                                  "${'saveTo'.tr}: \n${p.join(selectedDirectory, '${p.basenameWithoutExtension(imageController.filePath.value)}.jpg')}"
+                                );
                               }
                               setState(() {
                                 saveLoad=false;

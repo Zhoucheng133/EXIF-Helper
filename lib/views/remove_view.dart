@@ -120,7 +120,11 @@ class _RemoveViewState extends State<RemoveView> {
                               });
                               await compute(removeExif, [imageController.filePath.value, p.join(selectedDirectory, "${p.basenameWithoutExtension(imageController.filePath.value)}.jpg")]);
                               if(context.mounted){
-                                warnDialog(context, "saveSuccess".tr, "");
+                                warnDialog(
+                                  context, 
+                                  "saveSuccess".tr, 
+                                  "${'saveTo'.tr}: \n${p.join(selectedDirectory, '${p.basenameWithoutExtension(imageController.filePath.value)}.jpg')}"
+                                );
                               }
                               setState(() {
                                 saveLoad=false;
