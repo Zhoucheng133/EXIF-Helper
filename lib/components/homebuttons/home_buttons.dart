@@ -62,9 +62,9 @@ class _HomeButtonsState extends State<HomeButtons> {
             bottomRight: Radius.circular(10),
           ),
           onDone: () async {
-            await imageController.loadPreviewImage();
             imageController.loading.value = false;
             Get.toNamed("/mark", id: 1);
+            await imageController.loadPreviewImage();
           },
         ),
       ],
