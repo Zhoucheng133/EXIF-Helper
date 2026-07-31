@@ -46,4 +46,16 @@ class ImageController extends GetxController {
     previewLoad.value = false;
   }
 
+  bool checkExif(BuildContext context){
+    if(exifData.value==null){
+      return false;
+    }
+
+    if(exifData.value!.camMake.isEmpty || exifData.value!.camModel.isEmpty || exifData.value!.lenModel.isEmpty || exifData.value!.captureTime.isEmpty || exifData.value!.exposureTime.isEmpty || exifData.value!.fNum.isEmpty || exifData.value!.iso.isEmpty || exifData.value!.focal.isEmpty){
+      warnDialog(context, "saveFail".tr, "exifIncomplete".tr);
+      return false;
+    }
+    return true;
+  }
+
 }

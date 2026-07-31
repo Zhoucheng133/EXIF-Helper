@@ -35,4 +35,5 @@ const Map<String, String> zhTW = {
   'saveFailed': '保存失敗',
   'samePath': '儲存路徑和原圖路徑相同',
   'saveTo': '圖片已儲存至',
+  'exifIncomplete': 'EXIF 資訊不完整',
 };

@@ -35,4 +35,5 @@ const Map<String, String> enUS = {
   'saveFail': 'Save failed',
   'samePath': 'The save path is the same as the original image path',
   'saveTo': 'The image has been saved to',
+  'exifIncomplete': 'EXIF information incomplete',
 };

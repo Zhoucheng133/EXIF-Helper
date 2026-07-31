@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
@@ -91,5 +92,21 @@ class EXIFData{
       lenModel: json["lenModel"].replaceAll("\"", ""), 
       orientation: json["orientation"]
     );
+  }
+
+  String toJsonString(){
+    return jsonEncode({
+      "camMake": camMake, 
+      "camModel": camModel, 
+      "lenMake": lenMake, 
+      "lenModel": lenModel, 
+      "captureTime": captureTime, 
+      "exposureTime": exposureTime, 
+      "fNum": fNum, 
+      "iso": iso, 
+      "focal": focal, 
+      "focal35": focal35,
+      "orientation": orientation
+    });
   }
 }

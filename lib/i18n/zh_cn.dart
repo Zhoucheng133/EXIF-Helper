@@ -35,4 +35,5 @@ const Map<String, String> zhCN = {
   'saveFail': '保存失败',
   'samePath': '保存路径和原图路径相同',
   'saveTo': '图片已经保存至',
+  'exifIncomplete': 'EXIF 信息不完整',
 };
