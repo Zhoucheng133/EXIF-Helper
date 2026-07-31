@@ -27,7 +27,7 @@ const Map<String, String> zhCN = {
   'camMake': '相机制造商',
   'camModel': '相机型号',
   'lenModel': '镜头型号',
-  'forcal': '焦距',
+  'focal': '焦距',
   'captureTime': '拍摄时间',
   'saveImage': '保存图片',
   'closeImage': '关闭图片',

@@ -27,7 +27,7 @@ const Map<String, String> enUS = {
   'camMake': 'Camera Manufacturer',
   'camModel': 'Camera Model',
   'lenModel': 'Lens Model',
-  'forcal': 'Focal Length',
+  'focal': 'Focal Length',
   'captureTime': 'Capture Time',
   'saveImage': 'Save Image',
   'closeImage': 'Close',

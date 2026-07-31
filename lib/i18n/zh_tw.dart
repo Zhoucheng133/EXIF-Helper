@@ -27,7 +27,7 @@ const Map<String, String> zhTW = {
   'camMake': '相機製造商',
   'camModel': '相機型號',
   'lenModel': '鏡頭型號',
-  'forcal': '焦距',
+  'focal': '焦距',
   'captureTime': '拍攝時間',
   'saveImage': '儲存圖片',
   'closeImage': '關閉圖片',
