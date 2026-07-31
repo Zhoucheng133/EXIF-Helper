@@ -22,7 +22,58 @@ class _HomeViewState extends State<HomeView> {
       children: [
         DropTarget(
           onDragDone: (detail) async {
-            // TODO Drag
+            final bool checker=await imageController.fileChecker(context, detail.files[0].path);
+            if(checker && context.mounted){
+              showDialog(
+                context: context, 
+                builder: (context) => AlertDialog(
+                  contentPadding: .zero,
+                  clipBehavior: Clip.antiAlias,
+                  content: Column(
+                    mainAxisSize: .min,
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.edit_rounded,
+                          size: 18,
+                        ),
+                        title: Text("editExif".tr),
+                        onTap: (){
+                          Navigator.pop(context);
+                          imageController.loading.value = false;
+                          Get.toNamed("/edit", id: 1);
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.delete_rounded,
+                          size: 18,
+                        ),
+                        title: Text("removeExif".tr),
+                        onTap: (){
+                          Navigator.pop(context);
+                          imageController.loading.value = false;
+                          Get.toNamed("/remove", id: 1);
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.picture_in_picture_alt_rounded,
+                          size: 18,
+                        ),
+                        title: Text("addMark".tr),
+                        onTap: () async {
+                          Navigator.pop(context);
+                          imageController.loading.value = false;
+                          Get.toNamed("/mark", id: 1);
+                          await imageController.loadPreviewImage();
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              );
+            }
           },
           child: Container(
             color: Colors.transparent,
