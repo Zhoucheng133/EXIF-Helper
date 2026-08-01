@@ -34,7 +34,7 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 
 - Windows: `/windows/image.dll`
 - macOS: `/macos/image.dylib`
-- Android: `/android/app/src/main/jniLibs/arm64-v8a/libcore.so`
+- Android: `/android/app/src/main/jniLibs/arm64-v8a/image.so`
 - iOS: `/ios/libcore.xcframework`
 
 ### 构建App本体
