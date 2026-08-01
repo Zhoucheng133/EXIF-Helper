@@ -33,6 +33,7 @@ class _HomeViewState extends State<HomeView> {
                     mainAxisSize: .min,
                     children: [
                       ListTile(
+                        mouseCursor: SystemMouseCursors.basic,
                         leading: Icon(
                           Icons.edit_rounded,
                           size: 18,
@@ -45,6 +46,7 @@ class _HomeViewState extends State<HomeView> {
                         },
                       ),
                       ListTile(
+                        mouseCursor: SystemMouseCursors.basic,
                         leading: Icon(
                           Icons.delete_rounded,
                           size: 18,
@@ -57,6 +59,7 @@ class _HomeViewState extends State<HomeView> {
                         },
                       ),
                       ListTile(
+                        mouseCursor: SystemMouseCursors.basic,
                         leading: Icon(
                           Icons.picture_in_picture_alt_rounded,
                           size: 18,
