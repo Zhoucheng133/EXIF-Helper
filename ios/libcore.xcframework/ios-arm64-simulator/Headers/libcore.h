@@ -93,6 +93,8 @@ extern void FreeMemory(void* ptr);
 extern unsigned char* ImagePreview(char* path, int* outLength, int showLogo, int showF, int showExposureTime, int showISO);
 extern void ImageSave(char* path, char* output, int showLogo, int showF, int showExposureTime, int showISO);
 extern char* GetEXIF(char* path);
+extern void RemoveExif(char* inputPath, char* output);
+extern void EditEXIF(char* inputPath, char* output, char* exif);
 
 #ifdef __cplusplus
 }
