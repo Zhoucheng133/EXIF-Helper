@@ -36,4 +36,8 @@ const Map<String, String> enUS = {
   'samePath': 'The save path is the same as the original image path',
   'saveTo': 'The image has been saved to',
   'exifIncomplete': 'EXIF information incomplete',
+
+  'home': 'Home',
+  'settings': 'Settings',
+  'clearCache': 'Clear Cache',
 };

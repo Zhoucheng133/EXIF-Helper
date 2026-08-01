@@ -36,4 +36,8 @@ const Map<String, String> zhTW = {
   'samePath': '儲存路徑和原圖路徑相同',
   'saveTo': '圖片已儲存至',
   'exifIncomplete': 'EXIF 資訊不完整',
+
+  'home': '首頁',
+  'settings': '設定',
+  'clearCache': '清除快取',
 };

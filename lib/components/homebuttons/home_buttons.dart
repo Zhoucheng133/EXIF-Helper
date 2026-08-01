@@ -1,5 +1,9 @@
 import 'package:exif_helper/components/homebuttons/home_button_item.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
+import 'package:exif_helper/functions/cals.dart';
+import 'package:exif_helper/mobile/pages/edit_m_view.dart';
+import 'package:exif_helper/mobile/pages/mark_m_view.dart';
+import 'package:exif_helper/mobile/pages/remove_m_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,7 +38,11 @@ class _HomeButtonsState extends State<HomeButtons> {
               ), 
               onDone: (){
                 imageController.loading.value = false;
-                Get.toNamed("/edit", id: 1);
+                if(isDesktop()){
+                  Get.toNamed("/edit", id: 1);
+                }else{
+                  Get.to(()=> EditMView());
+                }
               },
             ),
             HomeButtonItem(
@@ -47,7 +55,11 @@ class _HomeButtonsState extends State<HomeButtons> {
               ),
               onDone: (){
                 imageController.loading.value = false;
-                Get.toNamed("/remove", id: 1);
+                if(isDesktop()){
+                  Get.toNamed("/remove", id: 1);
+                }else{
+                  Get.to(()=> RemoveMView());
+                }
               },
             ),
           ],
@@ -63,7 +75,11 @@ class _HomeButtonsState extends State<HomeButtons> {
           ),
           onDone: () async {
             imageController.loading.value = false;
-            Get.toNamed("/mark", id: 1);
+            if(isDesktop()){
+              Get.toNamed("/mark", id: 1);
+            }else{
+              Get.to(()=> MarkMView());
+            }
             await imageController.loadPreviewImage();
           },
         ),
