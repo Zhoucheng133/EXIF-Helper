@@ -40,4 +40,7 @@ const Map<String, String> zhTW = {
   'home': '首頁',
   'settings': '設定',
   'clearCache': '清除快取',
+  'saveSuccessTip': '圖片已儲存到相冊',
+  'saveFailTip': '圖片儲存失敗，請檢查相簿權限',
+  'photoInfo': '圖片資訊',
 };

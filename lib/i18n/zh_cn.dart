@@ -40,4 +40,7 @@ const Map<String, String> zhCN = {
   'home': '首页',
   'settings': '设置',
   'clearCache': '清除缓存',
+  'saveSuccessTip': '已经保存到相册',
+  'saveFailTip': '图片保存失败，请检查相册权限',
+  'photoInfo': '图片信息',
 };

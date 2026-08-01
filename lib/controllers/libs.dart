@@ -7,7 +7,6 @@ import 'package:exif_helper/controllers/types.dart';
 import 'package:ffi/ffi.dart';
 
 DynamicLibrary getDylib(){
-  // TODO 注意修改Android动态库名
   return Platform.isIOS ? DynamicLibrary.process() : DynamicLibrary.open(Platform.isWindows ? "image.dll" : Platform.isMacOS ? "image.dylib" : "image.so");
 }
 

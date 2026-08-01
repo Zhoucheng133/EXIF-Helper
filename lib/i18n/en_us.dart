@@ -40,4 +40,7 @@ const Map<String, String> enUS = {
   'home': 'Home',
   'settings': 'Settings',
   'clearCache': 'Clear Cache',
+  'saveSuccessTip': 'The image has been saved to the album',
+  'saveFailTip': 'Image failed to save. Please check your album permissions',
+  'photoInfo': 'Photo Info',
 };

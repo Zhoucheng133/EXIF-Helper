@@ -1,4 +1,7 @@
+import 'package:exif_helper/components/config_item.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
+import 'package:exif_helper/controllers/types.dart';
+import 'package:exif_helper/functions/cals.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -163,5 +166,34 @@ Future<void> showLanguageDialog(BuildContext context) async {
         )
       ],
     ),
+  );
+}
+
+void showImageInfo(BuildContext context, EXIFData item){
+  showDialog(
+    context: context, 
+    builder: (context)=>AlertDialog(
+      title: Text('photoInfo'.tr),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ConfigItem(keyWord: "camMake".tr, value: item.camMake, enable: true),
+          ConfigItem(keyWord: "camModel".tr, value: item.camModel, enable: true),
+          if(item.lenModel.isNotEmpty) ConfigItem(keyWord: "lenModel".tr, value: item.lenModel, enable: true),
+          ConfigItem(keyWord: "forcal".tr, value: "${item.focal}mm", enable: true),
+          ConfigItem(keyWord: "fNumber".tr, value: calFnum(item.fNum), enable: true),
+          ConfigItem(keyWord: "exposureTime".tr, value: "${item.exposureTime}s", enable: true),
+          ConfigItem(keyWord: "ISO", value: item.iso, enable: true),
+          ConfigItem(keyWord: "captureTime".tr, value: calDatatime(item.captureTime), enable: true),
+        ]
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: ()=>Navigator.of(context).pop(), 
+          child: Text("ok".tr)
+        )
+      ],
+    )
   );
 }
