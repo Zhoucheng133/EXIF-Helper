@@ -50,6 +50,15 @@ class EditItem extends StatefulWidget {
 }
 
 class _EditItemState extends State<EditItem> {
+
+  final controller=TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.text = widget.initValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -74,7 +83,7 @@ class _EditItemState extends State<EditItem> {
               ),
               if(widget.width==null) Expanded(
                 child: TextField(
-                  controller: TextEditingController(text: widget.initValue),
+                  controller: controller,
                   onChanged: widget.onChanged,
                   decoration: InputDecoration(
                     hintText: widget.keyWord,
@@ -96,7 +105,7 @@ class _EditItemState extends State<EditItem> {
               if(widget.width!=null) SizedBox(
                 width: widget.width!,
                 child: TextField(
-                  controller: TextEditingController(text: widget.initValue),
+                  controller: controller,
                   onChanged: widget.onChanged,
                   decoration: InputDecoration(
                     hintText: widget.keyWord,
