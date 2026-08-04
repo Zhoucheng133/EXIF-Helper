@@ -10,15 +10,18 @@
     <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
 
+This is a tool that can edit/remove EXIF ​​information from photos and also add EXIF ​​watermarks.  
 Support Windows, macOS, Android and iOS
 
 The repository for the dynamic library component is located [HERE](https://github.com/Zhoucheng133/EXIF-Helper-Core).
 
 ## Screenshots
 
-![alt text](../demo/en1.png)
+![demo2](../demo/en1.png)
 
-<img src="../demo/en2.png" width="200px" />
+![demo2](../demo/en2.png)
+
+<img src="../demo/en3.png" width="500px" />
 
 ## Configuring EXIF Helper on Your Device
 
@@ -32,7 +35,7 @@ For Windows, macOS, Android, and iOS platforms, this project includes pre-built 
 
 - Windows: `/windows/image.dll`
 - macOS: `/macos/image.dylib`
-- Android: `/android/app/src/main/jniLibs/arm64-v8a/libcore.so`
+- Android: `/android/app/src/main/jniLibs/arm64-v8a/image.so`
 - iOS: `/ios/libcore.xcframework`
 
 ### Build the App

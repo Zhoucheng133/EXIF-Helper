@@ -12,15 +12,18 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
 </a>
 
+这是一个可以编辑/移除照片中的EXIF信息，也可以添加EXIF信息水印的工具  
 支持Windows，macOS，Android和iOS
 
 动态库组件仓库[在这里](https://github.com/Zhoucheng133/EXIF-Helper-Core)
 
 ## 截图
 
-![alt text](demo/cn1.png)
+![demo2](demo/cn1.png)
 
-<img src="demo/cn2.png" width="200px" />
+![demo2](demo/cn2.png)
+
+<img src="demo/cn3.png" width="500px" />
 
 ## 在你的设备上配置EXIF Helper
 
