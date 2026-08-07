@@ -61,9 +61,10 @@ class _SettingsMViewState extends State<SettingsMView> {
     try {
       final supportDir=await getApplicationDocumentsDirectory();
       final String tempDir = p.join(supportDir.path, "temp_image");
-      int size = await getDirectorySize(Directory(tempDir));
+      int size1 = await getDirectorySize(Directory(tempDir));
+      int size2 = Platform.isIOS ? await getDirectorySize(Directory.systemTemp) : 0;
       setState(() {
-        cacheSize=size;
+        cacheSize=size1 + size2;
       });
     } catch (_) {
       setState(() {
@@ -84,6 +85,18 @@ class _SettingsMViewState extends State<SettingsMView> {
         } catch (_) {}
       }
     }
+
+    if(Platform.isIOS){
+      final temp = Directory.systemTemp;
+      if (await temp.exists()) {
+        await for (final entity in temp.list()) {
+          try {
+            await entity.delete(recursive: true);
+          } catch (_) {}
+        }
+      }
+    }
+
     getCacheSize();
   }
 
