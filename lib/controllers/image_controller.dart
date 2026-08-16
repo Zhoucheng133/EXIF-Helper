@@ -25,13 +25,19 @@ class ImageController extends GetxController {
   Future<bool> fileChecker(BuildContext context,String filePath) async {
     loading.value = true;
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
-      exifData.value = await compute(getEXIFData, [filePath]);
-      if(exifData.value == null && context.mounted){
-        warnDialog(context, "importErr".tr, "noExif".tr);
+      final data = await compute(getEXIFData, [filePath]);
+      if(data == null){
+        if(context.mounted){
+          warnDialog(context, "importErr".tr, "noExif".tr);
+        }
+        loading.value = false;
         return false;
       }
+      exifData.value = data;
     }else{
-      warnDialog(context, "importErr".tr, "unsupportFormat".tr);
+      if(context.mounted){
+        warnDialog(context, "importErr".tr, "unsupportFormat".tr);
+      }
       loading.value = false;
       return false;
     }
@@ -60,13 +66,17 @@ class ImageController extends GetxController {
     return true;
   }
 
-  ImageOptions get imageOptions => ImageOptions(
-    showLogo: showLogo.value,
-    showF: showF.value,
-    showExposureTime: showExposureTime.value,
-    showISO: showISO.value,
-    showFocal: exifData.value!.lenModel.trim().isEmpty ? true : showFocal.value,
-    showLenModel: exifData.value!.lenModel.trim().isEmpty ? false : showLenModel.value,
-  );
+  ImageOptions get imageOptions {
+    final hasLenModel = exifData.value?.lenModel.trim().isNotEmpty ?? false;
+
+    return ImageOptions(
+      showLogo: showLogo.value,
+      showF: showF.value,
+      showExposureTime: showExposureTime.value,
+      showISO: showISO.value,
+      showFocal: hasLenModel ? showFocal.value : true,
+      showLenModel: hasLenModel ? showLenModel.value : false,
+    );
+  }
 
 }
