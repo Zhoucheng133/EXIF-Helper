@@ -132,7 +132,7 @@ class _MarkMViewState extends State<MarkMView> {
                           imageController.loadPreviewImage();
                         },
                         trailing: Switch(
-                          value: imageController.showFocal.value,
+                          value: imageController.exifData.value!.lenModel.trim().isEmpty ? true : imageController.showFocal.value,
                           onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (value) {
                             imageController.showFocal.value=value;
                             imageController.loadPreviewImage();

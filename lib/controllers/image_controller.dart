@@ -65,8 +65,8 @@ class ImageController extends GetxController {
     showF: showF.value,
     showExposureTime: showExposureTime.value,
     showISO: showISO.value,
-    showFocal: showFocal.value,
-    showLenModel: showLenModel.value,
+    showFocal: exifData.value!.lenModel.trim().isEmpty ? true : showFocal.value,
+    showLenModel: exifData.value!.lenModel.trim().isEmpty ? false : showLenModel.value,
   );
 
 }

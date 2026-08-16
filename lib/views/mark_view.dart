@@ -143,7 +143,7 @@ class _MarkViewState extends State<MarkView> {
                                     label: "lenModel".tr
                                   ),
                                   CheckboxItem(
-                                    val: imageController.showFocal.value, 
+                                    val: imageController.exifData.value!.lenModel.trim().isEmpty ? true : imageController.showFocal.value, 
                                     onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (val){
                                       imageController.showFocal.value=val;
                                       imageController.loadPreviewImage();
