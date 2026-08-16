@@ -111,6 +111,34 @@ class _MarkMViewState extends State<MarkMView> {
                           },
                         ),
                       ),
+                      ListTile(
+                        title: Text("lenModel".tr),
+                        onTap: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showFocal.value ? null : (){
+                          imageController.showLenModel.value=!imageController.showLenModel.value;
+                          imageController.loadPreviewImage();
+                        },
+                        trailing: Switch(
+                          value: imageController.exifData.value!.lenModel.trim().isEmpty ? false : imageController.showLenModel.value,
+                          onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showFocal.value ? null : (value) {
+                            imageController.showLenModel.value=value;
+                            imageController.loadPreviewImage();
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text("focal".tr),
+                        onTap: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (){
+                          imageController.showFocal.value=!imageController.showFocal.value;
+                          imageController.loadPreviewImage();
+                        },
+                        trailing: Switch(
+                          value: imageController.showFocal.value,
+                          onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (value) {
+                            imageController.showFocal.value=value;
+                            imageController.loadPreviewImage();
+                          },
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
                         child: Row(

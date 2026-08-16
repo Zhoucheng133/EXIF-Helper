@@ -134,6 +134,22 @@ class _MarkViewState extends State<MarkView> {
                                     }, 
                                     label: "ISO"
                                   ),
+                                  CheckboxItem(
+                                    val: imageController.exifData.value!.lenModel.trim().isEmpty ? false : imageController.showLenModel.value, 
+                                    onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showFocal.value ? null : (val){
+                                      imageController.showLenModel.value=val;
+                                      imageController.loadPreviewImage();
+                                    }, 
+                                    label: "lenModel".tr
+                                  ),
+                                  CheckboxItem(
+                                    val: imageController.showFocal.value, 
+                                    onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (val){
+                                      imageController.showFocal.value=val;
+                                      imageController.loadPreviewImage();
+                                    }, 
+                                    label: "focal".tr
+                                  )
                                 ],
                               ),
                             ),

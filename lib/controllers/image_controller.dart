@@ -19,6 +19,8 @@ class ImageController extends GetxController {
   RxBool showF = true.obs;
   RxBool showExposureTime = true.obs;
   RxBool showISO = true.obs;
+  RxBool showFocal = true.obs;
+  RxBool showLenModel = true.obs;
 
   Future<bool> fileChecker(BuildContext context,String filePath) async {
     loading.value = true;
@@ -63,6 +65,8 @@ class ImageController extends GetxController {
     showF: showF.value,
     showExposureTime: showExposureTime.value,
     showISO: showISO.value,
+    showFocal: showFocal.value,
+    showLenModel: showLenModel.value,
   );
 
 }

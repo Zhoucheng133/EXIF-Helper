@@ -116,12 +116,16 @@ class ImageOptions {
   final bool showF;
   final bool showExposureTime;
   final bool showISO;
+  final bool showFocal;
+  final bool showLenModel;
 
   const ImageOptions({
     required this.showLogo,
     required this.showF,
     required this.showExposureTime,
-    required this.showISO,
+    required this.showISO, 
+    required this.showFocal, 
+    required this.showLenModel,
   });
 
   String toJsonString() => jsonEncode({
@@ -129,5 +133,7 @@ class ImageOptions {
     'showF': showF,
     'showExposureTime': showExposureTime,
     'showISO': showISO,
+    'showFocal': showFocal,
+    'showLenModel': showLenModel,
   });
 }
