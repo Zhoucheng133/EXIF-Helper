@@ -20,6 +20,117 @@ class _MarkMViewState extends State<MarkMView> {
 
   bool saveLoad=false;
 
+  void showConfigSheet(BuildContext context){
+    showModalBottomSheet(
+      clipBehavior: Clip.antiAlias,
+      context: context, 
+      builder: (context)=>Obx(
+        ()=> Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Padding(
+              padding: .symmetric(horizontal: 16.0, vertical: 10.0),
+              child: Text(
+                "config".tr,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text("showBrandLogo".tr),
+              onTap: (){
+                imageController.showLogo.value=!imageController.showLogo.value;
+                imageController.loadPreviewImage();
+              },
+              trailing: Switch(
+                value: imageController.showLogo.value,
+                onChanged: (value) {
+                  imageController.showLogo.value=!imageController.showLogo.value;
+                  imageController.loadPreviewImage();
+                },
+              ),
+            ),
+            ListTile(
+              title: Text("exposureTime".tr),
+              onTap: !imageController.showF.value && !imageController.showISO.value ? null :(){
+                imageController.showExposureTime.value=!imageController.showExposureTime.value;
+                imageController.loadPreviewImage();
+              },
+              trailing: Switch(
+                value: imageController.showExposureTime.value,
+                onChanged: !imageController.showF.value && !imageController.showISO.value ? null : (value) {
+                  imageController.showExposureTime.value=!imageController.showExposureTime.value;
+                  imageController.loadPreviewImage();
+                },
+              ),
+            ),
+            ListTile(
+              title: Text("fNumber".tr),
+              onTap: !imageController.showExposureTime.value && !imageController.showISO.value ? null : (){
+                imageController.showF.value=!imageController.showF.value;
+                imageController.loadPreviewImage();
+              },
+              trailing: Switch(
+                value: imageController.showF.value,
+                onChanged: !imageController.showExposureTime.value && !imageController.showISO.value ? null : (value) {
+                  imageController.showF.value=!imageController.showF.value;
+                  imageController.loadPreviewImage();
+                },
+              ),
+            ),
+            ListTile(
+              title: Text("ISO"),
+              onTap: !imageController.showExposureTime.value && !imageController.showF.value ? null : (){
+                imageController.showISO.value=!imageController.showISO.value;
+                imageController.loadPreviewImage();
+              },
+              trailing: Switch(
+                value: imageController.showISO.value,
+                onChanged: !imageController.showExposureTime.value && !imageController.showF.value ? null : (value) {
+                  imageController.showISO.value=!imageController.showISO.value;
+                  imageController.loadPreviewImage();
+                },
+              ),
+            ),
+            ListTile(
+              title: Text("lenModel".tr),
+              onTap: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showFocal.value ? null : (){
+                imageController.showLenModel.value=!imageController.showLenModel.value;
+                imageController.loadPreviewImage();
+              },
+              trailing: Switch(
+                value: imageController.exifData.value!.lenModel.trim().isEmpty ? false : imageController.showLenModel.value,
+                onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showFocal.value ? null : (value) {
+                  imageController.showLenModel.value=value;
+                  imageController.loadPreviewImage();
+                },
+              ),
+            ),
+            ListTile(
+              title: Text("focal".tr),
+              onTap: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (){
+                imageController.showFocal.value=!imageController.showFocal.value;
+                imageController.loadPreviewImage();
+              },
+              trailing: Switch(
+                value: imageController.exifData.value!.lenModel.trim().isEmpty ? true : imageController.showFocal.value,
+                onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (value) {
+                  imageController.showFocal.value=value;
+                  imageController.loadPreviewImage();
+                },
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).padding.bottom,
+            )
+          ],
+        ),
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return OrientationBuilder(
@@ -55,95 +166,10 @@ class _MarkMViewState extends State<MarkMView> {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      ListTile(
-                        title: Text("showBrandLogo".tr),
-                        onTap: (){
-                          imageController.showLogo.value=!imageController.showLogo.value;
-                          imageController.loadPreviewImage();
-                        },
-                        trailing: Switch(
-                          value: imageController.showLogo.value,
-                          onChanged: (value) {
-                            imageController.showLogo.value=!imageController.showLogo.value;
-                            imageController.loadPreviewImage();
-                          },
-                        ),
-                      ),
-                      ListTile(
-                        title: Text("exposureTime".tr),
-                        onTap: !imageController.showF.value && !imageController.showISO.value ? null :(){
-                          imageController.showExposureTime.value=!imageController.showExposureTime.value;
-                          imageController.loadPreviewImage();
-                        },
-                        trailing: Switch(
-                          value: imageController.showExposureTime.value,
-                          onChanged: !imageController.showF.value && !imageController.showISO.value ? null : (value) {
-                            imageController.showExposureTime.value=!imageController.showExposureTime.value;
-                            imageController.loadPreviewImage();
-                          },
-                        ),
-                      ),
-                      ListTile(
-                        title: Text("fNumber".tr),
-                        onTap: !imageController.showExposureTime.value && !imageController.showISO.value ? null : (){
-                          imageController.showF.value=!imageController.showF.value;
-                          imageController.loadPreviewImage();
-                        },
-                        trailing: Switch(
-                          value: imageController.showF.value,
-                          onChanged: !imageController.showExposureTime.value && !imageController.showISO.value ? null : (value) {
-                            imageController.showF.value=!imageController.showF.value;
-                            imageController.loadPreviewImage();
-                          },
-                        ),
-                      ),
-                      ListTile(
-                        title: Text("ISO"),
-                        onTap: !imageController.showExposureTime.value && !imageController.showF.value ? null : (){
-                          imageController.showISO.value=!imageController.showISO.value;
-                          imageController.loadPreviewImage();
-                        },
-                        trailing: Switch(
-                          value: imageController.showISO.value,
-                          onChanged: !imageController.showExposureTime.value && !imageController.showF.value ? null : (value) {
-                            imageController.showISO.value=!imageController.showISO.value;
-                            imageController.loadPreviewImage();
-                          },
-                        ),
-                      ),
-                      ListTile(
-                        title: Text("lenModel".tr),
-                        onTap: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showFocal.value ? null : (){
-                          imageController.showLenModel.value=!imageController.showLenModel.value;
-                          imageController.loadPreviewImage();
-                        },
-                        trailing: Switch(
-                          value: imageController.exifData.value!.lenModel.trim().isEmpty ? false : imageController.showLenModel.value,
-                          onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showFocal.value ? null : (value) {
-                            imageController.showLenModel.value=value;
-                            imageController.loadPreviewImage();
-                          },
-                        ),
-                      ),
-                      ListTile(
-                        title: Text("focal".tr),
-                        onTap: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (){
-                          imageController.showFocal.value=!imageController.showFocal.value;
-                          imageController.loadPreviewImage();
-                        },
-                        trailing: Switch(
-                          value: imageController.exifData.value!.lenModel.trim().isEmpty ? true : imageController.showFocal.value,
-                          onChanged: imageController.exifData.value!.lenModel.trim().isEmpty || !imageController.showLenModel.value ? null : (value) {
-                            imageController.showFocal.value=value;
-                            imageController.loadPreviewImage();
-                          },
-                        ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
                         child: Row(
                           crossAxisAlignment: .center,
-                          mainAxisAlignment: .spaceBetween,
                           children: [
                             TextButton(
                               onPressed: (){
@@ -151,6 +177,15 @@ class _MarkMViewState extends State<MarkMView> {
                               }, 
                               child: Text('photoInfo'.tr)
                             ),
+                            IconButton(
+                              onPressed: ()=>showConfigSheet(context), 
+                              icon: Icon(
+                                Icons.settings_rounded,
+                                color: Theme.of(context).colorScheme.primary,
+                                size: 20,
+                              ),
+                            ),
+                            Expanded(child: Container()),
                             FilledButton(
                               onPressed: saveLoad ? null : () async {
                                 setState(() {
