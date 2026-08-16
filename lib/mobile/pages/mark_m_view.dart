@@ -132,7 +132,7 @@ class _MarkMViewState extends State<MarkMView> {
                                 final supportDir=await getApplicationDocumentsDirectory();
                                 await compute(
                                   saveImageHanlder, 
-                                  [imageController.filePath.value, p.join(supportDir.path, "temp_image", "${timestamp.toString()}.jpg") , imageController.showLogo.value ? 1:0, imageController.showF.value ? 1:0, imageController.showExposureTime.value ? 1:0, imageController.showISO.value ? 1:0]
+                                  [imageController.filePath.value, p.join(supportDir.path, "temp_image", "${timestamp.toString()}.jpg") , imageController.imageOptions.toJsonString()]
                                 );
                                 final String ext=p.extension(imageController.filePath.value);
                                 final filePath=p.join(supportDir.path, "temp_image", "${timestamp.toString()}$ext");

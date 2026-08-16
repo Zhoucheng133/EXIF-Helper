@@ -164,7 +164,7 @@ class _MarkViewState extends State<MarkView> {
                               });
                               await compute(
                                 saveImageHanlder, 
-                                [imageController.filePath.value, p.join(selectedDirectory, "${p.basenameWithoutExtension(imageController.filePath.value)}.jpg") , imageController.showLogo.value ? 1:0, imageController.showF.value ? 1:0, imageController.showExposureTime.value ? 1:0, imageController.showISO.value ? 1:0]
+                                [imageController.filePath.value, p.join(selectedDirectory, "${p.basenameWithoutExtension(imageController.filePath.value)}.jpg") , imageController.imageOptions.toJsonString()]
                               );
                               if(context.mounted){
                                 warnDialog(

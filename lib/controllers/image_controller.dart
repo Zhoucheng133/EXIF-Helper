@@ -41,7 +41,7 @@ class ImageController extends GetxController {
     previewLoad.value = true;
     previewImage.value = await compute(
       previewImageHandler, 
-      [filePath.value, showLogo.value ? 1:0, showF.value ? 1:0, showExposureTime.value ? 1:0, showISO.value ? 1:0]
+      [filePath.value, imageOptions.toJsonString()]
     );
     previewLoad.value = false;
   }
@@ -57,5 +57,12 @@ class ImageController extends GetxController {
     }
     return true;
   }
+
+  ImageOptions get imageOptions => ImageOptions(
+    showLogo: showLogo.value,
+    showF: showF.value,
+    showExposureTime: showExposureTime.value,
+    showISO: showISO.value,
+  );
 
 }

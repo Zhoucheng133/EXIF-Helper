@@ -18,7 +18,7 @@ void freeMemory(Pointer<Utf8> pointer){
   freeMemory(pointer.cast());
 }
 
-// params: [filePath, showLogo(0,1), showF(0,1), showExposureTime(0,1), showISO(0,1)]
+// params: [filePath, optionsJson]
 Uint8List? previewImageHandler(List params) {
   final outLenPtr = malloc<Int32>();
   final dylib = getDylib();
@@ -27,10 +27,12 @@ Uint8List? previewImageHandler(List params) {
   .asFunction();
 
   final pathPtr = (params[0] as String).toNativeUtf8();
-  final dataPtr = imagePreview(pathPtr, outLenPtr, params[1], params[2], params[3], params[4]);
+  final optionsPtr = (params[1] as String).toNativeUtf8();
+  final dataPtr = imagePreview(pathPtr, outLenPtr, optionsPtr);
   final length = outLenPtr.value;
 
   malloc.free(pathPtr);
+  malloc.free(optionsPtr);
   malloc.free(outLenPtr);
 
   if (dataPtr == nullptr || length == 0) return null;
@@ -38,7 +40,7 @@ Uint8List? previewImageHandler(List params) {
   freeMemory(dataPtr.cast());
   return dataCopy;
 }
-// params: [filePath, outputPath, showLogo(0,1), showF(0,1), showExposureTime(0,1), showISO(0,1)]
+// params: [filePath, outputPath, optionsJson]
 void saveImageHanlder(List params) {
   final dylib = getDylib();
   ImageSaveDart imageSave = dylib
@@ -47,11 +49,13 @@ void saveImageHanlder(List params) {
 
   final inputPathPtr = (params[0] as String).toNativeUtf8();
   final outputPathPtr = (params[1] as String).toNativeUtf8();
+  final optionsPtr = (params[2] as String).toNativeUtf8();
 
-  imageSave(inputPathPtr, outputPathPtr, params[2], params[3], params[4], params[5]);
+  imageSave(inputPathPtr, outputPathPtr, optionsPtr);
 
   malloc.free(inputPathPtr);
   malloc.free(outputPathPtr);
+  malloc.free(optionsPtr);
 }
 // params: [path]
 EXIFData? getEXIFData(List params) {

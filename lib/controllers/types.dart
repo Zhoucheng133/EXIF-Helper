@@ -3,17 +3,17 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
-// func ImageSave(path *C.char, output *C.char, showLogo C.int, showF C.int, showExposureTime C.int, showISO C.int)
-typedef ImageSave = Void Function(Pointer<Utf8> path, Pointer<Utf8> output, Int showLogo, Int showF, Int showExposureTime, Int showISO);
-typedef ImageSaveDart = void Function(Pointer<Utf8> path, Pointer<Utf8> output, int showLogo, int showF, int showExposureTime, int showISO);
+// func ImageSave(path *C.char, output *C.char, options *C.char)
+typedef ImageSave = Void Function(Pointer<Utf8> path, Pointer<Utf8> output, Pointer<Utf8> options);
+typedef ImageSaveDart = void Function(Pointer<Utf8> path, Pointer<Utf8> output, Pointer<Utf8> options);
 
 // func GetEXIF(path *C.char) *C.char
 typedef GetEXIF = Pointer<Utf8> Function(Pointer<Utf8> path);
 typedef GetEXIFDart = Pointer<Utf8> Function(Pointer<Utf8> path);
 
-// func ImagePreview(path *C.char, outLength *C.int, showLogo C.int, showF C.int, showExposureTime C.int, showISO C.int)
-typedef ImagePreview = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength, Int showLogo, Int showF, Int showExposureTime, Int showISO);
-typedef ImagePreviewDart = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength, int showLogo, int showF, int showExposureTime, int showISO);
+// func ImagePreview(path *C.char, outLength *C.int, options *C.char)
+typedef ImagePreview = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength, Pointer<Utf8> options);
+typedef ImagePreviewDart = Pointer<Uint8> Function(Pointer<Utf8> path, Pointer<Int32> outLength, Pointer<Utf8> options);
 
 // func FreeMemory(ptr unsafe.Pointer)
 typedef FreeMemory = Void Function(Pointer<Void> ptr);
@@ -109,4 +109,25 @@ class EXIFData{
       "orientation": orientation
     });
   }
+}
+
+class ImageOptions {
+  final bool showLogo;
+  final bool showF;
+  final bool showExposureTime;
+  final bool showISO;
+
+  const ImageOptions({
+    required this.showLogo,
+    required this.showF,
+    required this.showExposureTime,
+    required this.showISO,
+  });
+
+  String toJsonString() => jsonEncode({
+    'showLogo': showLogo,
+    'showF': showF,
+    'showExposureTime': showExposureTime,
+    'showISO': showISO,
+  });
 }
