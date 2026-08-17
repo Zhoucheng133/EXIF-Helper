@@ -159,17 +159,17 @@ class _MarkMViewState extends State<MarkMView> {
                     initialScale: PhotoViewComputedScale.contained,
                   )
                 ),
-                if (!isLandscape) Padding(
-                  padding: .only(bottom: MediaQuery.of(context).padding.bottom),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.surface,
-                          ),
+                if (!isLandscape) Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                  ),
+                  child: Padding(
+                    padding: .only(bottom: MediaQuery.of(context).padding.bottom),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
                           child: Row(
                             crossAxisAlignment: .center,
                             children: [
@@ -225,9 +225,9 @@ class _MarkMViewState extends State<MarkMView> {
                               )
                             ],
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
