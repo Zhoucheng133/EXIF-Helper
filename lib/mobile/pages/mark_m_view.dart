@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:gal/gal.dart';
+import 'package:photo_view/photo_view.dart';
 
 class MarkMView extends StatefulWidget {
   const MarkMView({super.key});
@@ -148,17 +149,14 @@ class _MarkMViewState extends State<MarkMView> {
                 Expanded(
                   child: imageController.previewLoad.value ? Center(
                     child: CircularProgressIndicator()
-                  ) : InteractiveViewer(
-                    minScale: 1,
-                    maxScale: 4,
-                    child: SizedBox.expand(
-                      child: Image.memory(
-                        imageController.previewImage.value!,
-                        fit: BoxFit.contain,
-                        gaplessPlayback: false,
-                        cacheHeight: 800,
-                      ),
+                  ) : PhotoView(
+                    imageProvider: MemoryImage(imageController.previewImage.value!),
+                    backgroundDecoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
                     ),
+                    minScale: PhotoViewComputedScale.contained,
+                    maxScale: PhotoViewComputedScale.covered * 4,
+                    initialScale: PhotoViewComputedScale.contained,
                   )
                 ),
                 if (!isLandscape) Padding(
@@ -168,60 +166,65 @@ class _MarkMViewState extends State<MarkMView> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
-                        child: Row(
-                          crossAxisAlignment: .center,
-                          children: [
-                            TextButton(
-                              onPressed: (){
-                                showImageInfo(context, imageController.exifData.value!);
-                              }, 
-                              child: Text('photoInfo'.tr)
-                            ),
-                            IconButton(
-                              onPressed: ()=>showConfigSheet(context), 
-                              icon: Icon(
-                                Icons.settings_rounded,
-                                color: Theme.of(context).colorScheme.primary,
-                                size: 20,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                          child: Row(
+                            crossAxisAlignment: .center,
+                            children: [
+                              TextButton(
+                                onPressed: (){
+                                  showImageInfo(context, imageController.exifData.value!);
+                                }, 
+                                child: Text('photoInfo'.tr)
                               ),
-                            ),
-                            Expanded(child: Container()),
-                            FilledButton(
-                              onPressed: saveLoad ? null : () async {
-                                setState(() {
-                                  saveLoad=true;
-                                });
-                                int timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-                                final supportDir=await getApplicationDocumentsDirectory();
-                                await compute(
-                                  saveImageHanlder, 
-                                  [imageController.filePath.value, p.join(supportDir.path, "temp_image", "${timestamp.toString()}.jpg") , imageController.imageOptions.toJsonString()]
-                                );
-                                final String ext=p.extension(imageController.filePath.value);
-                                final filePath=p.join(supportDir.path, "temp_image", "${timestamp.toString()}$ext");
-                                try {
-                                  await Gal.putImage(filePath);
-                                  if(context.mounted){
-                                    warnDialog(context, "saveSuccess".tr, "saveSuccessTip".tr);
+                              IconButton(
+                                onPressed: ()=>showConfigSheet(context), 
+                                icon: Icon(
+                                  Icons.settings_rounded,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  size: 20,
+                                ),
+                              ),
+                              Expanded(child: Container()),
+                              FilledButton(
+                                onPressed: saveLoad ? null : () async {
+                                  setState(() {
+                                    saveLoad=true;
+                                  });
+                                  int timestamp = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+                                  final supportDir=await getApplicationDocumentsDirectory();
+                                  await compute(
+                                    saveImageHanlder, 
+                                    [imageController.filePath.value, p.join(supportDir.path, "temp_image", "${timestamp.toString()}.jpg") , imageController.imageOptions.toJsonString()]
+                                  );
+                                  final String ext=p.extension(imageController.filePath.value);
+                                  final filePath=p.join(supportDir.path, "temp_image", "${timestamp.toString()}$ext");
+                                  try {
+                                    await Gal.putImage(filePath);
+                                    if(context.mounted){
+                                      warnDialog(context, "saveSuccess".tr, "saveSuccessTip".tr);
+                                    }
+                                  } catch (_) {
+                                    if(context.mounted){
+                                      warnDialog(context, "saveFail".tr, "saveFailTip".tr);
+                                    }
                                   }
-                                } catch (_) {
-                                  if(context.mounted){
-                                    warnDialog(context, "saveFail".tr, "saveFailTip".tr);
-                                  }
-                                }
-                                setState(() {
-                                  saveLoad=false;
-                                });
-                              }, 
-                              child: saveLoad ? SizedBox(
-                                width: 10,
-                                height: 10,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                )
-                              ) : Text('saveImage'.tr)
-                            )
-                          ],
+                                  setState(() {
+                                    saveLoad=false;
+                                  });
+                                }, 
+                                child: saveLoad ? SizedBox(
+                                  width: 10,
+                                  height: 10,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  )
+                                ) : Text('saveImage'.tr)
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],
