@@ -124,7 +124,7 @@ class _MarkMViewState extends State<MarkMView> {
               ),
             ),
             SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
+              height: 10.0 + MediaQuery.of(context).padding.bottom,
             )
           ],
         ),
