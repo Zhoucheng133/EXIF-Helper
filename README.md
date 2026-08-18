@@ -31,7 +31,7 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 
 ### 构建动态/静态库
 
-核心组件在`/core`目录下，使用Go开发，构建方式见[Flutter FFI Template](https://github.com/Zhoucheng133/Flutter-FFI-Template)
+核心组件在`/core`目录下，使用Go开发，构建方式见[EXIF-Helper-Core](https://github.com/Zhoucheng133/EXIF-Helper-Core)
 
 对于Windows, macOS, Android和iOS平台，本项目包含已经构建好的二进制动态/静态库
 
