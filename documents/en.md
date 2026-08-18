@@ -29,7 +29,7 @@ You need to have Flutter and Go installed on your device.
 
 ### Build Dynamic/Static Libraries
 
-The core component is located in the `/core` directory and is developed using Go. For build instructions, refer to [Flutter FFI Template](https://github.com/Zhoucheng133/Flutter-FFI-Template).
+The core component is located in the `/core` directory and is developed using Go. For build instructions, refer to [EXIF-Helper-Core](https://github.com/Zhoucheng133/EXIF-Helper-Core).
 
 For Windows, macOS, Android, and iOS platforms, this project includes pre-built binary dynamic/static libraries.
 
