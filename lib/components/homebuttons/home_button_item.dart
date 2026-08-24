@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as p;
 
 class HomeButtonItem extends StatefulWidget {
 
@@ -23,6 +24,7 @@ class HomeButtonItem extends StatefulWidget {
 class _HomeButtonItemState extends State<HomeButtonItem> {
 
   final ImageController imageController = Get.find();
+  bool loading=false;
 
   Future<void> pickImage(BuildContext context) async {
     if(isDesktop()){
@@ -33,6 +35,9 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
         }
       }
     }else{
+      setState(() {
+        loading=true;
+      });
       final picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null && context.mounted){
@@ -40,6 +45,9 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
           widget.onDone();
         }
       }
+      setState(() {
+        loading=false;
+      });
     }
   }
 
@@ -59,10 +67,19 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
               Padding(
                 padding: .only(bottom: 20),
                 child: Center(
-                  child: Icon(
-                    widget.icon,
-                    color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
-                  ),
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: loading ? SizedBox(
+                      key: ValueKey(1),
+                      height: 30,
+                      width: 30,
+                      child: CircularProgressIndicator()
+                    ) : Icon(
+                      key: ValueKey(2),
+                      widget.icon,
+                      color: Theme.of(context).brightness==Brightness.dark ? Colors.purple[200] : Colors.purple,
+                    ),
+                  )
                 ),
               ),
               Positioned(
