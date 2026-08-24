@@ -16,7 +16,8 @@ Support Windows, macOS, Android and iOS
 The repository for the dynamic library component is located [HERE](https://github.com/Zhoucheng133/EXIF-Helper-Core).
 
 > [!IMPORTANT]
-> HEIC and HEIF files are not supported. If you want to process these two types of image files, you can use a conversion tool (such as [HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter), which supports converting both HEIC and HEIF files) to convert to JPEG.
+> HEIC and HEIF files are not supported. If you want to process these two types of image files, you can use a conversion tool (such as [HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter), which supports converting both HEIC and HEIF files) to convert to JPEG.  
+> Mobile version generally don't require processing, as iOS and Android devices usually convert images automatically.
 
 ## Screenshots
 

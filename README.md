@@ -18,7 +18,8 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 动态库组件仓库[在这里](https://github.com/Zhoucheng133/EXIF-Helper-Core)
 
 > [!IMPORTANT]
-> 不支持HEIC和HEIF文件，如果你想要处理这两种图片文件，你可以使用转换工具（比如[HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter)，同时支持转换HEIC和HEIF文件）转换至JPEG
+> 不支持HEIC和HEIF文件，如果你想要处理这两种图片文件，你可以使用转换工具（比如[HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter)，同时支持转换HEIC和HEIF文件）转换至JPEG  
+> 移动端版本一般不需要进行处理，因为iOS和Android设备多数情况会自动转换图片
 
 ## 截图
 
