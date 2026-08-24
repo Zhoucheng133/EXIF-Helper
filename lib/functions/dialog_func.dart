@@ -197,3 +197,33 @@ void showImageInfo(BuildContext context, EXIFData item){
     )
   );
 }
+
+void heifDialog(BuildContext context){
+  showDialog(
+    context: context, 
+    builder: (context)=>AlertDialog(
+      title: Text("heic/heif_title".tr),
+      content: Column(
+        spacing: 10,
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
+        children: [
+          Text("heic/heif_content".tr),
+          TextButton(
+            onPressed: () async {
+              final Uri url = Uri.parse('https://github.com/Zhoucheng133/HEIC-Converter');
+              await launchUrl(url);
+            }, 
+            child: Text('heic-converter'.tr)
+          )
+        ],
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: ()=>Navigator.pop(context), 
+          child: Text("ok".tr)
+        )
+      ],
+    )
+  );
+}

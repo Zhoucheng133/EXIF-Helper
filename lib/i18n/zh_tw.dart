@@ -44,4 +44,8 @@ const Map<String, String> zhTW = {
   'saveFailTip': '圖片儲存失敗，請檢查相簿權限',
   'photoInfo': '圖片資訊',
   'config': '設定',
+
+  'heic/heif_title': 'HEIC / HEIF 檔案',
+  'heic/heif_content': '此圖片為 HEIC/HEIF 格式，EXIF Helper 不支援直接讀取\n但是你可以使用 HEIC Converter（這是一款免費軟體）轉換後再使用',
+  'heic-converter': '查看 HEIC Converter'
 };

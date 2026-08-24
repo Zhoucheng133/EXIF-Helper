@@ -44,4 +44,8 @@ const Map<String, String> enUS = {
   'saveFailTip': 'Image failed to save. Please check your album permissions',
   'photoInfo': 'Photo Info',
   'config': 'Config',
+
+  'heic/heif_title': 'HEIC / HEIF File',
+  'heic/heif_content': 'This image is in HEIC/HEIF format, which is not supported for direct reading by EXIF Helper.\nYou can use HEIC Converter (a free app) to convert it first, then try again.',
+  'heic-converter': 'View HEIC Converter'
 };

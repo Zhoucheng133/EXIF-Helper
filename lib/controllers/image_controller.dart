@@ -4,6 +4,7 @@ import 'package:exif_helper/functions/dialog_func.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:path/path.dart' as p;
 
 class ImageController extends GetxController {
 
@@ -24,6 +25,11 @@ class ImageController extends GetxController {
 
   Future<bool> fileChecker(BuildContext context,String filePath) async {
     loading.value = true;
+    if(p.extension(filePath).toLowerCase()=='.heic' || p.extension(filePath).toLowerCase()=='.heif'){
+      heifDialog(context);
+      loading.value=false;
+      return false;
+    }
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
       final data = await compute(getEXIFData, [filePath]);
       if(data == null){
