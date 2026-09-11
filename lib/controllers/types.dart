@@ -53,6 +53,10 @@ class EXIFData{
   String focal;
   String focal35;
   String orientation;
+  double? latitude;
+  double? longitude;
+  double? altitude;
+
   EXIFData({
     required this.camMake, 
     required this.camModel, 
@@ -64,7 +68,10 @@ class EXIFData{
     required this.iso, 
     required this.focal, 
     required this.focal35, 
-    required this.orientation
+    required this.orientation,
+    this.latitude,
+    this.longitude,
+    this.altitude,
   });
 
   factory EXIFData.fromJson(Map<String, dynamic> json) {
@@ -90,7 +97,10 @@ class EXIFData{
       focal35: json["focal35"].replaceAll("\"", ""), 
       lenMake: json["lenMake"].replaceAll("\"", ""), 
       lenModel: json["lenModel"].replaceAll("\"", ""), 
-      orientation: json["orientation"]
+      orientation: json["orientation"],
+      latitude: json["latitude"],
+      longitude: json["longitude"],
+      altitude: json["altitude"],
     );
   }
 
@@ -106,7 +116,10 @@ class EXIFData{
       "iso": iso, 
       "focal": focal, 
       "focal35": focal35,
-      "orientation": orientation
+      "orientation": orientation,
+      "latitude": latitude,
+      "longitude": longitude,
+      "altitude": altitude,
     });
   }
 }
