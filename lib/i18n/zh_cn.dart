@@ -47,5 +47,8 @@ const Map<String, String> zhCN = {
 
   'heic/heif_title': 'HEIC / HEIF 文件',
   'heic/heif_content': '此图片为 HEIC/HEIF 格式，EXIF Helper不支持直接读取\n但是你可以使用HEIC Converter (这是一个免费的软件) 转换之后再使用',
-  'heic-converter': '查看HEIC Converter'
+  'heic-converter': '查看HEIC Converter',
+
+  'location': '位置',
+  'addLocation': '添加位置信息'
 };

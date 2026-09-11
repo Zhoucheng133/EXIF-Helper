@@ -216,3 +216,61 @@ class _EditTimeState extends State<EditTime> {
     );
   }
 }
+
+class EditLocation extends StatefulWidget {
+  const EditLocation({super.key});
+
+  @override
+  State<EditLocation> createState() => _EditLocationState();
+}
+
+class _EditLocationState extends State<EditLocation> {
+
+  final ImageController imageController = Get.find();
+
+  bool hasLocation(){
+    return imageController.exifData.value!=null && imageController.exifData.value!.latitude!=null && imageController.exifData.value!.longitude!=null;
+  }
+
+  String formatCoordinates(double latitude, double longitude) {
+    final latDirection = latitude >= 0 ? 'N' : 'S';
+    final lonDirection = longitude >= 0 ? 'E' : 'W';
+
+    return '${latitude.abs().toStringAsFixed(4)}° $latDirection, '
+        '${longitude.abs().toStringAsFixed(4)}° $lonDirection';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Column(
+        mainAxisSize: .min,
+        crossAxisAlignment: .start,
+        spacing: 5,
+        children: [
+          Text(
+            "location".tr,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).brightness==Brightness.dark ? Colors.white : Colors.black
+            ),
+          ),
+          Obx(()=>
+            hasLocation() ? TextButton(
+              onPressed: (){
+                // TODO 设置位置信息
+              }, 
+              child: Text(formatCoordinates(imageController.exifData.value!.latitude!, imageController.exifData.value!.longitude!))
+            ) : TextButton(
+              onPressed: (){
+                // TODO 添加位置信息
+              }, 
+              child: Text("addLocation".tr)
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
