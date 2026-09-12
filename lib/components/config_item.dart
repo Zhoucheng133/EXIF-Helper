@@ -1,4 +1,5 @@
 import 'package:exif_helper/controllers/theme_controller.dart';
+import 'package:exif_helper/controllers/types.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,6 +39,46 @@ class _ConfigItemState extends State<ConfigItem> {
               color: Colors.grey,
             ),
             overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class LocationConfig extends StatefulWidget {
+
+  final EXIFData data;
+
+  const LocationConfig({super.key, required this.data});
+
+  @override
+  State<LocationConfig> createState() => _LocationConfigState();
+}
+
+class _LocationConfigState extends State<LocationConfig> {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            "location".tr,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).brightness==Brightness.dark ? Colors.white : Colors.black
+            ),
+          ),
+          TextButton(
+            onPressed: (){
+              // TODO 查看定位信息
+            }, 
+            child: Text(
+              widget.data.formatCoordinates()
+            )
           )
         ],
       ),

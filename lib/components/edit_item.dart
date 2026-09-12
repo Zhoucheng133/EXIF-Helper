@@ -228,18 +228,6 @@ class _EditLocationState extends State<EditLocation> {
 
   final ImageController imageController = Get.find();
 
-  bool hasLocation(){
-    return imageController.exifData.value!=null && imageController.exifData.value!.latitude!=null && imageController.exifData.value!.longitude!=null;
-  }
-
-  String formatCoordinates(double latitude, double longitude) {
-    final latDirection = latitude >= 0 ? 'N' : 'S';
-    final lonDirection = longitude >= 0 ? 'E' : 'W';
-
-    return '${latitude.abs().toStringAsFixed(4)}° $latDirection, '
-        '${longitude.abs().toStringAsFixed(4)}° $lonDirection';
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -257,11 +245,11 @@ class _EditLocationState extends State<EditLocation> {
             ),
           ),
           Obx(()=>
-            hasLocation() ? TextButton(
+            imageController.exifData.value!.hasLocation() ? TextButton(
               onPressed: (){
                 // TODO 设置位置信息
               }, 
-              child: Text(formatCoordinates(imageController.exifData.value!.latitude!, imageController.exifData.value!.longitude!))
+              child: Text(imageController.exifData.value!.formatCoordinates())
             ) : TextButton(
               onPressed: (){
                 // TODO 添加位置信息

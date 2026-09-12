@@ -161,6 +161,7 @@ class _MarkViewState extends State<MarkView> {
                             ConfigItem(keyWord: "exposureTime".tr, value: "${imageController.exifData.value!.exposureTime}s", enable: true),
                             ConfigItem(keyWord: "ISO", value: imageController.exifData.value!.iso, enable: true),
                             ConfigItem(keyWord: "captureTime".tr, value: calDatatime(imageController.exifData.value!.captureTime), enable: true),
+                            if(imageController.exifData.value!.hasLocation()) LocationConfig(data: imageController.exifData.value!,),
                             const SizedBox(height: 20,),
                           ],
                         ),

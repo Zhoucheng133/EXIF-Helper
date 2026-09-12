@@ -104,6 +104,22 @@ class EXIFData{
     );
   }
 
+    bool hasLocation(){
+      return latitude!=null && longitude!=null;
+    }
+
+    String formatCoordinates() {
+      try {
+        final latDirection = latitude! >= 0 ? 'N' : 'S';
+        final lonDirection = longitude! >= 0 ? 'E' : 'W';
+
+        return '${latitude!.abs().toStringAsFixed(4)}° $latDirection, '
+            '${longitude!.abs().toStringAsFixed(4)}° $lonDirection';
+      } catch (_) {
+        return "";
+      }
+    }
+
   String toJsonString(){
     return jsonEncode({
       "camMake": camMake, 
