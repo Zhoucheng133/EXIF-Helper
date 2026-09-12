@@ -1,3 +1,4 @@
+import 'package:exif_helper/components/map/map_content.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/controllers/types.dart';
 import 'package:flutter/material.dart';
@@ -74,7 +75,21 @@ class _LocationConfigState extends State<LocationConfig> {
           ),
           TextButton(
             onPressed: (){
-              // TODO 查看定位信息
+              showDialog(
+                context: context, 
+                builder: (context)=>Dialog(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: SizedBox(
+                      width: 400,
+                      child: MapContent(
+                        select: false,
+                        data: widget.data,
+                      )
+                    )
+                  ),
+                )
+              );
             }, 
             child: Text(
               widget.data.formatCoordinates()

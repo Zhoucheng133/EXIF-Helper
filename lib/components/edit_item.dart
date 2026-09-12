@@ -1,3 +1,4 @@
+import 'package:exif_helper/components/map/map_content.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
 import 'package:exif_helper/functions/cals.dart';
 import 'package:flutter/material.dart';
@@ -247,7 +248,21 @@ class _EditLocationState extends State<EditLocation> {
           Obx(()=>
             imageController.exifData.value!.hasLocation() ? TextButton(
               onPressed: (){
-                // TODO 设置位置信息
+                showDialog(
+                  context: context, 
+                  builder: (context)=>Dialog(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: SizedBox(
+                        width: 400,
+                        child: MapContent(
+                          select: true,
+                          data: imageController.exifData.value!,
+                        )
+                      )
+                    ),
+                  )
+                );
               }, 
               child: Text(imageController.exifData.value!.formatCoordinates())
             ) : TextButton(

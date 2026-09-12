@@ -50,5 +50,7 @@ const Map<String, String> zhCN = {
   'heic-converter': '查看HEIC Converter',
 
   'location': '位置',
-  'addLocation': '添加位置信息'
+  'addLocation': '添加位置信息',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': '高德地图'
 };
