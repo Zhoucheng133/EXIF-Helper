@@ -41,7 +41,6 @@ class _AmapState extends State<Amap> {
             final newLng = data['lng'] as double;
             // 例如: widget.data.latitude = newLat; widget.data.longitude = newLng;
             widget.locationUpdate(Location(latitude: newLat, longitude: newLng));
-            debugPrint('地图中心更新: $newLat, $newLng');
           },
         )
         ..setNavigationDelegate(

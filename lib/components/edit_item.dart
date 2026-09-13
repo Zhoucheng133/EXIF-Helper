@@ -259,7 +259,7 @@ class _EditLocationState extends State<EditLocation> {
             ),
           ),
           Obx(()=>
-            imageController.exifData.value!.hasLocation() ? TextButton(
+            TextButton(
               onPressed: (){
                 showDialog(
                   context: context, 
@@ -278,13 +278,8 @@ class _EditLocationState extends State<EditLocation> {
                   )
                 );
               }, 
-              child: Text(imageController.exifData.value!.formatCoordinates())
-            ) : TextButton(
-              onPressed: (){
-                // TODO 添加位置信息
-              }, 
-              child: Text("addLocation".tr)
-            ),
+              child: Text(imageController.exifData.value!.hasLocation() ?  imageController.exifData.value!.formatCoordinates() : "addLocation".tr)
+            )
           )
         ],
       ),
