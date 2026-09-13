@@ -186,6 +186,7 @@ void showImageInfo(BuildContext context, EXIFData item){
           ConfigItem(keyWord: "exposureTime".tr, value: "${item.exposureTime}s", enable: true),
           ConfigItem(keyWord: "ISO", value: item.iso, enable: true),
           ConfigItem(keyWord: "captureTime".tr, value: calDatatime(item.captureTime), enable: true),
+          if(item.hasLocation()) LocationConfig(data: item,),
         ]
       ),
       actions: [

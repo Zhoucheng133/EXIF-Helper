@@ -78,6 +78,7 @@ class _EditMViewState extends State<EditMView> {
                   EditItem(keyWord: "exposureTime".tr, initValue: imageController.exifData.value!.exposureTime, onChanged: (value) => imageController.exifData.value!.exposureTime=value, endLabel: "s", width: 100, exposureTime: true,),
                   EditItem(keyWord: "ISO".tr, initValue: imageController.exifData.value!.iso, onChanged: (value) => imageController.exifData.value!.iso=value, numberOnly: true, width: 100,),
                   EditTime(),
+                  EditLocation(),
                   Row(
                     crossAxisAlignment: .center,
                     mainAxisAlignment: .spaceBetween,
