@@ -52,5 +52,6 @@ const Map<String, String> zhCN = {
   'location': '位置',
   'addLocation': '添加位置信息',
   'openstreetmap': 'OpenStreetMap',
-  'amap': '高德地图'
+  'amap': '高德地图',
+  'removeLocation': '移除定位信息'
 };

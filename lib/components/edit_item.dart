@@ -1,5 +1,6 @@
 import 'package:exif_helper/components/map/map_content.dart';
 import 'package:exif_helper/controllers/image_controller.dart';
+import 'package:exif_helper/controllers/types.dart';
 import 'package:exif_helper/functions/cals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -229,6 +230,18 @@ class _EditLocationState extends State<EditLocation> {
 
   final ImageController imageController = Get.find();
 
+  void updateLocation(Location? location){
+    if(location!=null){
+      imageController.exifData.value!.latitude=location.latitude;
+      imageController.exifData.value!.longitude=location.longitude;
+      imageController.exifData.refresh();
+    }else{
+      imageController.exifData.value!.latitude=null;
+      imageController.exifData.value!.longitude=null;
+      imageController.exifData.refresh();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -257,7 +270,8 @@ class _EditLocationState extends State<EditLocation> {
                         width: 400,
                         child: MapContent(
                           select: true,
-                          data: imageController.exifData.value!,
+                          data: imageController.exifData.value!, 
+                          updateLocation: (value)=>updateLocation(value),
                         )
                       )
                     ),

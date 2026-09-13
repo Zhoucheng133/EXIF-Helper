@@ -84,7 +84,8 @@ class _LocationConfigState extends State<LocationConfig> {
                       width: 400,
                       child: MapContent(
                         select: false,
-                        data: widget.data,
+                        data: widget.data, 
+                        updateLocation: (value) {},
                       )
                     )
                   ),

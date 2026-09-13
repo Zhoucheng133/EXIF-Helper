@@ -41,6 +41,13 @@ typedef EditEXIFDart = void Function(Pointer<Utf8> inputPath, Pointer<Utf8> outp
 // 	Orientation  string `json:"orientation"`
 // }
 
+class Location{
+  double latitude;
+  double longitude;
+
+  Location({required this.latitude, required this.longitude});
+}
+
 class EXIFData{
   String camMake;
   String camModel;

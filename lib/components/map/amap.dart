@@ -7,8 +7,9 @@ import 'package:webview_flutter/webview_flutter.dart';
 class Amap extends StatefulWidget {
   final bool select;
   final EXIFData data;
+  final ValueChanged locationUpdate;
 
-  const Amap({super.key, required this.select, required this.data});
+  const Amap({super.key, required this.select, required this.data, required this.locationUpdate});
 
   @override
   State<Amap> createState() => _AmapState();
@@ -38,8 +39,8 @@ class _AmapState extends State<Amap> {
             final data = jsonDecode(message.message);
             final newLat = data['lat'] as double;
             final newLng = data['lng'] as double;
-            // TODO 位置更新
             // 例如: widget.data.latitude = newLat; widget.data.longitude = newLng;
+            widget.locationUpdate(Location(latitude: newLat, longitude: newLng));
             debugPrint('地图中心更新: $newLat, $newLng');
           },
         )

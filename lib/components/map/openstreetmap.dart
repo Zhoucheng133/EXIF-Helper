@@ -7,8 +7,9 @@ class Openstreetmap extends StatefulWidget {
 
   final bool select;
   final EXIFData data;
+  final ValueChanged locationUpdate;
 
-  const Openstreetmap({super.key, required this.select, required this.data});
+  const Openstreetmap({super.key, required this.select, required this.data, required this.locationUpdate});
 
   @override
   State<Openstreetmap> createState() => _OpenstreetmapState();
@@ -34,8 +35,10 @@ class _OpenstreetmapState extends State<Openstreetmap> {
               initialCenter: (widget.data.latitude!=null && widget.data.longitude!=null) ? LatLng(widget.data.latitude!, widget.data.longitude!) : LatLng(39.9042, 116.4074),
               initialZoom: 12.0,
               onMapEvent: (event) {
-                // TODO 位置更新
-                // final center = event.camera.center;
+                final center = event.camera.center;
+                widget.locationUpdate(
+                  Location(latitude: center.latitude, longitude: center.longitude)
+                );
               },
             ),
             children: [
