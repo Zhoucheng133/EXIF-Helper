@@ -23,6 +23,13 @@ class _MapContentState extends State<MapContent> {
 
   double? latitude;
   double? longitude;
+  late String selectedMap;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedMap = themeController.lang.value.locale.countryCode=="CN" ? 'amap' : 'openstreetmap';
+  }
 
   void updateLocation(Location location){
     setState(() {
@@ -49,87 +56,86 @@ class _MapContentState extends State<MapContent> {
   @override
   Widget build(BuildContext context) {
 
-    return DefaultTabController(
-      length: 2,
-      child: Obx(
-        ()=> Column(
-          mainAxisSize: .min,
-          children: [
-            SizedBox(
-              height: 50,
-              child: Padding(
-                padding: .symmetric(horizontal: 10),
-                child: Row(
-                  crossAxisAlignment: .center,
-                  mainAxisAlignment: .spaceBetween,
-                  children: [
-                    Padding(
-                      padding: .only(left: 10),
-                      child: Text(
-                        formatLocation(),
+    return Column(
+      mainAxisSize: .min,
+      children: [
+        SizedBox(
+          height: 55,
+          child: Padding(
+            padding: .symmetric(horizontal: 15),
+            child: Row(
+              crossAxisAlignment: .center,
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    focusColor: Colors.transparent,
+                    borderRadius: BorderRadius.circular(10),
+                    padding: .symmetric(horizontal: 10),
+                    value: selectedMap,
+                    items: [
+                      DropdownMenuItem(
+                        value: 'amap',
+                        child: Text('amap'.tr),
                       ),
-                    ),
-                    IconButton(
-                      onPressed: ()=>Navigator.pop(context), 
-                      icon: Icon(Icons.close_rounded)
-                    ),
-                  ],
-                )
-              ),
-            ),
-            TabBar(
-              tabs: themeController.lang.value.locale.countryCode=="CN" ? [
-                Tab(text: 'amap'.tr),
-                Tab(text: 'openstreetmap'.tr),
-              ] : [
-                Tab(text: 'openstreetmap'.tr),
-                Tab(text: 'amap'.tr),
-              ],
-            ),
-            SizedBox(
-              width: 400,
-              height: 400,
-              child: TabBarView(
-                children: themeController.lang.value.locale.countryCode=="CN" ? [
-                  Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value),),
-                  Openstreetmap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)),
-                ] : [
-                  Openstreetmap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)),
-                  Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value))
-                ],
-              ),
-            ),
-            if(widget.select) Padding(
-              padding: .symmetric(horizontal: 10, vertical: 10),
-              child: Row(
-                mainAxisAlignment: .spaceBetween,
-                children: [
-                  TextButton(
-                    child: Text("removeLocation".tr),
-                    onPressed: (){
-                      widget.updateLocation(null);
-                      Navigator.pop(context);
+                      DropdownMenuItem(
+                        value: 'openstreetmap',
+                        child: Text('openstreetmap'.tr),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      if (value != null) {
+                        setState(() {
+                          selectedMap = value;
+                        });
+                      }
                     },
                   ),
-                  ElevatedButton(
-                    onPressed: (){
-                      if(latitude==null || longitude==null){
-                        if(widget.data.latitude==null || widget.data.longitude==null){
-                          widget.updateLocation(null);
-                        }
-                      }else if(latitude!=null && longitude!=null){
-                        widget.updateLocation(Location(latitude: latitude!, longitude: longitude!));
-                      }
-                      Navigator.pop(context);
-                    }, 
-                    child: Text("ok".tr)
-                  )
-                ],
-              ),
+                ),
+                IconButton(
+                  onPressed: ()=>Navigator.pop(context), 
+                  icon: Icon(Icons.close_rounded)
+                ),
+              ],
             )
-          ],
+          ),
         ),
-      ),
+        SizedBox(
+          width: 400,
+          height: 400,
+          child: selectedMap == 'amap'
+              ? Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value))
+              : Openstreetmap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)),
+        ),
+        if(widget.select) Padding(
+          padding: .symmetric(horizontal: 10, vertical: 10),
+          child: Row(
+            mainAxisAlignment: .spaceBetween,
+            children: [
+              TextButton(
+                child: Text("removeLocation".tr),
+                onPressed: (){
+                  widget.updateLocation(null);
+                  Navigator.pop(context);
+                },
+              ),
+              ElevatedButton(
+                onPressed: (){
+                  if(latitude==null || longitude==null){
+                    if(widget.data.latitude==null || widget.data.longitude==null){
+                      widget.updateLocation(null);
+                    }
+                  }else if(latitude!=null && longitude!=null){
+                    widget.updateLocation(Location(latitude: latitude!, longitude: longitude!));
+                  }
+                  Navigator.pop(context);
+                }, 
+                child: Text("ok".tr)
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 }
