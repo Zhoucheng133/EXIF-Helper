@@ -45,4 +45,4 @@ app.*.map.json
 /android/app/release
 
 test
-assets/amap.html
+lib/components/map/amap_key.dart

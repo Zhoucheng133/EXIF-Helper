@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    html, body, #container { width: 100%; height: 100%; margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script src="https://webapi.amap.com/maps?v=2.0&key={{AMAP_KEY}}"></script>
+  <script>
+    var map, marker
+
+    function initMap(lat, lng, select, hasMarker) {
+      map = new AMap.Map('container', {
+        zoom: 12,
+        center: [lng, lat],
+        dragEnable: true,
+        zoomEnable: true,
+      });
+
+      if (hasMarker) {
+        marker = new AMap.Marker({
+          position: [lng, lat],
+          icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png"
+        });
+        map.add(marker)
+      }
+
+      if (select) {
+        map.on('moveend', function () {
+          var center = map.getCenter();
+          FlutterChannel.postMessage(JSON.stringify({
+            lat: center.getLat(),
+            lng: center.getLng()
+          }));
+        });
+      }
+    }
+
+    function updateLocation(lat, lng) {
+      map.setCenter([lng, lat]);
+      if (marker) {
+        map.add(marker)
+      }
+    }
+  </script>
+</body>
+</html>
