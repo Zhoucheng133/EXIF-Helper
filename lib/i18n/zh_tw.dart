@@ -2,7 +2,7 @@ const Map<String, String> zhTW = {
   "aboutEXIFHelper": "關於 EXIF Helper",
   'edit': '編輯',
   'copy': '複製',
-  'paste': '粘貼',
+  'paste': '貼上',
   'selectAll': '全選',
   'window': '視窗',
   
@@ -31,8 +31,8 @@ const Map<String, String> zhTW = {
   'captureTime': '拍攝時間',
   'saveImage': '儲存圖片',
   'closeImage': '關閉圖片',
-  'saveSuccess': '保存成功',
-  'saveFailed': '保存失敗',
+  'saveSuccess': '儲存成功',
+  'saveFailed': '儲存失敗',
   'samePath': '儲存路徑和原圖路徑相同',
   'saveTo': '圖片已儲存至',
   'exifIncomplete': 'EXIF 資訊不完整',
@@ -47,5 +47,11 @@ const Map<String, String> zhTW = {
 
   'heic/heif_title': 'HEIC / HEIF 檔案',
   'heic/heif_content': '此圖片為 HEIC/HEIF 格式，EXIF Helper 不支援直接讀取\n但是你可以使用 HEIC Converter（這是一款免費軟體）轉換後再使用',
-  'heic-converter': '查看 HEIC Converter'
+  'heic-converter': '查看 HEIC Converter',
+
+  'location': '位置',
+  'addLocation': '添加位置資訊',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': '高德地圖',
+  'removeLocation': '移除定位資訊'
 };
