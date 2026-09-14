@@ -29,15 +29,21 @@
         map.add(marker)
       }
 
+      sendMsg();
+
       if (select) {
         map.on('moveend', function () {
-          var center = map.getCenter();
-          FlutterChannel.postMessage(JSON.stringify({
-            lat: center.getLat(),
-            lng: center.getLng()
-          }));
+          sendMsg();
         });
       }
+    }
+
+    function sendMsg(){
+      var center = map.getCenter();
+      FlutterChannel.postMessage(JSON.stringify({
+        lat: center.getLat(),
+        lng: center.getLng()
+      }));
     }
 
     function updateLocation(lat, lng) {

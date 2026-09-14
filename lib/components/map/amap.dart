@@ -104,16 +104,18 @@ class _AmapState extends State<Amap> {
           load ? Center(
             child: CircularProgressIndicator(),
           ) : WebViewWidget(controller: _controller),
-          if (widget.select == true)
-            const IgnorePointer(
-              child: Center(
+          if (widget.select == true) const IgnorePointer(
+            child: Center(
+              child: Padding(
+                padding: .only(bottom: 20),
                 child: Icon(
-                  Icons.my_location,
+                  Icons.location_on_rounded,
                   color: Colors.red,
-                  size: 30,
+                  size: 35,
                 ),
               ),
             ),
+          ),
         ],
       ),
     );
