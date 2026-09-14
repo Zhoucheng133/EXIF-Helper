@@ -99,11 +99,11 @@ class _AmapState extends State<Amap> {
     return SizedBox(
       width: 500,
       height: 500,
-      child: Stack(
+      child:load ? Center(
+          child: CircularProgressIndicator(),
+        ) : Stack(
         children: [
-          load ? Center(
-            child: CircularProgressIndicator(),
-          ) : WebViewWidget(controller: _controller),
+          WebViewWidget(controller: _controller),
           if (widget.select == true) const IgnorePointer(
             child: Center(
               child: Padding(

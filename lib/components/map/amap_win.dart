@@ -108,20 +108,20 @@ class _AmapWinState extends State<AmapWin> {
 
     if(widget.select == false && !_hasCoords){
       return const SizedBox(
-        width:500,
-        height:500,
+        width: 500,
+        height: 500,
         child:Placeholder(),
       );
     }
 
     return SizedBox(
-      width:500,
-      height:500,
-      child:Stack(
+      width: 500,
+      height: 500,
+      child: load ? const Center(
+        child:CircularProgressIndicator(),
+      ) : Stack(
         children:[
-          load ? const Center(
-            child:CircularProgressIndicator(),
-          ) : Webview(_controller),
+          Webview(_controller),
           if(widget.select)
             const IgnorePointer(
               child:Center(
