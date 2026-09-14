@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:exif_helper/components/map/amap.dart';
 import 'package:exif_helper/components/map/openstreetmap.dart';
+import 'package:exif_helper/components/map/osm_win.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
 import 'package:exif_helper/controllers/types.dart';
 import 'package:flutter/material.dart';
@@ -103,9 +106,13 @@ class _MapContentState extends State<MapContent> {
         SizedBox(
           width: 400,
           height: 400,
-          child: selectedMap == 'amap'
-              ? Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value))
-              : Openstreetmap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)),
+          child: selectedMap == 'amap' ? ( Platform.isWindows ? 
+              Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)) : 
+              Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value))
+            ) : ( Platform.isWindows ? 
+              OsmWin(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)) :
+              Openstreetmap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value))
+            ),
         ),
         if(widget.select) Padding(
           padding: .symmetric(horizontal: 10, vertical: 10),
