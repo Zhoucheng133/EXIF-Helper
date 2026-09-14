@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:exif_helper/components/map/amap.dart';
+import 'package:exif_helper/components/map/amap_win.dart';
 import 'package:exif_helper/components/map/openstreetmap.dart';
 import 'package:exif_helper/components/map/osm_win.dart';
 import 'package:exif_helper/controllers/theme_controller.dart';
@@ -107,7 +108,7 @@ class _MapContentState extends State<MapContent> {
           width: 400,
           height: 400,
           child: selectedMap == 'amap' ? ( Platform.isWindows ? 
-              Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)) : 
+              AmapWin(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)) : 
               Amap(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value))
             ) : ( Platform.isWindows ? 
               OsmWin(select: widget.select, data: widget.data, locationUpdate: (value)=>updateLocation(value)) :
