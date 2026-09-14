@@ -38,7 +38,10 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
         loading=true;
       });
       final picker = ImagePicker();
-      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      final XFile? image = await picker.pickImage(
+        source: ImageSource.gallery,
+        requestFullMetadata: true
+      );
       if (image != null && context.mounted){
         if(await imageController.fileChecker(context, image.path)){
           widget.onDone();
