@@ -19,6 +19,7 @@
         center: [lng, lat],
         dragEnable: true,
         zoomEnable: true,
+        scrollWheel: false
       });
 
       if (hasMarker) {
@@ -52,6 +53,15 @@
         map.add(marker)
       }
     }
+    window.addEventListener('wheel', function (e) {
+      if (!map) return;
+
+      if (e.deltaY < 0) {
+        map.zoomIn();
+      } else if (e.deltaY > 0) {
+        map.zoomOut();
+      }
+    }, { passive: true });
   </script>
 </body>
 </html>
