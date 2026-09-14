@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:exif_helper/controllers/types.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class Openstreetmap extends StatefulWidget {
 
@@ -16,6 +17,63 @@ class Openstreetmap extends StatefulWidget {
 }
 
 class _OpenstreetmapState extends State<Openstreetmap> {
+
+  late final WebViewController _controller;
+  bool _pageLoaded = false;
+
+  bool get _hasCoords => widget.data.latitude != null && widget.data.longitude != null;
+
+  Future<void> init() async {
+    if (!(widget.select == false && !_hasCoords)) {
+      final lat = _hasCoords ? widget.data.latitude! : 39.9042;
+      final lng = _hasCoords ? widget.data.longitude! : 116.4074;
+      final hasMarker = widget.select == false && _hasCoords;
+
+      _controller = WebViewController()
+        ..setJavaScriptMode(JavaScriptMode.unrestricted)
+        ..addJavaScriptChannel(
+          'FlutterChannel',
+          onMessageReceived: (message) {
+            final data = jsonDecode(message.message);
+            final newLat = data['lat'] as double;
+            final newLng = data['lng'] as double;
+            widget.locationUpdate(Location(latitude: newLat, longitude: newLng));
+          },
+        )
+        ..setNavigationDelegate(
+          NavigationDelegate(
+            onPageFinished: (_) {
+              _pageLoaded = true;
+              _controller.runJavaScript(
+                'initMap($lat, $lng, ${widget.select}, $hasMarker);',
+              );
+            },
+          ),
+        )
+        ..loadFlutterAsset("assets/osm.html");
+      
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  @override
+  void didUpdateWidget(covariant Openstreetmap oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (_pageLoaded &&
+        _hasCoords &&
+        (oldWidget.data.latitude != widget.data.latitude ||
+            oldWidget.data.longitude != widget.data.longitude)) {
+      _controller.runJavaScript(
+        'updateLocation(${widget.data.latitude}, ${widget.data.longitude});',
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if(widget.select==false && (widget.data.latitude==null || widget.data.longitude==null)){
@@ -30,44 +88,16 @@ class _OpenstreetmapState extends State<Openstreetmap> {
       height: 500,
       child: Stack(
         children: [
-          FlutterMap(
-            options: MapOptions(
-              initialCenter: (widget.data.latitude!=null && widget.data.longitude!=null) ? LatLng(widget.data.latitude!, widget.data.longitude!) : LatLng(39.9042, 116.4074),
-              initialZoom: 12.0,
-              onMapEvent: (event) {
-                final center = event.camera.center;
-                widget.locationUpdate(
-                  Location(latitude: center.latitude, longitude: center.longitude)
-                );
-              },
-            ),
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'zhouc.exifhelper'
-              ),
-              if(widget.select==false && widget.data.longitude!=null && widget.data.latitude!=null) MarkerLayer(
-                markers: [
-                  Marker(
-                    point: LatLng(widget.data.latitude!, widget.data.longitude!),
-                    width: 40,
-                    height: 40,
-                    child: const Icon(
-                      Icons.my_location,
-                      color: Colors.red,
-                      size: 30,
-                    ),
-                  ),
-                ]
-              )
-            ]
-          ),
-          if(widget.select==true) IgnorePointer(
+          WebViewWidget(controller: _controller),
+          if (widget.select == true) const IgnorePointer(
             child: Center(
-              child: Icon(
-                Icons.my_location,
-                color: Colors.red,
-                size: 30,
+              child: Padding(
+                padding: .only(bottom: 20),
+                child: Icon(
+                  Icons.location_on_rounded,
+                  color: Colors.red,
+                  size: 35,
+                ),
               ),
             ),
           ),
