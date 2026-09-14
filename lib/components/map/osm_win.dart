@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:exif_helper/controllers/types.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:webview_windows/webview_windows.dart';
 
 class OsmWin extends StatefulWidget {
@@ -31,7 +34,12 @@ class _OsmWinState extends State<OsmWin> {
 
   Future<String> _createHtmlFile() async {
     var html = await rootBundle.loadString('assets/osm_win.html',);
-    return html;
+    final tmpdir = await getTemporaryDirectory();
+    final dir = await Directory(p.join(tmpdir.path, "exif_tmp")).create();
+    final file = File('${dir.path}/osm.html',);
+    await file.writeAsString(html, encoding: utf8,);
+
+    return dir.path;
   }
 
   Future<void> init() async {
@@ -65,8 +73,13 @@ class _OsmWinState extends State<OsmWin> {
         }
       });
 
-      final url = await _createHtmlFile();
-      await _controller.loadUrl(url);
+      final dir=await _createHtmlFile();
+      await _controller.addVirtualHostNameMapping(
+        "exifhelper.localhost", 
+        dir, 
+        WebviewHostResourceAccessKind.allow
+      );
+      await _controller.loadUrl("https://exifhelper.localhost/osm.html");
 
       setState(() {
         load=false;
