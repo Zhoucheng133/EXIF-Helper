@@ -20,6 +20,7 @@ class _OpenstreetmapState extends State<Openstreetmap> {
 
   late final WebViewController _controller;
   bool _pageLoaded = false;
+  bool load=true;
 
   bool get _hasCoords => widget.data.latitude != null && widget.data.longitude != null;
 
@@ -51,7 +52,9 @@ class _OpenstreetmapState extends State<Openstreetmap> {
           ),
         )
         ..loadFlutterAsset("assets/osm.html");
-      
+      setState(() {
+        load=false;
+      });
     }
   }
 
@@ -88,7 +91,9 @@ class _OpenstreetmapState extends State<Openstreetmap> {
       height: 500,
       child: Stack(
         children: [
-          WebViewWidget(controller: _controller),
+          load ? Center(
+            child: CircularProgressIndicator(),
+          ) : WebViewWidget(controller: _controller),
           if (widget.select == true) const IgnorePointer(
             child: Center(
               child: Padding(
