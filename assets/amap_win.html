@@ -9,34 +9,38 @@
 </head>
 <body>
   <div id="container"></div>
-  <script src="https://webapi.amap.com/maps?v=2.0&key={{AMAP_KEY}}"></script>
   <script>
     var map, marker
 
-    function initMap(lat, lng, select, hasMarker) {
-      map = new AMap.Map('container', {
-        zoom: 12,
-        center: [lng, lat],
-        dragEnable: true,
-        zoomEnable: true,
-        scrollWheel: false
-      });
-
-      if (hasMarker) {
-        marker = new AMap.Marker({
-          position: [lng, lat],
-          icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png"
+    function initMap(lat, lng, select, hasMarker, key) {
+      const script = document.createElement('script');
+      script.src = `https://webapi.amap.com/maps?v=2.0&key=${key}`;
+      script.onload = function () {
+        map = new AMap.Map('container', {
+          zoom: 12,
+          center: [lng, lat],
+          dragEnable: true,
+          zoomEnable: true,
+          scrollWheel: false
         });
-        map.add(marker)
-      }
 
-      sendMsg();
+        if (hasMarker) {
+          marker = new AMap.Marker({
+            position: [lng, lat],
+            icon: "https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png"
+          });
+          map.add(marker)
+        }
 
-      if (select) {
-        map.on('moveend', function () {
-          sendMsg();
-        });
-      }
+        sendMsg();
+
+        if (select) {
+          map.on('moveend', function () {
+            sendMsg();
+          });
+        }
+      };
+      document.head.appendChild(script);
     }
 
     function sendMsg(){

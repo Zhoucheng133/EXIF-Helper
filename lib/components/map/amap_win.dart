@@ -71,7 +71,7 @@ class _AmapWinState extends State<AmapWin> {
         if(state ==LoadingState.navigationCompleted){
           _pageLoaded=true;
           _controller.executeScript(
-            "initMap($lat,$lng, ${widget.select}, $hasMarker);",
+            "initMap($lat,$lng, ${widget.select}, $hasMarker, $amapKey);",
           );
         }
       });
