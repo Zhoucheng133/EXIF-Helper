@@ -11,21 +11,21 @@
 </a>
 
 This is a tool that can edit/remove EXIF ​​information from photos and also add EXIF ​​watermarks.  
-Support Windows, macOS, Android and iOS
+Support Windows, macOS, ~~Android~~ and iOS
 
 The repository for the dynamic library component is located [HERE](https://github.com/Zhoucheng133/EXIF-Helper-Core).
 
 > [!IMPORTANT]
 > HEIC and HEIF files are not supported. If you want to process these two types of image files, you can use a conversion tool (such as [HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter), which supports converting both HEIC and HEIF files) to convert to JPEG.  
-> Mobile version generally don't require processing, as iOS and Android devices usually convert images automatically.
+
+> [!NOTE]
+> After testing, compatibility and permission issues were found on Android devices. Theoretically, it should work; you can try building it yourself.
 
 ## Screenshots
 
 ![demo2](../demo/en1.png)
 
 ![demo2](../demo/en2.png)
-
-<img src="../demo/en3.png" width="500px" />
 
 ## Configuring EXIF Helper on Your Device
 
@@ -43,6 +43,8 @@ For Windows, macOS, Android, and iOS platforms, this project includes pre-built 
 - iOS: `/ios/libcore.xcframework`
 
 ### Build the App
+
+Before building, you need to create an `amapKey` variable in `lib/components/map/amap_key.dart`.
 
 This project uses Flutter version `3.41.6`. Do not use Flutter versions lower than `3.38` for building.
 
