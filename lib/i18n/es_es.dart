@@ -1,0 +1,57 @@
+const Map<String, String> esES = {
+  "aboutEXIFHelper": "Acerca de EXIF Helper",
+  'edit': 'Editar',
+  'copy': 'Copiar',
+  'paste': 'Pegar',
+  'selectAll': 'Seleccionar todo',
+  'window': 'Ventana',
+  
+  'importErr': 'Error al importar la imagen',
+  'unsupportFormat': 'Formato no compatible',
+  'noExif': 'Sin datos EXIF',
+  'addView': 'O arrastra y suelta un archivo de foto aquí',
+  
+  'ok': 'Aceptar',
+  'about': 'Acerca de',
+  'prjLink': 'URL del proyecto',
+  'license': 'Licencia',
+  'language': 'Idioma',
+
+  'editExif': 'Editar EXIF',
+  'removeExif': 'Eliminar EXIF',
+  'addMark': 'Añadir marca de agua',
+
+  'showBrandLogo': 'Mostrar logotipo de marca',
+  'exposureTime': 'Tiempo de exposición',
+  'fNumber': 'Número F',
+  'camMake': 'Fabricante de cámara',
+  'camModel': 'Modelo de cámara',
+  'lenModel': 'Modelo de lente',
+  'focal': 'Distancia focal',
+  'captureTime': 'Hora de captura',
+  'saveImage': 'Guardar imagen',
+  'closeImage': 'Cerrar',
+  'saveSuccess': 'Guardado con éxito',
+  'saveFail': 'Error al guardar',
+  'samePath': 'La ruta de guardado es la misma que la imagen original',
+  'saveTo': 'La imagen se ha guardado en: ',
+  'exifIncomplete': 'Información EXIF incompleta',
+
+  'home': 'Inicio',
+  'settings': 'Ajustes',
+  'clearCache': 'Borrar caché',
+  'saveSuccessTip': 'La imagen se ha guardado en el álbum',
+  'saveFailTip': 'No se pudo guardar la imagen. Comprueba los permisos de tu álbum',
+  'photoInfo': 'Información de la foto',
+  'config': 'Configuración',
+
+  'heic/heif_title': 'Archivo HEIC / HEIF',
+  'heic/heif_content': 'Esta imagen está en formato HEIC/HEIF, el cual no es compatible para lectura directa por EXIF Helper.\nPuedes usar HEIC Converter (una aplicación gratuita) para convertirla primero y luego intentarlo de nuevo.',
+  'heic-converter': 'Ver HEIC Converter',
+
+  'location': 'Ubicación',
+  'addLocation': 'Añadir información de ubicación',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': 'Amap',
+  'removeLocation': 'Eliminar información de ubicación'
+};

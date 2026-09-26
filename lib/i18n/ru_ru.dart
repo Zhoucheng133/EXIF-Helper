@@ -1,0 +1,57 @@
+const Map<String, String> ruRU = {
+  "aboutEXIFHelper": "О программе EXIF Helper",
+  'edit': 'Правка',
+  'copy': 'Копировать',
+  'paste': 'Вставить',
+  'selectAll': 'Выбрать все',
+  'window': 'Окно',
+  
+  'importErr': 'Ошибка импорта изображения',
+  'unsupportFormat': 'Неподдерживаемый формат',
+  'noExif': 'Нет данных EXIF',
+  'addView': 'Или перетащите файл фотографии сюда',
+  
+  'ok': 'ОК',
+  'about': 'О программе',
+  'prjLink': 'Ссылка на проект',
+  'license': 'Лицензия',
+  'language': 'Язык',
+
+  'editExif': 'Редактировать EXIF',
+  'removeExif': 'Удалить EXIF',
+  'addMark': 'Добавить водяной знак',
+
+  'showBrandLogo': 'Показывать логотип бренда',
+  'exposureTime': 'Выдержка',
+  'fNumber': 'Диафрагма',
+  'camMake': 'Производитель камеры',
+  'camModel': 'Модель камеры',
+  'lenModel': 'Модель объектива',
+  'focal': 'Фокусное расстояние',
+  'captureTime': 'Время съемки',
+  'saveImage': 'Сохранить изображение',
+  'closeImage': 'Закрыть',
+  'saveSuccess': 'Успешно сохранено',
+  'saveFail': 'Не удалось сохранить',
+  'samePath': 'Путь сохранения совпадает с путем исходного изображения',
+  'saveTo': 'Изображение сохранено в: ',
+  'exifIncomplete': 'Информация EXIF неполная',
+
+  'home': 'Главная',
+  'settings': 'Настройки',
+  'clearCache': 'Очистить кэш',
+  'saveSuccessTip': 'Изображение сохранено в альбом',
+  'saveFailTip': 'Не удалось сохранить изображение. Проверьте разрешения альбома',
+  'photoInfo': 'Информация о фото',
+  'config': 'Конфигурация',
+
+  'heic/heif_title': 'Файл HEIC / HEIF',
+  'heic/heif_content': 'Это изображение имеет формат HEIC/HEIF, который не поддерживается EXIF Helper для прямого чтения.\nВы можете использовать HEIC Converter (бесплатное приложение) для конвертации, а затем повторить попытку.',
+  'heic-converter': 'Посмотреть HEIC Converter',
+
+  'location': 'Местоположение',
+  'addLocation': 'Добавить информацию о местоположении',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': 'Amap',
+  'removeLocation': 'Удалить информацию о местоположении'
+};

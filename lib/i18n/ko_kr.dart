@@ -1,0 +1,57 @@
+const Map<String, String> koKR = {
+  "aboutEXIFHelper": "EXIF Helper 정보",
+  'edit': '편집',
+  'copy': '복사',
+  'paste': '붙여넣기',
+  'selectAll': '모두 선택',
+  'window': '창',
+  
+  'importErr': '이미지 가져오기 오류',
+  'unsupportFormat': '지원되지 않는 형식',
+  'noExif': 'EXIF 데이터 없음',
+  'addView': '여기에 사진 파일을 드래그하여 놓을 수도 있습니다',
+  
+  'ok': '확인',
+  'about': '정보',
+  'prjLink': '프로젝트 URL',
+  'license': '라이선스',
+  'language': '언어',
+
+  'editExif': 'EXIF 편집',
+  'removeExif': 'EXIF 제거',
+  'addMark': '워터마크 추가',
+
+  'showBrandLogo': '브랜드 로고 표시',
+  'exposureTime': '노출 시간',
+  'fNumber': '조리개 값',
+  'camMake': '카메라 제조사',
+  'camModel': '카메라 모델',
+  'lenModel': '렌즈 모델',
+  'focal': '초점 거리',
+  'captureTime': '촬영 일시',
+  'saveImage': '이미지 저장',
+  'closeImage': '닫기',
+  'saveSuccess': '성공적으로 저장됨',
+  'saveFail': '저장 실패',
+  'samePath': '저장 경로가 원본 이미지 경로와 동일합니다',
+  'saveTo': '이미지가 저장된 위치: ',
+  'exifIncomplete': 'EXIF 정보가 불완전합니다',
+
+  'home': '홈',
+  'settings': '설정',
+  'clearCache': '캐시 지우기',
+  'saveSuccessTip': '앨범에 저장되었습니다',
+  'saveFailTip': '이미지 저장 실패. 앨범 권한을 확인해주세요',
+  'photoInfo': '사진 정보',
+  'config': '구성',
+
+  'heic/heif_title': 'HEIC / HEIF 파일',
+  'heic/heif_content': '이 이미지는 HEIC/HEIF 형식이며, EXIF Helper에서 직접 읽을 수 없습니다.\nHEIC Converter(무료 앱)를 사용하여 변환한 후 다시 시도하세요.',
+  'heic-converter': 'HEIC Converter 보기',
+
+  'location': '위치',
+  'addLocation': '위치 정보 추가',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': '고덕 지도 (Amap)',
+  'removeLocation': '위치 정보 제거'
+};

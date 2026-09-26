@@ -4,6 +4,13 @@ import 'package:exif_helper/functions/cals.dart';
 import 'package:exif_helper/i18n/en_us.dart';
 import 'package:exif_helper/i18n/zh_cn.dart';
 import 'package:exif_helper/i18n/zh_tw.dart';
+import 'package:exif_helper/i18n/ja_jp.dart';
+import 'package:exif_helper/i18n/ko_kr.dart';
+import 'package:exif_helper/i18n/de_de.dart';
+import 'package:exif_helper/i18n/ru_ru.dart';
+import 'package:exif_helper/i18n/es_es.dart';
+import 'package:exif_helper/i18n/pt_pt.dart';
+import 'package:exif_helper/i18n/fr_fr.dart';
 import 'package:exif_helper/main_window.dart';
 import 'package:exif_helper/mobile/main_view.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +55,13 @@ class MainTranslations extends Translations {
     'en_US': enUS,
     'zh_CN': zhCN,
     'zh_TW': zhTW,
+    'ja_JP': jaJP,
+    'ko_KR': koKR,
+    'de_DE': deDE,
+    'ru_RU': ruRU,
+    'es_ES': esES,
+    'pt_PT': ptPT,
+    'fr_FR': frFR,
   };
 }
 
