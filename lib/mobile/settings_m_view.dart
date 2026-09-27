@@ -15,23 +15,35 @@ class SettingsMView extends StatefulWidget {
   State<SettingsMView> createState() => _SettingsMViewState();
 }
 
+Future<void> clearController() async {
+  final supportDir = await getApplicationDocumentsDirectory();
+  final String tempDir = p.join(supportDir.path, "temp_image");
+  final Directory dir = Directory(tempDir);
+
+  if (await dir.exists()) {
+    await for (final entity in dir.list()) {
+      try {
+        await entity.delete(recursive: true);
+      } catch (_) {}
+    }
+  }
+
+  if(Platform.isIOS){
+    final temp = Directory.systemTemp;
+    if (await temp.exists()) {
+      await for (final entity in temp.list()) {
+        try {
+          await entity.delete(recursive: true);
+        } catch (_) {}
+      }
+    }
+  }
+}
+
 class _SettingsMViewState extends State<SettingsMView> {
-  int cacheSize=0;
   String version="";
 
   final ThemeController themeController = Get.find();
-
-  String sizeConvert(int bytes) {
-    if (bytes < 1024) {
-      return '$bytes B';
-    } else if (bytes < 1048576) {
-      return '${(bytes / 1024).toStringAsFixed(2)} KB';
-    } else if (bytes < 1073741824) {
-      return '${(bytes / 1048576).toStringAsFixed(2)} MB';
-    } else {
-      return '${(bytes / 1073741824).toStringAsFixed(2)} GB';
-    }
-  }
 
   void getVersion() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -43,78 +55,13 @@ class _SettingsMViewState extends State<SettingsMView> {
   @override
   void initState() {
     super.initState();
-    getCacheSize();
     getVersion();
-  }
-
-  Future<int> getDirectorySize(Directory path) async {
-    int size = 0;
-    for (var entity in path.listSync(recursive: true)) {
-      if (entity is File) {
-        size += entity.lengthSync();
-      }
-    }
-    return size;
-  }
-
-  Future<void> getCacheSize() async {
-    try {
-      final supportDir=await getApplicationDocumentsDirectory();
-      final String tempDir = p.join(supportDir.path, "temp_image");
-      int size1 = await getDirectorySize(Directory(tempDir));
-      int size2 = Platform.isIOS ? await getDirectorySize(Directory.systemTemp) : 0;
-      setState(() {
-        cacheSize=size1 + size2;
-      });
-    } catch (_) {
-      setState(() {
-        cacheSize=0;
-      });
-    }
-  }
-
-  Future<void> clearController() async {
-    final supportDir = await getApplicationDocumentsDirectory();
-    final String tempDir = p.join(supportDir.path, "temp_image");
-    final Directory dir = Directory(tempDir);
-
-    if (await dir.exists()) {
-      await for (final entity in dir.list()) {
-        try {
-          await entity.delete(recursive: true);
-        } catch (_) {}
-      }
-    }
-
-    if(Platform.isIOS){
-      final temp = Directory.systemTemp;
-      if (await temp.exists()) {
-        await for (final entity in temp.list()) {
-          try {
-            await entity.delete(recursive: true);
-          } catch (_) {}
-        }
-      }
-    }
-
-    getCacheSize();
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        ListTile(
-          leading: Icon(Icons.cached_rounded),
-          onTap: ()=>clearController(),
-          title: Text("clearCache".tr),
-          subtitle: Text(
-            sizeConvert(cacheSize),
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary.withAlpha(120)
-            ),
-          ),
-        ),
         Obx(
           () => ListTile(
             leading: Icon(Icons.language_rounded),

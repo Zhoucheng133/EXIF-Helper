@@ -13,6 +13,7 @@ import 'package:exif_helper/i18n/pt_pt.dart';
 import 'package:exif_helper/i18n/fr_fr.dart';
 import 'package:exif_helper/main_window.dart';
 import 'package:exif_helper/mobile/main_view.dart';
+import 'package:exif_helper/mobile/settings_m_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
@@ -38,6 +39,8 @@ Future<void> main() async {
       await windowManager.show();
       await windowManager.focus();
     });
+  }else{
+    await clearController();
   }
   runApp(const MainApp());
 }
