@@ -87,6 +87,9 @@ class _EditItemState extends State<EditItem> {
                 child: TextField(
                   controller: controller,
                   onChanged: widget.onChanged,
+                  onSubmitted: (value) {
+                    FocusScope.of(context).unfocus();
+                  },
                   decoration: InputDecoration(
                     hintText: widget.keyWord,
                     hintStyle: TextStyle(
@@ -109,6 +112,9 @@ class _EditItemState extends State<EditItem> {
                 child: TextField(
                   controller: controller,
                   onChanged: widget.onChanged,
+                  onSubmitted: (value) {
+                    FocusScope.of(context).unfocus();
+                  },
                   decoration: InputDecoration(
                     hintText: widget.keyWord,
                     hintStyle: TextStyle(
