@@ -84,9 +84,9 @@ class _EditMViewState extends State<EditMView> {
                     mainAxisAlignment: .spaceBetween,
                     children: [
                       TextButton(
-                        onPressed: (){
+                        onPressed: imageController.hasExifData ? (){
                           showImageInfo(context, imageController.exifData.value!);
-                        }, 
+                        } : null, 
                         child: Text('photoInfo'.tr)
                       ),
                       FilledButton(

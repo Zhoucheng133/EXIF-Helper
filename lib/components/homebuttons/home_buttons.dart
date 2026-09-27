@@ -36,6 +36,7 @@ class _HomeButtonsState extends State<HomeButtons> {
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
               ), 
+              allowNoExif: true,
               onDone: (){
                 imageController.loading.value = false;
                 if(isDesktop()){

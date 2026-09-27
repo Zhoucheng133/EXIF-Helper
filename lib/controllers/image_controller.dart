@@ -23,7 +23,7 @@ class ImageController extends GetxController {
   RxBool showFocal = true.obs;
   RxBool showLenModel = true.obs;
 
-  Future<bool> fileChecker(BuildContext context,String filePath) async {
+  Future<bool> fileChecker(BuildContext context, String filePath, {bool allowNoExif = false}) async {
     loading.value = true;
     if(p.extension(filePath).toLowerCase()=='.heic' || p.extension(filePath).toLowerCase()=='.heif'){
       heifDialog(context);
@@ -33,6 +33,24 @@ class ImageController extends GetxController {
     if(filePath.toLowerCase().endsWith(".jpg") || filePath.toLowerCase().endsWith(".jpeg")){
       final data = await compute(getEXIFData, [filePath]);
       if(data == null){
+        if(allowNoExif){
+          exifData.value = EXIFData(
+            camMake: "",
+            camModel: "",
+            lenMake: "",
+            lenModel: "",
+            captureTime: "",
+            exposureTime: "",
+            fNum: "",
+            iso: "",
+            focal: "",
+            focal35: "",
+            orientation: "1",
+          );
+          this.filePath.value = filePath;
+          loading.value = false;
+          return true;
+        }
         if(context.mounted){
           warnDialog(context, "importErr".tr, "noExif".tr);
         }
@@ -59,6 +77,8 @@ class ImageController extends GetxController {
     );
     previewLoad.value = false;
   }
+
+  bool get hasExifData => exifData.value != null && (exifData.value!.camMake.isNotEmpty || exifData.value!.camModel.isNotEmpty || exifData.value!.focal.isNotEmpty || exifData.value!.fNum.isNotEmpty || exifData.value!.exposureTime.isNotEmpty || exifData.value!.iso.isNotEmpty || exifData.value!.captureTime.isNotEmpty);
 
   bool checkExif(BuildContext context){
     if(exifData.value==null){

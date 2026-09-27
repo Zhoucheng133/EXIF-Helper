@@ -22,7 +22,7 @@ class _HomeViewState extends State<HomeView> {
       children: [
         DropTarget(
           onDragDone: (detail) async {
-            final bool checker=await imageController.fileChecker(context, detail.files[0].path);
+            final bool checker=await imageController.fileChecker(context, detail.files[0].path, allowNoExif: true);
             if(checker && context.mounted){
               showDialog(
                 context: context, 
