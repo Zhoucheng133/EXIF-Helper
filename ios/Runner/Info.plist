@@ -27,9 +27,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>需要访问相册以保存图片</string>
+	<string>To save your photo</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>需要访问相册以保存图片</string>
+	<string>To save your photo</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
