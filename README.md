@@ -8,12 +8,7 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
-<a href="https://apps.microsoft.com/detail/9p6389wjjj8k?referrer=appbadge&mode=direct">
-	<img src="https://get.microsoft.com/images/en-us%20dark.svg" height="50"/>
-</a>
-<a href="https://apps.apple.com/us/app/exif-helper/id6817382650">
-	<img src="./demo/appstore.svg" height="50"/>
-</a>
+<a href="https://apps.microsoft.com/detail/9p6389wjjj8k?referrer=appbadge&mode=direct"><img src="https://get.microsoft.com/images/en-us%20dark.svg" height="50" alt="Get it from Microsoft"/></a>&emsp;<a href="https://apps.apple.com/us/app/exif-helper/id6817382650"><img src="./demo/appstore.svg" height="50" alt="Download on the App Store"/></a>
 
 这是一个可以编辑/移除照片中的EXIF信息，也可以添加EXIF信息水印的工具  
 支持Windows，macOS，~~Android~~和iOS
