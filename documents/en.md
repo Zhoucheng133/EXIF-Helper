@@ -7,7 +7,10 @@
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
 <a href="https://apps.microsoft.com/detail/9p6389wjjj8k?referrer=appbadge&mode=direct">
-    <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
+    <img src="https://get.microsoft.com/images/en-us%20dark.svg" height="50"/>
+</a>
+<a href="https://apps.apple.com/us/app/exif-helper/id6817382650">
+	<img src="../demo/appstore.svg" height="50"/>
 </a>
 
 This is a tool that can edit/remove EXIF ​​information from photos and also add EXIF ​​watermarks.  
@@ -16,7 +19,7 @@ Support Windows, macOS, ~~Android~~ and iOS
 The repository for the dynamic library component is located [HERE](https://github.com/Zhoucheng133/EXIF-Helper-Core).
 
 > [!IMPORTANT]
-> HEIC and HEIF files are not supported. If you want to process these two types of image files, you can use a conversion tool (such as [HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter), which supports converting both HEIC and HEIF files) to convert to JPEG.  
+> HEIC and HEIF files are not supported for **desktop version**. If you want to process these two types of image files, you can use a conversion tool (such as [HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter), which supports converting both HEIC and HEIF files) to convert to JPEG.  
 
 > [!NOTE]
 > After testing, compatibility and permission issues were found on Android devices. Theoretically, it should work; you can try building it yourself.
