@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:exif_helper/functions/cals.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,6 +27,8 @@ List<LanguageType> get supportedLocales => [
 class ThemeController extends GetxController {
   Rx<LanguageType> lang=Rx(supportedLocales[0]);
   late SharedPreferences prefs;
+
+  Rx<bool> phoneLike = (!isDesktop()).obs; 
 
   Future<void> initLang() async {
     prefs=await SharedPreferences.getInstance();
