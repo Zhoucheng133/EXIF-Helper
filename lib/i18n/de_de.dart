@@ -1,0 +1,57 @@
+const Map<String, String> deDE = {
+  "aboutEXIFHelper": "Über EXIF Helper",
+  'edit': 'Bearbeiten',
+  'copy': 'Kopieren',
+  'paste': 'Einfügen',
+  'selectAll': 'Alle auswählen',
+  'window': 'Fenster',
+  
+  'importErr': 'Fehler beim Importieren des Bildes',
+  'unsupportFormat': 'Nicht unterstütztes Format',
+  'noExif': 'Keine EXIF-Daten',
+  'addView': 'Oder ziehen Sie eine Bilddatei per Drag & Drop hierher',
+  
+  'ok': 'OK',
+  'about': 'Über',
+  'prjLink': 'Projekt-URL',
+  'license': 'Lizenz',
+  'language': 'Sprache',
+
+  'editExif': 'EXIF bearbeiten',
+  'removeExif': 'EXIF entfernen',
+  'addMark': 'Wasserzeichen hinzufügen',
+
+  'showBrandLogo': 'Markenlogo anzeigen',
+  'exposureTime': 'Belichtungszeit',
+  'fNumber': 'Blende',
+  'camMake': 'Kamerahersteller',
+  'camModel': 'Kameramodell',
+  'lenModel': 'Objektivmodell',
+  'focal': 'Brennweite',
+  'captureTime': 'Aufnahmezeit',
+  'saveImage': 'Bild speichern',
+  'closeImage': 'Schließen',
+  'saveSuccess': 'Erfolgreich gespeichert',
+  'saveFail': 'Speichern fehlgeschlagen',
+  'samePath': 'Der Speichertfad ist derselbe wie der des Originalbildes',
+  'saveTo': 'Das Bild wurde gespeichert unter: ',
+  'exifIncomplete': 'EXIF-Informationen unvollständig',
+
+  'home': 'Startseite',
+  'settings': 'Einstellungen',
+  'clearCache': 'Cache leeren',
+  'saveSuccessTip': 'Das Bild wurde im Album gespeichert',
+  'saveFailTip': 'Bild konnte nicht gespeichert werden. Bitte überprüfen Sie Ihre Album-Berechtigungen',
+  'photoInfo': 'Bildinformationen',
+  'config': 'Konfiguration',
+
+  'heic/heif_title': 'HEIC / HEIF Datei',
+  'heic/heif_content': 'Dieses Bild liegt im HEIC/HEIF-Format vor, das von EXIF Helper nicht direkt gelesen werden kann.\nSie können den HEIC Converter (eine kostenlose App) verwenden, um es zu konvertieren, und es dann erneut versuchen.',
+  'heic-converter': 'HEIC Converter anzeigen',
+
+  'location': 'Standort',
+  'addLocation': 'Standortinformationen hinzufügen',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': 'Amap',
+  'removeLocation': 'Standortinformationen entfernen'
+};

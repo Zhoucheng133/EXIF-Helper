@@ -1,0 +1,58 @@
+const Map<String, String> jaJP = {
+  "aboutEXIFHelper": "EXIF Helper について",
+  'edit': '編集',
+  'copy': 'コピー',
+  'paste': '貼り付け',
+  'selectAll': 'すべて選択',
+  'window': 'ウィンドウ',
+  
+  'importErr': '画像のインポートエラー',
+  'unsupportFormat': 'サポートされていないフォーマット',
+  'noExif': 'EXIF データがありません',
+  'addView': 'ここに写真ファイルをドラッグ＆ドロップすることもできます',
+  
+  'ok': 'OK',
+  'about': '情報',
+  'prjLink': 'プロジェクト URL',
+  'license': 'ライセンス',
+  'language': '言語',
+
+  'editExif': 'EXIF 編集',
+  'removeExif': 'EXIF 削除',
+  'addMark': '透かし追加',
+
+  'showBrandLogo': 'ブランドロゴを表示',
+  'exposureTime': '露出時間',
+  'fNumber': 'F値',
+  'camMake': 'カメラメーカー',
+  'camModel': 'カメラモデル',
+  'lenModel': 'レンズモデル',
+  'focal': '焦点距離',
+  'captureTime': '撮影日時',
+  'saveImage': '画像を保存',
+  'closeImage': '閉じる',
+  'saveSuccess': '保存しました',
+  'saveFail': '保存に失敗しました',
+  'samePath': '保存先が元の画像のパスと同じです',
+  'saveTime': '',
+  'saveTo': '画像が保存されました: ',
+  'exifIncomplete': 'EXIF 情報が不完全です',
+
+  'home': 'ホーム',
+  'settings': '設定',
+  'clearCache': 'キャッシュをクリア',
+  'saveSuccessTip': 'アルバムに保存されました',
+  'saveFailTip': '保存に失敗しました。アルバムの権限を確認してください',
+  'photoInfo': '写真情報',
+  'config': '構成',
+
+  'heic/heif_title': 'HEIC / HEIF ファイル',
+  'heic/heif_content': 'この画像は HEIC/HEIF 形式であり、EXIF Helper では直接読み取ることができません。\nHEIC Converter（無料アプリ）を使用して変換してから、再度お試しください。',
+  'heic-converter': 'HEIC Converter を表示',
+
+  'location': '位置情報',
+  'addLocation': '位置情報を追加',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': '高徳地図 (Amap)',
+  'removeLocation': '位置情報を削除'
+};

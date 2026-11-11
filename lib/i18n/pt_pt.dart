@@ -1,0 +1,57 @@
+const Map<String, String> ptPT = {
+  "aboutEXIFHelper": "Sobre o EXIF Helper",
+  'edit': 'Editar',
+  'copy': 'Copiar',
+  'paste': 'Colar',
+  'selectAll': 'Selecionar Tudo',
+  'window': 'Janela',
+  
+  'importErr': 'Erro ao importar imagem',
+  'unsupportFormat': 'Formato não suportado',
+  'noExif': 'Sem dados EXIF',
+  'addView': 'Ou arraste e solte um arquivo de foto aqui',
+  
+  'ok': 'OK',
+  'about': 'Sobre',
+  'prjLink': 'URL do Projeto',
+  'license': 'Licença',
+  'language': 'Idioma',
+
+  'editExif': 'Editar EXIF',
+  'removeExif': 'Remover EXIF',
+  'addMark': 'Adicionar Marca d\'Água',
+
+  'showBrandLogo': 'Mostrar Logotipo da Marca',
+  'exposureTime': 'Tempo de Exposição',
+  'fNumber': 'Número F',
+  'camMake': 'Fabricante da Câmera',
+  'camModel': 'Modelo da Câmera',
+  'lenModel': 'Modelo da Lente',
+  'focal': 'Distância Focal',
+  'captureTime': 'Data e Hora da Captura',
+  'saveImage': 'Salvar Imagem',
+  'closeImage': 'Fechar',
+  'saveSuccess': 'Salvo com sucesso',
+  'saveFail': 'Falha ao salvar',
+  'samePath': 'O caminho de salvamento é o mesmo da imagem original',
+  'saveTo': 'A imagem foi salva em: ',
+  'exifIncomplete': 'Informações EXIF incompletas',
+
+  'home': 'Início',
+  'settings': 'Configurações',
+  'clearCache': 'Limpar Cache',
+  'saveSuccessTip': 'A imagem foi salva no álbum',
+  'saveFailTip': 'Falha ao salvar a imagem. Verifique as permissões do seu álbum',
+  'photoInfo': 'Informações da Foto',
+  'config': 'Config',
+
+  'heic/heif_title': 'Arquivo HEIC / HEIF',
+  'heic/heif_content': 'Esta imagem está no formato HEIC/HEIF, que não é suportado para leitura direta pelo EXIF Helper.\nVocê pode usar o HEIC Converter (um aplicativo gratuito) para convertê-la primeiro e tentar novamente.',
+  'heic-converter': 'Ver HEIC Converter',
+
+  'location': 'Localização',
+  'addLocation': 'Adicionar Informações de Localização',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': 'Amap',
+  'removeLocation': 'Remover Informações de Localização'
+};

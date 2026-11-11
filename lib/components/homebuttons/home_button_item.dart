@@ -13,8 +13,9 @@ class HomeButtonItem extends StatefulWidget {
   final double height;
   final BorderRadius borderRadius;
   final VoidCallback onDone;
+  final bool allowNoExif;
 
-  const HomeButtonItem({super.key, required this.title, required this.icon, required this.width, required this.height, required this.borderRadius, required this.onDone});
+  const HomeButtonItem({super.key, required this.title, required this.icon, required this.width, required this.height, required this.borderRadius, required this.onDone, this.allowNoExif = false});
 
   @override
   State<HomeButtonItem> createState() => _HomeButtonItemState();
@@ -29,7 +30,7 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
     if(isDesktop()){
       FilePickerResult? result = await FilePicker.platform.pickFiles();
       if (result != null && context.mounted) {
-        if(await imageController.fileChecker(context, result.files.single.path!)){
+        if(await imageController.fileChecker(context, result.files.single.path!, allowNoExif: widget.allowNoExif)){
           widget.onDone();
         }
       }
@@ -43,7 +44,7 @@ class _HomeButtonItemState extends State<HomeButtonItem> {
         requestFullMetadata: true
       );
       if (image != null && context.mounted){
-        if(await imageController.fileChecker(context, image.path)){
+        if(await imageController.fileChecker(context, image.path, allowNoExif: widget.allowNoExif)){
           widget.onDone();
         }
       }

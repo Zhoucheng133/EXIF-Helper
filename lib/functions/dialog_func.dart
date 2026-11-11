@@ -174,20 +174,22 @@ void showImageInfo(BuildContext context, EXIFData item){
     context: context, 
     builder: (context)=>AlertDialog(
       title: Text('photoInfo'.tr),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ConfigItem(keyWord: "camMake".tr, value: item.camMake, enable: true),
-          ConfigItem(keyWord: "camModel".tr, value: item.camModel, enable: true),
-          if(item.lenModel.isNotEmpty) ConfigItem(keyWord: "lenModel".tr, value: item.lenModel, enable: true),
-          ConfigItem(keyWord: "focal".tr, value: "${item.focal}mm", enable: true),
-          ConfigItem(keyWord: "fNumber".tr, value: calFnum(item.fNum), enable: true),
-          ConfigItem(keyWord: "exposureTime".tr, value: "${item.exposureTime}s", enable: true),
-          ConfigItem(keyWord: "ISO", value: item.iso, enable: true),
-          ConfigItem(keyWord: "captureTime".tr, value: calDatatime(item.captureTime), enable: true),
-          if(item.hasLocation()) LocationConfig(data: item,),
-        ]
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ConfigItem(keyWord: "camMake".tr, value: item.camMake, enable: true),
+            ConfigItem(keyWord: "camModel".tr, value: item.camModel, enable: true),
+            if(item.lenModel.isNotEmpty) ConfigItem(keyWord: "lenModel".tr, value: item.lenModel, enable: true),
+            ConfigItem(keyWord: "focal".tr, value: "${item.focal}mm", enable: true),
+            ConfigItem(keyWord: "fNumber".tr, value: calFnum(item.fNum), enable: true),
+            ConfigItem(keyWord: "exposureTime".tr, value: "${item.exposureTime}s", enable: true),
+            ConfigItem(keyWord: "ISO", value: item.iso, enable: true),
+            ConfigItem(keyWord: "captureTime".tr, value: calDatatime(item.captureTime), enable: true),
+            if(item.hasLocation()) LocationConfig(data: item,),
+          ]
+        ),
       ),
       actions: [
         ElevatedButton(

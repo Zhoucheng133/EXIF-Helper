@@ -1,0 +1,57 @@
+const Map<String, String> frFR = {
+  "aboutEXIFHelper": "À propos d'EXIF Helper",
+  'edit': 'Modifier',
+  'copy': 'Copier',
+  'paste': 'Coller',
+  'selectAll': 'Tout sélectionner',
+  'window': 'Fenêtre',
+  
+  'importErr': 'Erreur lors de l\'importation de l\'image',
+  'unsupportFormat': 'Format non pris en charge',
+  'noExif': 'Aucune donnée EXIF',
+  'addView': 'Ou glissez-déposez un fichier photo ici',
+  
+  'ok': 'OK',
+  'about': 'À propos',
+  'prjLink': 'URL du projet',
+  'license': 'Licence',
+  'language': 'Langue',
+
+  'editExif': 'Modifier EXIF',
+  'removeExif': 'Supprimer EXIF',
+  'addMark': 'Ajouter un filigrane',
+
+  'showBrandLogo': 'Afficher le logo de la marque',
+  'exposureTime': 'Temps d\'exposition',
+  'fNumber': 'Nombre F',
+  'camMake': 'Fabricant de l\'appareil',
+  'camModel': 'Modèle de l\'appareil',
+  'lenModel': 'Modèle d\'objectif',
+  'focal': 'Longueur focale',
+  'captureTime': 'Heure de capture',
+  'saveImage': 'Enregistrer l\'image',
+  'closeImage': 'Fermer',
+  'saveSuccess': 'Enregistré avec succès',
+  'saveFail': 'Échec de l\'enregistrement',
+  'samePath': 'Le chemin d\'enregistrement est le même que celui de l\'image originale',
+  'saveTo': 'L\'image a été enregistrée dans : ',
+  'exifIncomplete': 'Informations EXIF incomplètes',
+
+  'home': 'Accueil',
+  'settings': 'Paramètres',
+  'clearCache': 'Vider le cache',
+  'saveSuccessTip': 'L\'image a été enregistrée dans l\'album',
+  'saveFailTip': 'Échec de l\'enregistrement de l\'image. Veuillez vérifier les autorisations de votre album',
+  'photoInfo': 'Informations sur la photo',
+  'config': 'Configuration',
+
+  'heic/heif_title': 'Fichier HEIC / HEIF',
+  'heic/heif_content': 'Cette image est au format HEIC/HEIF, qui n\'est pas pris en charge pour une lecture directe par EXIF Helper.\nVous pouvez utiliser HEIC Converter (une application gratuite) pour la convertir d\'abord, puis réessayer.',
+  'heic-converter': 'Voir HEIC Converter',
+
+  'location': 'Emplacement',
+  'addLocation': 'Ajouter des informations de localisation',
+  'openstreetmap': 'OpenStreetMap',
+  'amap': 'Amap',
+  'removeLocation': 'Supprimer les informations de localisation'
+};

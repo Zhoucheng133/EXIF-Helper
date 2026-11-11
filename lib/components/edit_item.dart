@@ -87,6 +87,19 @@ class _EditItemState extends State<EditItem> {
                 child: TextField(
                   controller: controller,
                   onChanged: widget.onChanged,
+                  textInputAction: TextInputAction.done,
+                  onEditingComplete: () {
+                    if (!isDesktop()) {
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
+                  onSubmitted: (value) {
+                    if (!isDesktop()) {
+                      FocusScope.of(context).unfocus();
+                    } else {
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
                   decoration: InputDecoration(
                     hintText: widget.keyWord,
                     hintStyle: TextStyle(
@@ -109,6 +122,19 @@ class _EditItemState extends State<EditItem> {
                 child: TextField(
                   controller: controller,
                   onChanged: widget.onChanged,
+                  textInputAction: TextInputAction.done,
+                  onEditingComplete: () {
+                    if (!isDesktop()) {
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
+                  onSubmitted: (value) {
+                    if (!isDesktop()) {
+                      FocusScope.of(context).unfocus();
+                    } else {
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
                   decoration: InputDecoration(
                     hintText: widget.keyWord,
                     hintStyle: TextStyle(

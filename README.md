@@ -8,26 +8,24 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 
 ![License](https://img.shields.io/badge/License-MIT-dark_green)
 
-<a href="https://apps.microsoft.com/detail/9p6389wjjj8k?referrer=appbadge&mode=direct">
-	<img src="https://get.microsoft.com/images/en-us%20dark.svg" width="200"/>
-</a>
+<a href="https://apps.microsoft.com/detail/9p6389wjjj8k?referrer=appbadge&mode=direct"><img src="https://get.microsoft.com/images/en-us%20dark.svg" height="50" alt="Get it from Microsoft"/></a>&emsp;<a href="https://apps.apple.com/us/app/exif-helper/id6817382650"><img src="./demo/appstore.svg" height="50" alt="Download on the App Store"/></a>
 
 这是一个可以编辑/移除照片中的EXIF信息，也可以添加EXIF信息水印的工具  
-支持Windows，macOS，Android和iOS
+支持Windows，macOS，~~Android~~和iOS
 
 动态库组件仓库[在这里](https://github.com/Zhoucheng133/EXIF-Helper-Core)
 
 > [!IMPORTANT]
-> 不支持HEIC和HEIF文件，如果你想要处理这两种图片文件，你可以使用转换工具（比如[HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter)，同时支持转换HEIC和HEIF文件）转换至JPEG  
-> 移动端版本一般不需要进行处理，因为iOS和Android设备多数情况会自动转换图片
+> 在**桌面端**不支持HEIC和HEIF文件，如果你想要处理这两种图片文件，你可以使用转换工具（比如[HEIC Converter](https://github.com/Zhoucheng133/HEIC-Converter)，同时支持转换HEIC和HEIF文件）转换至JPEG  
+
+> [!NOTE]
+> 经过测试在Android设备上存在兼容性和权限的问题，理论上也可以运行，可以自行构建尝试
 
 ## 截图
 
 ![demo2](demo/cn1.png)
 
 ![demo2](demo/cn2.png)
-
-<img src="demo/cn3.png" width="500px" />
 
 ## 在你的设备上配置EXIF Helper
 
@@ -45,6 +43,8 @@ Also available in English. Click [HERE](/documents/en.md) to view the English ve
 - iOS: `/ios/libcore.xcframework`
 
 ### 构建App本体
+
+在构建的时候需要你在`lib/components/map/amap_key.dart`文件中添加一个`amapKey`变量作为高德地图的key
 
 本项目使用的Flutter版本为`3.41.6`，不要使用低于`3.38`的Flutter构建
 
