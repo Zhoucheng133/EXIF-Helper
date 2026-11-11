@@ -141,7 +141,7 @@ class _MarkMViewState extends State<MarkMView> {
         final isLandscape = orientation == Orientation.landscape;
         return Obx(
           () => Scaffold(
-            appBar: isLandscape && themeController.phoneLike.value ? null :  AppBar(
+            appBar: themeController.phoneLike.value && isLandscape ? null :  AppBar(
               backgroundColor: Theme.of(context).colorScheme.surface,
               scrolledUnderElevation: 0.0,
               title: Text('addMark'.tr),
